@@ -1015,7 +1015,10 @@
         - Contact details
         - Site links
         - Social media links
-        Can have multiple footers (page footer, section footer)
+        - Legal information
+    
+        SEO: Can contain important site-wide links
+        Accessibility: Often contains skip links and site map
         -->
         <footer style="background-color: #e9ecef; padding: 10px; margin: 5px 0">
           <p style="margin: 0">
@@ -1533,52 +1536,235 @@
     </section>
 
     <!-- 
-    META AND HEAD TAGS
+    META AND HEAD TAGS - COMPREHENSIVE GUIDE
     Critical for SEO, performance, and functionality
-    These determine how your page appears and behaves
+    These determine how your page appears and behaves across different platforms
+    Meta tags are the foundation of professional web development
     -->
     <section class="tag-category">
-      <h2>13. Meta and Head Tags</h2>
+      <h2>13. Meta Tags - Complete Guide</h2>
       <p>
         <strong>Use for:</strong> Document metadata, external resources, page
-        information
+        information, SEO optimization, and social media integration
       </p>
 
       <!-- 
-      ESSENTIAL META TAGS
-      Critical for SEO and functionality
+      FUNDAMENTAL META TAGS
+      These are absolutely essential for every webpage
       -->
-      <h3>Essential Meta Tags</h3>
+      <h3>1. Essential Meta Tags (Required)</h3>
       <div class="example">
+        <h4>Character Encoding & Viewport</h4>
         <code>
-          <!-- REQUIRED META TAGS --><br />
-          &lt;meta charset="UTF-8"&gt;
-          <!-- Character encoding --><br />
+          <!-- ALWAYS FIRST - Character encoding --><br />
+          &lt;meta charset="UTF-8"&gt;<br />
+          <!-- UTF-8 supports all international characters, emojis, special symbols --><br />
+          <!-- Must be within first 1024 bytes of document --><br /><br />
+
+          <!-- RESPONSIVE DESIGN - Essential for mobile --><br />
           &lt;meta name="viewport" content="width=device-width,
-          initial-scale=1.0"&gt;
-          <!-- Responsive --><br /><br />
+          initial-scale=1.0"&gt;<br />
+          <!-- width=device-width: Use device's screen width --><br />
+          <!-- initial-scale=1.0: Don't zoom in or out --><br />
+          <!-- Other viewport options: --><br />
+          &lt;meta name="viewport" content="width=device-width,
+          initial-scale=1.0, maximum-scale=5.0, minimum-scale=0.5,
+          user-scalable=yes"&gt;<br />
+        </code>
 
-          <!-- SEO META TAGS --><br />
-          &lt;meta name="description" content="Page description for search
-          results"&gt;<br />
-          &lt;meta name="keywords" content="html, css, javascript, web
-          development"&gt;<br />
-          &lt;meta name="author" content="Your Name"&gt;<br />
+        <h4>Document Information</h4>
+        <code>
+          <!-- PAGE TITLE - Most important for SEO --><br />
+          &lt;title&gt;Comprehensive HTML Guide | Learn HTML Tags and Best
+          Practices&lt;/title&gt;<br />
+          <!-- Keep under 60 characters for search results --><br />
+          <!-- Include primary keyword near the beginning --><br /><br />
+
+          <!-- HTTP-EQUIV META TAGS --><br />
+          &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+          <!-- IE compatibility --><br />
+          &lt;meta http-equiv="Content-Type" content="text/html;
+          charset=UTF-8"&gt;
+          <!-- Alternative to charset --><br />
+          &lt;meta http-equiv="refresh" content="30"&gt;
+          <!-- Auto-refresh every 30 seconds --><br />
+        </code>
+      </div>
+
+      <!-- 
+      SEO META TAGS
+      Critical for search engine optimization and rankings
+      -->
+      <h3>2. SEO Meta Tags</h3>
+      <div class="example">
+        <h4>Search Engine Optimization</h4>
+        <code>
+          <!-- DESCRIPTION - Appears in search results --><br />
+          &lt;meta name="description" content="Learn HTML with our comprehensive
+          guide covering all HTML tags, semantic elements, forms, accessibility,
+          and modern best practices. Perfect for beginners and
+          professionals."&gt;<br />
+          <!-- Keep between 150-160 characters --><br />
+          <!-- Write compelling copy that encourages clicks --><br />
+          <!-- Include target keywords naturally --><br /><br />
+
+          <!-- KEYWORDS - Less important but still useful --><br />
+          &lt;meta name="keywords" content="HTML, HTML5, web development,
+          semantic HTML, accessibility, SEO, meta tags, forms, tables"&gt;<br />
+          <!-- Comma-separated list of relevant keywords --><br />
+          <!-- Don't stuff keywords - quality over quantity --><br /><br />
+
+          <!-- AUTHOR INFORMATION --><br />
+          &lt;meta name="author" content="Your Name or Company"&gt;<br />
+          &lt;meta name="creator" content="Web Development Team"&gt;<br />
+          &lt;meta name="publisher" content="Your Organization"&gt;<br /><br />
+
+          <!-- ROBOTS DIRECTIVES --><br />
           &lt;meta name="robots" content="index, follow"&gt;
-          <!-- Search engine instructions --><br /><br />
+          <!-- Default: Allow indexing and following links --><br />
+          &lt;meta name="robots" content="noindex, nofollow"&gt;
+          <!-- Don't index page or follow links --><br />
+          &lt;meta name="robots" content="index, nofollow"&gt;
+          <!-- Index but don't follow links --><br />
+          &lt;meta name="robots" content="noindex, follow"&gt;
+          <!-- Don't index but follow links --><br />
+          &lt;meta name="googlebot" content="index, follow"&gt;
+          <!-- Specific to Google --><br />
+          &lt;meta name="bingbot" content="index, follow"&gt;
+          <!-- Specific to Bing --><br /><br />
 
-          <!-- SOCIAL MEDIA META TAGS (Open Graph) --><br />
-          &lt;meta property="og:title" content="Page Title"&gt;<br />
-          &lt;meta property="og:description" content="Page description"&gt;<br />
-          &lt;meta property="og:image" content="image-url.jpg"&gt;<br />
-          &lt;meta property="og:url" content="https://yoursite.com"&gt;<br />
-          &lt;meta property="og:type" content="website"&gt;<br /><br />
+          <!-- CONTENT CLASSIFICATION --><br />
+          &lt;meta name="rating" content="general"&gt;
+          <!-- Content rating --><br />
+          &lt;meta name="distribution" content="global"&gt;
+          <!-- Distribution scope --><br />
+          &lt;meta name="language" content="en-US"&gt;
+          <!-- Content language --><br />
+          &lt;meta name="geo.region" content="US-NY"&gt;
+          <!-- Geographic region --><br />
+          &lt;meta name="geo.placename" content="New York"&gt;
+          <!-- Place name --><br />
+          &lt;meta name="geo.position" content="40.712776;-74.005974"&gt;
+          <!-- Latitude;Longitude --><br />
+        </code>
+      </div>
 
-          <!-- TWITTER CARD META TAGS --><br />
-          &lt;meta name="twitter:card" content="summary_large_image"&gt;<br />
-          &lt;meta name="twitter:title" content="Page Title"&gt;<br />
-          &lt;meta name="twitter:description" content="Page description"&gt;<br />
-          &lt;meta name="twitter:image" content="image-url.jpg"&gt;<br />
+      <!-- 
+      SOCIAL MEDIA META TAGS
+      Essential for social media sharing and engagement
+      -->
+      <h3>3. Social Media Meta Tags</h3>
+      <div class="example">
+        <h4>Open Graph (Facebook, LinkedIn, etc.)</h4>
+        <code>
+          <!-- OPEN GRAPH PROTOCOL - Used by Facebook, LinkedIn, Discord --><br />
+          &lt;meta property="og:title" content="Comprehensive HTML Guide | Learn
+          HTML Tags"&gt;<br />
+          &lt;meta property="og:description" content="Master HTML with our
+          complete guide covering all tags, semantic elements, and modern best
+          practices."&gt;<br />
+          &lt;meta property="og:image"
+          content="https://yoursite.com/images/html-guide-preview.jpg"&gt;<br />
+          &lt;meta property="og:image:width" content="1200"&gt;
+          <!-- Recommended: 1200x630 pixels --><br />
+          &lt;meta property="og:image:height" content="630"&gt;<br />
+          &lt;meta property="og:image:alt" content="HTML Guide Preview - Code
+          Examples and Best Practices"&gt;<br />
+          &lt;meta property="og:url"
+          content="https://yoursite.com/html-guide"&gt;<br />
+          &lt;meta property="og:type" content="website"&gt;
+          <!-- article, video, music, etc. --><br />
+          &lt;meta property="og:site_name" content="Your Website Name"&gt;<br />
+          &lt;meta property="og:locale" content="en_US"&gt;<br />
+          &lt;meta property="article:author" content="Author Name"&gt;
+          <!-- For articles --><br />
+          &lt;meta property="article:published_time"
+          content="2025-07-13T10:00:00Z"&gt;<br />
+          &lt;meta property="article:modified_time"
+          content="2025-07-13T15:30:00Z"&gt;<br />
+          &lt;meta property="article:section" content="Web Development"&gt;<br />
+          &lt;meta property="article:tag" content="HTML"&gt;<br />
+        </code>
+
+        <h4>Twitter Cards</h4>
+        <code>
+          <!-- TWITTER CARDS - Enhanced Twitter sharing --><br />
+          &lt;meta name="twitter:card" content="summary_large_image"&gt;
+          <!-- summary, summary_large_image, app, player --><br />
+          &lt;meta name="twitter:site" content="@yourtwitterhandle"&gt;
+          <!-- Your Twitter handle --><br />
+          &lt;meta name="twitter:creator" content="@authorhandle"&gt;
+          <!-- Author's Twitter handle --><br />
+          &lt;meta name="twitter:title" content="Comprehensive HTML Guide |
+          Learn HTML Tags"&gt;<br />
+          &lt;meta name="twitter:description" content="Master HTML with our
+          complete guide covering all tags, semantic elements, and modern best
+          practices."&gt;<br />
+          &lt;meta name="twitter:image"
+          content="https://yoursite.com/images/html-guide-twitter.jpg"&gt;<br />
+          &lt;meta name="twitter:image:alt" content="HTML Guide Preview showing
+          code examples"&gt;<br /><br />
+
+          <!-- APP SPECIFIC TWITTER CARDS --><br />
+          &lt;meta name="twitter:app:name:iphone" content="Your App Name"&gt;<br />
+          &lt;meta name="twitter:app:id:iphone" content="123456789"&gt;<br />
+          &lt;meta name="twitter:app:url:iphone" content="yourapp://path"&gt;<br />
+        </code>
+      </div>
+
+      <!-- 
+      TECHNICAL META TAGS
+      For advanced functionality and optimization
+      -->
+      <h3>4. Technical & Performance Meta Tags</h3>
+      <div class="example">
+        <h4>Performance & Caching</h4>
+        <code>
+          <!-- CACHE CONTROL --><br />
+          &lt;meta http-equiv="Cache-Control" content="no-cache, no-store,
+          must-revalidate"&gt;<br />
+          &lt;meta http-equiv="Pragma" content="no-cache"&gt;<br />
+          &lt;meta http-equiv="Expires" content="0"&gt;<br /><br />
+
+          <!-- DNS PREFETCH - Improve performance --><br />
+          &lt;meta http-equiv="x-dns-prefetch-control" content="on"&gt;<br /><br />
+
+          <!-- CONTENT SECURITY POLICY --><br />
+          &lt;meta http-equiv="Content-Security-Policy" content="default-src
+          'self'; script-src 'self' 'unsafe-inline'; style-src 'self'
+          'unsafe-inline'"&gt;<br /><br />
+
+          <!-- REFERRER POLICY --><br />
+          &lt;meta name="referrer"
+          content="strict-origin-when-cross-origin"&gt;<br />
+          <!-- Options: no-referrer, no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url --><br />
+        </code>
+
+        <h4>Mobile & App Integration</h4>
+        <code>
+          <!-- MOBILE WEB APP --><br />
+          &lt;meta name="mobile-web-app-capable" content="yes"&gt;<br />
+          &lt;meta name="mobile-web-app-status-bar-style"
+          content="black-translucent"&gt;<br /><br />
+
+          <!-- APPLE MOBILE WEB APP --><br />
+          &lt;meta name="apple-mobile-web-app-capable" content="yes"&gt;<br />
+          &lt;meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"&gt;<br />
+          &lt;meta name="apple-mobile-web-app-title" content="HTML Guide"&gt;<br /><br />
+
+          <!-- WINDOWS TILES --><br />
+          &lt;meta name="msapplication-TileColor" content="#2b5797"&gt;<br />
+          &lt;meta name="msapplication-TileImage"
+          content="/mstile-144x144.png"&gt;<br />
+          &lt;meta name="msapplication-config"
+          content="/browserconfig.xml"&gt;<br /><br />
+
+          <!-- THEME COLORS --><br />
+          &lt;meta name="theme-color" content="#007acc"&gt;
+          <!-- Address bar color on mobile --><br />
+          &lt;meta name="msapplication-navbutton-color" content="#007acc"&gt;
+          <!-- Windows Phone --><br />
         </code>
       </div>
 
@@ -1586,26 +1772,170 @@
       LINKING EXTERNAL RESOURCES
       Performance and functionality considerations
       -->
-      <h3>External Resources</h3>
+      <h3>5. Link Tags & External Resources</h3>
       <div class="example">
+        <h4>Stylesheets & Fonts</h4>
         <code>
           <!-- CSS STYLESHEETS --><br />
           &lt;link rel="stylesheet" href="styles.css"&gt;<br />
+          &lt;link rel="stylesheet" href="print.css" media="print"&gt;
+          <!-- Print-specific styles --><br />
+          &lt;link rel="stylesheet" href="mobile.css" media="screen and
+          (max-width: 768px)"&gt;
+          <!-- Mobile styles --><br /><br />
+
+          <!-- GOOGLE FONTS --><br />
+          &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;<br />
+          &lt;link rel="preconnect" href="https://fonts.gstatic.com"
+          crossorigin&gt;<br />
           &lt;link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700"&gt;<br /><br />
-
-          <!-- FAVICON --><br />
-          &lt;link rel="icon" type="image/x-icon" href="favicon.ico"&gt;<br />
-          &lt;link rel="apple-touch-icon" href="apple-touch-icon.png"&gt;<br /><br />
-
-          <!-- PRELOADING RESOURCES --><br />
-          &lt;link rel="preload" href="important.css" as="style"&gt;<br />
-          &lt;link rel="preload" href="hero-image.jpg" as="image"&gt;<br />
-          &lt;link rel="prefetch" href="next-page.html"&gt;<br /><br />
-
-          <!-- CANONICAL URL --><br />
-          &lt;link rel="canonical" href="https://yoursite.com/page"&gt;<br />
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"&gt;<br />
         </code>
+
+        <h4>Favicon & Icons</h4>
+        <code>
+          <!-- FAVICON - Various sizes for different devices --><br />
+          &lt;link rel="icon" type="image/x-icon" href="/favicon.ico"&gt;<br />
+          &lt;link rel="icon" type="image/png" sizes="16x16"
+          href="/favicon-16x16.png"&gt;<br />
+          &lt;link rel="icon" type="image/png" sizes="32x32"
+          href="/favicon-32x32.png"&gt;<br />
+          &lt;link rel="icon" type="image/png" sizes="96x96"
+          href="/favicon-96x96.png"&gt;<br /><br />
+
+          <!-- APPLE TOUCH ICONS --><br />
+          &lt;link rel="apple-touch-icon" sizes="57x57"
+          href="/apple-icon-57x57.png"&gt;<br />
+          &lt;link rel="apple-touch-icon" sizes="60x60"
+          href="/apple-icon-60x60.png"&gt;<br />
+          &lt;link rel="apple-touch-icon" sizes="72x72"
+          href="/apple-icon-72x72.png"&gt;<br />
+          &lt;link rel="apple-touch-icon" sizes="76x76"
+          href="/apple-icon-76x76.png"&gt;<br />
+          &lt;link rel="apple-touch-icon" sizes="114x114"
+          href="/apple-icon-114x114.png"&gt;<br />
+          &lt;link rel="apple-touch-icon" sizes="120x120"
+          href="/apple-icon-120x120.png"&gt;<br />
+          &lt;link rel="apple-touch-icon" sizes="144x144"
+          href="/apple-icon-144x144.png"&gt;<br />
+          &lt;link rel="apple-touch-icon" sizes="152x152"
+          href="/apple-icon-152x152.png"&gt;<br />
+          &lt;link rel="apple-touch-icon" sizes="180x180"
+          href="/apple-icon-180x180.png"&gt;<br /><br />
+
+          <!-- ANDROID CHROME ICONS --><br />
+          &lt;link rel="icon" type="image/png" sizes="192x192"
+          href="/android-icon-192x192.png"&gt;<br />
+          &lt;link rel="manifest" href="/manifest.json"&gt;
+          <!-- PWA manifest --><br />
+        </code>
+
+        <h4>Performance Optimization</h4>
+        <code>
+          <!-- PRELOADING CRITICAL RESOURCES --><br />
+          &lt;link rel="preload" href="critical.css" as="style"&gt;
+          <!-- Critical CSS --><br />
+          &lt;link rel="preload" href="hero-image.jpg" as="image"&gt;
+          <!-- Above-fold images --><br />
+          &lt;link rel="preload" href="important-font.woff2" as="font"
+          type="font/woff2" crossorigin&gt;<br /><br />
+
+          <!-- PREFETCHING FUTURE RESOURCES --><br />
+          &lt;link rel="prefetch" href="next-page.html"&gt;
+          <!-- Next likely page --><br />
+          &lt;link rel="prefetch" href="secondary-style.css"&gt;
+          <!-- Secondary resources --><br /><br />
+
+          <!-- PRECONNECTING TO EXTERNAL DOMAINS --><br />
+          &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;<br />
+          &lt;link rel="preconnect" href="https://api.example.com"&gt;<br />
+          &lt;link rel="dns-prefetch" href="https://cdn.example.com"&gt;
+          <!-- DNS resolution only --><br /><br />
+
+          <!-- SEO & CANONICAL URLS --><br />
+          &lt;link rel="canonical" href="https://yoursite.com/html-guide"&gt;
+          <!-- Preferred URL --><br />
+          &lt;link rel="alternate" hreflang="es"
+          href="https://yoursite.com/es/html-guide"&gt;
+          <!-- Spanish version --><br />
+          &lt;link rel="alternate" hreflang="fr"
+          href="https://yoursite.com/fr/html-guide"&gt;
+          <!-- French version --><br />
+          &lt;link rel="alternate" type="application/rss+xml" title="RSS Feed"
+          href="/feed.xml"&gt;<br />
+        </code>
+      </div>
+
+      <!-- 
+      META TAGS BEST PRACTICES
+      Professional guidelines for meta tag implementation
+      -->
+      <h3>6. Meta Tags Best Practices</h3>
+      <div class="example">
+        <h4>Implementation Guidelines</h4>
+        <ul>
+          <li>
+            <strong>Order matters:</strong> charset should be first, viewport
+            second
+          </li>
+          <li>
+            <strong>Keep titles under 60 characters</strong> for complete
+            display in search results
+          </li>
+          <li>
+            <strong>Descriptions should be 150-160 characters</strong> to avoid
+            truncation
+          </li>
+          <li>
+            <strong>Use unique titles and descriptions</strong> for each page
+          </li>
+          <li>
+            <strong>Include target keywords naturally</strong> in titles and
+            descriptions
+          </li>
+          <li>
+            <strong>Test social media sharing</strong> with Facebook Debugger
+            and Twitter Card Validator
+          </li>
+          <li>
+            <strong>Optimize images for social media:</strong> 1200x630px for
+            Open Graph
+          </li>
+          <li>
+            <strong>Use absolute URLs</strong> for images and canonical links
+          </li>
+        </ul>
+
+        <h4>Testing & Validation Tools</h4>
+        <ul>
+          <li>
+            <strong>Google Search Console:</strong> Monitor search performance
+          </li>
+          <li>
+            <strong>Facebook Sharing Debugger:</strong> Test Open Graph tags
+          </li>
+          <li><strong>Twitter Card Validator:</strong> Test Twitter Cards</li>
+          <li>
+            <strong>LinkedIn Post Inspector:</strong> Test LinkedIn sharing
+          </li>
+          <li>
+            <strong>W3C Markup Validator:</strong> Validate HTML structure
+          </li>
+          <li>
+            <strong>Google Rich Results Test:</strong> Test structured data
+          </li>
+        </ul>
+
+        <h4>Common Mistakes to Avoid</h4>
+        <ul>
+          <li>❌ Missing or duplicate title tags</li>
+          <li>❌ Same meta description on multiple pages</li>
+          <li>❌ Missing viewport meta tag (poor mobile experience)</li>
+          <li>❌ Using relative URLs in Open Graph images</li>
+          <li>❌ Not testing social media sharing appearance</li>
+          <li>❌ Forgetting alt text for Open Graph images</li>
+          <li>❌ Not updating meta tags when content changes</li>
+        </ul>
       </div>
     </section>
 
@@ -2182,9 +2512,25 @@
     SCRIPTS AT END OF BODY
     Performance best practice: Load scripts after content
     This ensures DOM is ready and page renders faster
+    
+    SCRIPT TAG DETAILS:
+    - Can be internal (code between tags) or external (src attribute)
+    - Blocking by default - stops HTML parsing until executed
+    - Use defer/async for external scripts to improve performance
+    - Place at end of body to ensure DOM is ready
     -->
     <script>
-      // Example: Simple functionality for the dialog
+      /* 
+      JAVASCRIPT FUNCTIONALITY EXAMPLES
+      This script demonstrates basic DOM manipulation and event handling
+      Use cases:
+      - Interactive features
+      - Form validation
+      - Dynamic content updates
+      - User experience enhancements
+      */
+
+      // DOM Content Loaded Event - ensures HTML is fully parsed
       document.addEventListener("DOMContentLoaded", function () {
         // Close dialog when clicking outside
         const dialog = document.getElementById("info-dialog");
@@ -2196,9 +2542,27 @@
           });
         }
 
+        // Example: Progress bar animation
+        const progressBars = document.querySelectorAll("progress");
+        progressBars.forEach((bar) => {
+          // Animate progress bars for demonstration
+          if (bar.id === "upload-progress") {
+            let value = 0;
+            const interval = setInterval(() => {
+              value += 2;
+              bar.value = value;
+              bar.nextElementSibling.textContent = value + "%";
+              if (value >= 100) {
+                clearInterval(interval);
+              }
+            }, 100);
+          }
+        });
+
         // Log message for demonstration
         console.log("HTML Guide loaded successfully!");
         console.log("This page demonstrates modern HTML best practices.");
+        console.log("Check the Network tab to see resource loading order.");
       });
     </script>
   </body>
