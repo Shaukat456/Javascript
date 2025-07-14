@@ -864,7 +864,12 @@
       </p>
     </section>
 
-    <!-- Semantic HTML5 Tags -->
+    <!-- 
+    SEMANTIC HTML5 SECTION
+    Critical for modern web development
+    SEO impact: Search engines understand content better
+    Accessibility: Screen readers navigate more effectively
+    -->
     <section class="tag-category">
       <h2>9. Semantic HTML5 Tags</h2>
       <p>
@@ -872,29 +877,200 @@
         better SEO and accessibility
       </p>
 
+      <!-- 
+      SEMANTIC LAYOUT EXAMPLE
+      Use case: Better document structure than divs
+      SEO benefit: Search engines understand page sections
+      -->
       <div class="example">
-        <p><strong>Document structure example:</strong></p>
-        <code>
-          &lt;header&gt; - Page or section header<br />
-          &lt;nav&gt; - Navigation links<br />
-          &lt;main&gt; - Main content area<br />
-          &lt;section&gt; - Thematic grouping of content<br />
-          &lt;article&gt; - Self-contained content<br />
-          &lt;aside&gt; - Sidebar content<br />
-          &lt;footer&gt; - Page or section footer<br />
-        </code>
+        <p><strong>Semantic document structure:</strong></p>
+
+        <!-- 
+        HEADER ELEMENT
+        Use cases:
+        - Site header with logo and navigation
+        - Article headers
+        - Section introductions
+        Can have multiple headers per page
+        -->
+        <header style="background-color: #f0f8ff; padding: 10px; margin: 5px 0">
+          <h1 style="margin: 0; font-size: 1.2em">Site Header with Logo</h1>
+
+          <!-- 
+          NAV ELEMENT
+          Use cases:
+          - Main navigation menu
+          - Breadcrumbs
+          - Pagination links
+          - Footer navigation
+          Should contain list of links
+          -->
+          <nav>
+            <ul style="list-style: none; padding: 0; margin: 5px 0">
+              <li style="display: inline; margin-right: 15px">
+                <a href="#home">Home</a>
+              </li>
+              <li style="display: inline; margin-right: 15px">
+                <a href="#about">About</a>
+              </li>
+              <li style="display: inline; margin-right: 15px">
+                <a href="#services">Services</a>
+              </li>
+              <li style="display: inline"><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+        </header>
+
+        <!-- 
+        MAIN ELEMENT
+        Use cases:
+        - Primary content of the page
+        - Content that is unique to the page
+        - Should not include repeated content
+        Only ONE main element per page
+        -->
+        <main style="background-color: #f9f9f9; padding: 15px; margin: 5px 0">
+          <h2 style="margin-top: 0">Main Content Area</h2>
+
+          <!-- 
+          ARTICLE ELEMENT
+          Use cases:
+          - Blog posts
+          - News articles
+          - Forum posts
+          - Self-contained content that could be distributed independently
+          -->
+          <article
+            style="
+              background-color: white;
+              padding: 10px;
+              margin: 10px 0;
+              border-left: 3px solid #007acc;
+            "
+          >
+            <h3 style="margin-top: 0">Article Title</h3>
+            <p>
+              This is an article that could stand alone. It's self-contained
+              content like a blog post or news article.
+            </p>
+
+            <!-- 
+            TIME ELEMENT
+            Use cases:
+            - Publication dates
+            - Event dates
+            - Machine-readable time data
+            datetime attribute for ISO format
+            -->
+            <time datetime="2025-07-13">Published on July 13, 2025</time>
+          </article>
+
+          <!-- 
+          SECTION ELEMENT
+          Use cases:
+          - Thematic grouping of content
+          - Chapters in a document
+          - Tabbed content areas
+          Should have a heading
+          -->
+          <section
+            style="background-color: #f0f0f0; padding: 10px; margin: 10px 0"
+          >
+            <h3 style="margin-top: 0">Section Heading</h3>
+            <p>
+              This section groups related content together. Each section should
+              have a clear theme.
+            </p>
+          </section>
+        </main>
+
+        <!-- 
+        ASIDE ELEMENT
+        Use cases:
+        - Sidebars
+        - Related links
+        - Advertisements
+        - Author bio boxes
+        Content related but not essential to main content
+        -->
+        <aside
+          style="
+            background-color: #fff3cd;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ffeaa7;
+          "
+        >
+          <h4 style="margin-top: 0">Related Information</h4>
+          <p>
+            This is sidebar content related to the main content but not
+            essential.
+          </p>
+        </aside>
+
+        <!-- 
+        FOOTER ELEMENT
+        Use cases:
+        - Copyright information
+        - Contact details
+        - Site links
+        - Social media links
+        Can have multiple footers (page footer, section footer)
+        -->
+        <footer style="background-color: #e9ecef; padding: 10px; margin: 5px 0">
+          <p style="margin: 0">
+            Footer content - copyright, links, contact info
+          </p>
+        </footer>
       </div>
 
       <p>
         <strong>Benefits:</strong> Better SEO, improved accessibility, cleaner
-        code structure
+        code structure, future-proof design
       </p>
+
+      <!-- 
+      SEMANTIC BEST PRACTICES
+      - Use semantic elements instead of divs when possible
+      - Each semantic element should have appropriate content
+      - Don't use semantic elements just for styling
+      -->
+      <div class="example">
+        <p><strong>Semantic vs Non-semantic comparison:</strong></p>
+        <code>
+          <!-- Bad: Generic divs --><br />
+          &lt;div class="header"&gt;&lt;/div&gt;<br />
+          &lt;div class="nav"&gt;&lt;/div&gt;<br />
+          &lt;div class="content"&gt;&lt;/div&gt;<br />
+          &lt;div class="sidebar"&gt;&lt;/div&gt;<br />
+          &lt;div class="footer"&gt;&lt;/div&gt;<br /><br />
+
+          <!-- Good: Semantic HTML --><br />
+          &lt;header&gt;&lt;/header&gt;<br />
+          &lt;nav&gt;&lt;/nav&gt;<br />
+          &lt;main&gt;&lt;/main&gt;<br />
+          &lt;aside&gt;&lt;/aside&gt;<br />
+          &lt;footer&gt;&lt;/footer&gt;<br />
+        </code>
+      </div>
     </section>
 
-    <!-- Division and Span Tags -->
+    <!-- 
+    CONTAINER TAGS SECTION
+    Understanding block vs inline elements is fundamental
+    Layout concepts: How elements flow and stack
+    -->
     <section class="tag-category">
       <h2>10. Container Tags</h2>
 
+      <!-- 
+      DIV - BLOCK LEVEL CONTAINER
+      Use cases:
+      - Layout sections
+      - Grouping elements for styling
+      - Creating grid/flexbox containers
+      - When semantic elements don't fit
+      -->
       <h3>Division (&lt;div&gt;)</h3>
       <p>
         <strong>Use for:</strong> Grouping block-level elements, creating layout
@@ -904,9 +1080,28 @@
         <div style="background-color: #e0e0e0; padding: 10px; margin: 5px">
           <p>This paragraph is inside a div container.</p>
           <p>Divs are block-level elements that take full width.</p>
+          <!-- 
+          NESTED DIV EXAMPLE
+          Use case: Complex layouts, component structure
+          -->
+          <div style="display: flex; gap: 10px; margin-top: 10px">
+            <div style="background-color: #ffcccb; padding: 10px; flex: 1">
+              Left column
+            </div>
+            <div style="background-color: #add8e6; padding: 10px; flex: 1">
+              Right column
+            </div>
+          </div>
         </div>
       </div>
 
+      <!-- 
+      SPAN - INLINE CONTAINER
+      Use cases:
+      - Styling part of text
+      - Adding classes/IDs to inline content
+      - Wrapping text for JavaScript manipulation
+      -->
       <h3>Span (&lt;span&gt;)</h3>
       <p>
         <strong>Use for:</strong> Styling inline elements, grouping inline
@@ -923,60 +1118,500 @@
           <span style="background-color: yellow">inline elements</span> that
           don't break the flow.
         </p>
+        <!-- 
+        PRACTICAL SPAN EXAMPLES
+        Real-world use cases
+        -->
+        <p>Price: <span style="font-size: 1.2em; color: green">$29.99</span></p>
+        <p>
+          Status:
+          <span
+            class="badge"
+            style="
+              background-color: #28a745;
+              color: white;
+              padding: 2px 6px;
+              border-radius: 3px;
+            "
+            >Active</span
+          >
+        </p>
+      </div>
+
+      <!-- 
+      BLOCK VS INLINE EXPLANATION
+      Fundamental concept for layout understanding
+      -->
+      <div class="example">
+        <p><strong>Block vs Inline Elements:</strong></p>
+        <p>
+          <strong>Block elements:</strong> div, p, h1-h6, ul, ol, li, header,
+          section, article
+        </p>
+        <p>- Take full width available</p>
+        <p>- Start on new line</p>
+        <p>- Can contain other block and inline elements</p>
+
+        <p>
+          <strong>Inline elements:</strong> span, a, strong, em, img, input,
+          button
+        </p>
+        <p>- Take only necessary width</p>
+        <p>- Flow with text</p>
+        <p>- Cannot contain block elements</p>
+
+        <p>
+          <strong>Inline-block elements:</strong> img, input, button (by
+          default)
+        </p>
+        <p>- Flow inline but accept width/height</p>
       </div>
     </section>
 
-    <!-- Media Tags -->
+    <!-- 
+    MEDIA TAGS SECTION
+    Modern web requires rich media content
+    Performance: Always consider file sizes and loading
+    Accessibility: Provide alternatives for all media
+    -->
     <section class="tag-category">
       <h2>11. Media Tags</h2>
 
+      <!-- 
+      AUDIO ELEMENT
+      Use cases:
+      - Podcasts
+      - Music players
+      - Sound effects
+      - Voice messages
+      -->
       <h3>Audio (&lt;audio&gt;)</h3>
       <p><strong>Use for:</strong> Embedding audio content</p>
       <div class="example">
+        <!-- 
+        AUDIO ATTRIBUTES
+        controls: Shows play/pause/volume controls
+        autoplay: Auto-plays (avoid for UX reasons)
+        loop: Repeats audio
+        muted: Starts muted
+        preload: none/metadata/auto
+        -->
         <audio controls>
           <source src="audio-file.mp3" type="audio/mpeg" />
           <source src="audio-file.ogg" type="audio/ogg" />
+          <source src="audio-file.wav" type="audio/wav" />
+          <!-- Fallback text for unsupported browsers -->
           Your browser does not support the audio element.
         </audio>
+
+        <p><strong>Audio formats:</strong></p>
+        <ul>
+          <li><strong>MP3:</strong> Most compatible, good compression</li>
+          <li><strong>OGG:</strong> Open source, good quality</li>
+          <li><strong>WAV:</strong> Uncompressed, large files</li>
+          <li><strong>AAC:</strong> High quality, good compression</li>
+        </ul>
       </div>
 
+      <!-- 
+      VIDEO ELEMENT
+      Use cases:
+      - Product demos
+      - Tutorials
+      - Entertainment content
+      - Background videos
+      -->
       <h3>Video (&lt;video&gt;)</h3>
       <p><strong>Use for:</strong> Embedding video content</p>
       <div class="example">
-        <video width="320" height="240" controls>
+        <!-- 
+        VIDEO ATTRIBUTES
+        controls: Shows video controls
+        width/height: Dimensions
+        poster: Thumbnail image before play
+        autoplay: Auto-plays (use carefully)
+        muted: Required for autoplay in most browsers
+        loop: Repeats video
+        -->
+        <video width="320" height="240" controls poster="thumbnail.jpg">
           <source src="movie.mp4" type="video/mp4" />
+          <source src="movie.webm" type="video/webm" />
           <source src="movie.ogg" type="video/ogg" />
+          <!-- Fallback for accessibility -->
+          <track
+            kind="subtitles"
+            src="subtitles.vtt"
+            srclang="en"
+            label="English"
+          />
           Your browser does not support the video tag.
         </video>
+
+        <p><strong>Video formats:</strong></p>
+        <ul>
+          <li><strong>MP4:</strong> Most compatible, widely supported</li>
+          <li><strong>WebM:</strong> Open source, good compression</li>
+          <li><strong>OGG:</strong> Open source alternative</li>
+        </ul>
+
+        <p><strong>Video best practices:</strong></p>
+        <ul>
+          <li>Always provide multiple formats for compatibility</li>
+          <li>Include poster images for better UX</li>
+          <li>Add captions/subtitles for accessibility</li>
+          <li>Optimize file sizes for web delivery</li>
+          <li>Consider using video hosting services for large files</li>
+        </ul>
+      </div>
+
+      <!-- 
+      FIGURE AND FIGCAPTION
+      Use cases:
+      - Images with captions
+      - Diagrams with descriptions
+      - Code examples with explanations
+      - Charts and graphs
+      -->
+      <h3>Figure (&lt;figure&gt; and &lt;figcaption&gt;)</h3>
+      <p>
+        <strong>Use for:</strong> Self-contained content with optional caption
+      </p>
+      <div class="example">
+        <figure style="margin: 0; text-align: center">
+          <img
+            src="https://via.placeholder.com/200x150?text=Chart"
+            alt="Sample chart showing data trends"
+            style="border: 1px solid #ddd"
+          />
+          <!-- 
+          FIGCAPTION ELEMENT
+          - Provides caption for figure
+          - Can be before or after figure content
+          - Improves accessibility
+          -->
+          <figcaption style="font-style: italic; margin-top: 5px; color: #666">
+            Figure 1: Sample chart showing quarterly sales data
+          </figcaption>
+        </figure>
+
+        <figure style="margin: 20px 0">
+          <pre
+            style="
+              background-color: #f4f4f4;
+              padding: 10px;
+              border-radius: 4px;
+              overflow-x: auto;
+            "
+          ><code>function greet(name) {
+    return `Hello, ${name}!`;
+}</code></pre>
+          <figcaption style="font-style: italic; color: #666">
+            Code Example: Simple greeting function in JavaScript
+          </figcaption>
+        </figure>
       </div>
     </section>
 
-    <!-- Meta Information -->
+    <!-- 
+    ADVANCED HTML FEATURES
+    Modern HTML capabilities that improve UX and functionality
+    These features are essential for professional web development
+    -->
     <section class="tag-category">
-      <h2>12. Meta and Head Tags</h2>
+      <h2>12. Advanced HTML Features</h2>
+
+      <!-- 
+      DATA ATTRIBUTES
+      Use cases:
+      - Storing custom data
+      - JavaScript interaction
+      - CSS styling hooks
+      - Configuration data
+      -->
+      <h3>Data Attributes</h3>
+      <p><strong>Use for:</strong> Storing custom data in HTML elements</p>
+      <div class="example">
+        <!-- 
+        DATA ATTRIBUTE EXAMPLES
+        - Must start with "data-"
+        - Can be accessed via JavaScript
+        - HTML5 standard for custom data
+        -->
+        <div
+          data-user-id="12345"
+          data-role="admin"
+          data-last-login="2025-07-13"
+        >
+          User information stored in data attributes
+        </div>
+
+        <button
+          data-action="save"
+          data-target="user-profile"
+          data-confirm="true"
+        >
+          Save Profile
+        </button>
+
+        <product-card
+          data-price="29.99"
+          data-category="electronics"
+          data-stock="15"
+        >
+          Product with metadata
+        </product-card>
+
+        <p><strong>JavaScript access:</strong></p>
+        <code>
+          element.dataset.userId // "12345"<br />
+          element.dataset.lastLogin // "2025-07-13"<br />
+          element.getAttribute('data-price') // "29.99"
+        </code>
+      </div>
+
+      <!-- 
+      PROGRESS AND METER ELEMENTS
+      Use cases:
+      - Loading indicators
+      - Progress bars
+      - Completion status
+      - Gauge displays
+      -->
+      <h3>Progress and Meter Elements</h3>
+      <p><strong>Use for:</strong> Displaying progress and measurements</p>
+      <div class="example">
+        <!-- 
+        PROGRESS ELEMENT
+        - Shows completion progress
+        - value: current progress
+        - max: maximum value
+        -->
+        <label for="download-progress">Download Progress:</label><br />
+        <progress id="download-progress" value="65" max="100">65%</progress>
+        <span>65%</span><br /><br />
+
+        <label for="upload-progress">Upload Progress:</label><br />
+        <progress id="upload-progress" value="0" max="100">0%</progress>
+        <span>0%</span><br /><br />
+
+        <!-- 
+        METER ELEMENT
+        - Shows scalar measurement within range
+        - Different from progress (not completion)
+        - Can show low/high/optimum ranges
+        -->
+        <label for="disk-usage">Disk Usage:</label><br />
+        <meter
+          id="disk-usage"
+          value="6"
+          min="0"
+          max="10"
+          low="3"
+          high="8"
+          optimum="5"
+        >
+          6 out of 10
+        </meter>
+        <span>6/10 GB used</span><br /><br />
+
+        <label for="battery-level">Battery Level:</label><br />
+        <meter
+          id="battery-level"
+          value="75"
+          min="0"
+          max="100"
+          low="20"
+          high="80"
+          optimum="90"
+        >
+          75%
+        </meter>
+        <span>75%</span>
+      </div>
+
+      <!-- 
+      DETAILS AND SUMMARY
+      Use cases:
+      - FAQ sections
+      - Collapsible content
+      - Show/hide panels
+      - Accordion interfaces
+      -->
+      <h3>Details and Summary (Collapsible Content)</h3>
+      <p>
+        <strong>Use for:</strong> Creating expandable/collapsible content
+        sections
+      </p>
+      <div class="example">
+        <!-- 
+        DETAILS/SUMMARY EXAMPLES
+        - Native browser collapsible content
+        - No JavaScript required
+        - Accessible by default
+        -->
+        <details>
+          <summary>What is HTML?</summary>
+          <p>
+            HTML (HyperText Markup Language) is the standard markup language for
+            creating web pages. It describes the structure of a web page using
+            markup tags.
+          </p>
+        </details>
+
+        <details open>
+          <summary>Advanced HTML Features (Expanded by default)</summary>
+          <p>
+            Modern HTML includes many powerful features like semantic elements,
+            form validation, media elements, and custom data attributes.
+          </p>
+          <ul>
+            <li>Semantic HTML5 elements</li>
+            <li>Native form validation</li>
+            <li>Audio and video elements</li>
+            <li>Canvas and SVG support</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>Browser Support</summary>
+          <p>
+            Most modern HTML features are well-supported across current
+            browsers. Always check compatibility for specific features using
+            resources like MDN or Can I Use.
+          </p>
+        </details>
+      </div>
+
+      <!-- 
+      DIALOG ELEMENT
+      Use cases:
+      - Modal dialogs
+      - Alert boxes
+      - Confirmation dialogs
+      - Custom popup content
+      -->
+      <h3>Dialog Element (Modal)</h3>
+      <p><strong>Use for:</strong> Creating modal dialogs and popup content</p>
+      <div class="example">
+        <!-- 
+        DIALOG EXAMPLES
+        - Native modal functionality
+        - Keyboard and focus management
+        - Backdrop and ESC key support
+        -->
+        <button onclick="document.getElementById('info-dialog').showModal()">
+          Open Info Dialog
+        </button>
+
+        <dialog
+          id="info-dialog"
+          style="
+            padding: 20px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          "
+        >
+          <h3 style="margin-top: 0">Information</h3>
+          <p>
+            This is a native HTML dialog element. It provides built-in modal
+            functionality.
+          </p>
+          <form method="dialog">
+            <button type="submit">Close</button>
+          </form>
+        </dialog>
+
+        <p><strong>Dialog features:</strong></p>
+        <ul>
+          <li>Native keyboard navigation (ESC to close)</li>
+          <li>Focus trapping within dialog</li>
+          <li>Backdrop click to close (when configured)</li>
+          <li>Semantic accessibility support</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 
+    META AND HEAD TAGS
+    Critical for SEO, performance, and functionality
+    These determine how your page appears and behaves
+    -->
+    <section class="tag-category">
+      <h2>13. Meta and Head Tags</h2>
       <p>
         <strong>Use for:</strong> Document metadata, external resources, page
         information
       </p>
 
+      <!-- 
+      ESSENTIAL META TAGS
+      Critical for SEO and functionality
+      -->
+      <h3>Essential Meta Tags</h3>
       <div class="example">
         <code>
-          &lt;meta charset="UTF-8"&gt; - Character encoding<br />
+          <!-- REQUIRED META TAGS --><br />
+          &lt;meta charset="UTF-8"&gt;
+          <!-- Character encoding --><br />
           &lt;meta name="viewport" content="width=device-width,
-          initial-scale=1.0"&gt; - Responsive design<br />
-          &lt;meta name="description" content="Page description"&gt; - SEO
-          description<br />
-          &lt;meta name="keywords" content="html, css, javascript"&gt; - SEO
-          keywords<br />
-          &lt;link rel="stylesheet" href="styles.css"&gt; - External CSS<br />
-          &lt;script src="script.js"&gt;&lt;/script&gt; - External JavaScript<br />
+          initial-scale=1.0"&gt;
+          <!-- Responsive --><br /><br />
+
+          <!-- SEO META TAGS --><br />
+          &lt;meta name="description" content="Page description for search
+          results"&gt;<br />
+          &lt;meta name="keywords" content="html, css, javascript, web
+          development"&gt;<br />
+          &lt;meta name="author" content="Your Name"&gt;<br />
+          &lt;meta name="robots" content="index, follow"&gt;
+          <!-- Search engine instructions --><br /><br />
+
+          <!-- SOCIAL MEDIA META TAGS (Open Graph) --><br />
+          &lt;meta property="og:title" content="Page Title"&gt;<br />
+          &lt;meta property="og:description" content="Page description"&gt;<br />
+          &lt;meta property="og:image" content="image-url.jpg"&gt;<br />
+          &lt;meta property="og:url" content="https://yoursite.com"&gt;<br />
+          &lt;meta property="og:type" content="website"&gt;<br /><br />
+
+          <!-- TWITTER CARD META TAGS --><br />
+          &lt;meta name="twitter:card" content="summary_large_image"&gt;<br />
+          &lt;meta name="twitter:title" content="Page Title"&gt;<br />
+          &lt;meta name="twitter:description" content="Page description"&gt;<br />
+          &lt;meta name="twitter:image" content="image-url.jpg"&gt;<br />
+        </code>
+      </div>
+
+      <!-- 
+      LINKING EXTERNAL RESOURCES
+      Performance and functionality considerations
+      -->
+      <h3>External Resources</h3>
+      <div class="example">
+        <code>
+          <!-- CSS STYLESHEETS --><br />
+          &lt;link rel="stylesheet" href="styles.css"&gt;<br />
+          &lt;link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700"&gt;<br /><br />
+
+          <!-- FAVICON --><br />
+          &lt;link rel="icon" type="image/x-icon" href="favicon.ico"&gt;<br />
+          &lt;link rel="apple-touch-icon" href="apple-touch-icon.png"&gt;<br /><br />
+
+          <!-- PRELOADING RESOURCES --><br />
+          &lt;link rel="preload" href="important.css" as="style"&gt;<br />
+          &lt;link rel="preload" href="hero-image.jpg" as="image"&gt;<br />
+          &lt;link rel="prefetch" href="next-page.html"&gt;<br /><br />
+
+          <!-- CANONICAL URL --><br />
+          &lt;link rel="canonical" href="https://yoursite.com/page"&gt;<br />
         </code>
       </div>
     </section>
 
     <!-- Script Tags with Defer and Async -->
     <section class="tag-category">
-      <h2>13. Script Tags - Defer vs Async</h2>
+      <h2>14. Script Tags - Defer vs Async</h2>
       <p>
         <strong>Use for:</strong> Controlling how and when JavaScript files are
         loaded and executed
@@ -1119,58 +1754,452 @@
       </div>
     </section>
 
-    <!-- Best Practices Section -->
+    <!-- 
+    HTML VALIDATION AND QUALITY
+    Professional web development requires attention to code quality
+    These practices separate amateur from professional code
+    -->
     <section class="tag-category">
-      <h2>14. HTML Best Practices</h2>
-      <ul>
-        <li>
-          <strong>Always use semantic HTML:</strong> Choose tags based on
-          meaning, not appearance
-        </li>
-        <li>
-          <strong>Include alt attributes:</strong> Always provide alt text for
-          images
-        </li>
-        <li>
-          <strong>Use proper nesting:</strong> Ensure tags are properly opened
-          and closed
-        </li>
-        <li>
-          <strong>Validate your HTML:</strong> Use tools like W3C Markup
-          Validator
-        </li>
-        <li>
-          <strong>Keep it accessible:</strong> Use proper heading hierarchy,
-          labels for form elements
-        </li>
-        <li>
-          <strong>Use lowercase:</strong> Write all HTML tags and attributes in
-          lowercase
-        </li>
-        <li>
-          <strong>Quote attribute values:</strong> Always use quotes around
-          attribute values
-        </li>
-        <li>
-          <strong>Close self-closing tags:</strong> Use proper syntax for void
-          elements
-        </li>
-      </ul>
+      <h2>15. HTML Validation, Accessibility & Performance</h2>
+
+      <!-- 
+      HTML VALIDATION
+      Why validation matters for professional development
+      -->
+      <h3>HTML Validation</h3>
+      <p>
+        <strong>Why validate:</strong> Ensures cross-browser compatibility and
+        professional quality
+      </p>
+      <div class="example">
+        <p><strong>Validation tools:</strong></p>
+        <ul>
+          <li>
+            <strong>W3C Markup Validator:</strong> https://validator.w3.org/
+          </li>
+          <li><strong>HTML5 Validator:</strong> https://html5.validator.nu/</li>
+          <li><strong>Browser DevTools:</strong> Built-in error reporting</li>
+          <li><strong>VS Code Extensions:</strong> Real-time validation</li>
+        </ul>
+
+        <p><strong>Common validation errors to avoid:</strong></p>
+        <ul>
+          <li>
+            Unclosed tags:
+            <code>&lt;p&gt;Text &lt;strong&gt;bold&lt;/p&gt;</code> ❌
+          </li>
+          <li>
+            Improper nesting:
+            <code>&lt;p&gt;&lt;div&gt;content&lt;/div&gt;&lt;/p&gt;</code> ❌
+          </li>
+          <li>Missing alt attributes on images ❌</li>
+          <li>Duplicate IDs on same page ❌</li>
+          <li>Missing DOCTYPE declaration ❌</li>
+        </ul>
+      </div>
+
+      <!-- 
+      ACCESSIBILITY (A11Y)
+      Critical for inclusive web development
+      Legal requirements in many jurisdictions
+      -->
+      <h3>Accessibility (A11Y) Best Practices</h3>
+      <p>
+        <strong>Why accessibility matters:</strong> Inclusive design, legal
+        compliance, better SEO
+      </p>
+      <div class="example">
+        <p><strong>Essential accessibility practices:</strong></p>
+
+        <!-- SEMANTIC HTML -->
+        <h4>1. Use Semantic HTML</h4>
+        <code>
+          <!-- Good --><br />
+          &lt;button&gt;Click me&lt;/button&gt;<br />
+          &lt;nav&gt;&lt;ul&gt;&lt;li&gt;&lt;a
+          href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/nav&gt;<br /><br />
+
+          <!-- Bad --><br />
+          &lt;div onclick="doSomething()"&gt;Click me&lt;/div&gt;<br />
+          &lt;div
+          class="nav"&gt;&lt;div&gt;&lt;div&gt;&lt;span&gt;Home&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;<br />
+        </code>
+
+        <!-- ALT TEXT -->
+        <h4>2. Proper Alt Text</h4>
+        <code>
+          &lt;img src="chart.png" alt="Sales increased 25% from Q1 to Q2
+          2025"&gt; ✅<br />
+          &lt;img src="chart.png" alt="chart"&gt; ❌<br />
+          &lt;img src="decorative.png" alt=""&gt; ✅ (decorative image)<br />
+        </code>
+
+        <!-- FORM LABELS -->
+        <h4>3. Form Labels and Instructions</h4>
+        <code>
+          &lt;label for="email"&gt;Email Address (required)&lt;/label&gt;<br />
+          &lt;input type="email" id="email" name="email" required
+          aria-describedby="email-help"&gt;<br />
+          &lt;div id="email-help"&gt;We'll never share your email&lt;/div&gt;<br />
+        </code>
+
+        <!-- HEADING HIERARCHY -->
+        <h4>4. Proper Heading Hierarchy</h4>
+        <code>
+          &lt;h1&gt;Page Title&lt;/h1&gt;<br />
+          &nbsp;&nbsp;&lt;h2&gt;Section&lt;/h2&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&lt;h3&gt;Subsection&lt;/h3&gt;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&lt;h3&gt;Another Subsection&lt;/h3&gt;<br />
+          &nbsp;&nbsp;&lt;h2&gt;Another Section&lt;/h2&gt;<br />
+        </code>
+
+        <!-- COLOR CONTRAST -->
+        <h4>5. Color and Contrast</h4>
+        <ul>
+          <li>Minimum contrast ratio: 4.5:1 for normal text</li>
+          <li>Minimum contrast ratio: 3:1 for large text</li>
+          <li>Don't rely on color alone to convey information</li>
+          <li>Test with tools like WebAIM Contrast Checker</li>
+        </ul>
+
+        <!-- KEYBOARD NAVIGATION -->
+        <h4>6. Keyboard Navigation</h4>
+        <ul>
+          <li>All interactive elements must be keyboard accessible</li>
+          <li>Visible focus indicators</li>
+          <li>Logical tab order</li>
+          <li>Skip links for main content</li>
+        </ul>
+      </div>
+
+      <!-- 
+      PERFORMANCE OPTIMIZATION
+      Critical for user experience and SEO
+      -->
+      <h3>Performance Best Practices</h3>
+      <p>
+        <strong>Why performance matters:</strong> User experience, SEO rankings,
+        conversion rates
+      </p>
+      <div class="example">
+        <h4>1. Optimize Images</h4>
+        <ul>
+          <li>Use appropriate formats (WebP, AVIF for modern browsers)</li>
+          <li>Compress images before uploading</li>
+          <li>Use responsive images with srcset</li>
+          <li>Lazy load images below the fold</li>
+        </ul>
+        <code>
+          &lt;img src="small.jpg" srcset="small.jpg 300w, medium.jpg 600w,
+          large.jpg 1200w" sizes="(max-width: 600px) 300px, (max-width: 1200px)
+          600px, 1200px" alt="Responsive image" loading="lazy"&gt;
+        </code>
+
+        <h4>2. Minimize HTTP Requests</h4>
+        <ul>
+          <li>Combine CSS and JavaScript files</li>
+          <li>Use CSS sprites for small images</li>
+          <li>Inline critical CSS</li>
+          <li>Use icon fonts or SVG sprites</li>
+        </ul>
+
+        <h4>3. Optimize Loading</h4>
+        <ul>
+          <li>Use defer/async for scripts</li>
+          <li>Preload critical resources</li>
+          <li>Minimize render-blocking resources</li>
+          <li>Use compression (gzip/brotli)</li>
+        </ul>
+
+        <h4>4. Measure Performance</h4>
+        <ul>
+          <li>
+            <strong>Google PageSpeed Insights:</strong> Performance scoring
+          </li>
+          <li><strong>Lighthouse:</strong> Built into Chrome DevTools</li>
+          <li><strong>WebPageTest:</strong> Detailed performance analysis</li>
+          <li><strong>GTmetrix:</strong> Performance monitoring</li>
+        </ul>
+      </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Best Practices Section -->
+    <section class="tag-category">
+      <h2>16. HTML Best Practices & Professional Tips</h2>
+
+      <!-- 
+      FUNDAMENTAL PRINCIPLES
+      Core concepts every HTML developer must know
+      -->
+      <h3>Fundamental Principles</h3>
+      <ul>
+        <li>
+          <strong>Semantic HTML first:</strong> Choose tags based on meaning,
+          not appearance <br /><small
+            >Use &lt;button&gt; for buttons, &lt;nav&gt; for navigation,
+            &lt;article&gt; for articles</small
+          >
+        </li>
+        <li>
+          <strong>Accessibility is not optional:</strong> Always include alt
+          text, proper labels, and keyboard navigation <br /><small
+            >Your website should work for everyone, including users with
+            disabilities</small
+          >
+        </li>
+        <li>
+          <strong>Mobile-first approach:</strong> Design for mobile devices
+          first, then enhance for desktop <br /><small
+            >Most web traffic comes from mobile devices</small
+          >
+        </li>
+        <li>
+          <strong>Progressive enhancement:</strong> Start with basic HTML, then
+          enhance with CSS and JavaScript <br /><small
+            >Your content should be accessible even if CSS/JS fails to
+            load</small
+          >
+        </li>
+      </ul>
+
+      <!-- 
+      CODE ORGANIZATION
+      Professional code structure and maintenance
+      -->
+      <h3>Code Organization</h3>
+      <div class="example">
+        <h4>1. Document Structure</h4>
+        <code>
+          &lt;!DOCTYPE html&gt;<br />
+          &lt;html lang="en"&gt;<br />
+          &lt;head&gt;<br />
+          &nbsp;&nbsp;&lt;!-- Meta tags first --&gt;<br />
+          &nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br />
+          &nbsp;&nbsp;&lt;meta name="viewport" content="width=device-width,
+          initial-scale=1.0"&gt;<br />
+          &nbsp;&nbsp;<br />
+          &nbsp;&nbsp;&lt;!-- SEO meta tags --&gt;<br />
+          &nbsp;&nbsp;&lt;title&gt;Page Title&lt;/title&gt;<br />
+          &nbsp;&nbsp;&lt;meta name="description" content="..."&gt;<br />
+          &nbsp;&nbsp;<br />
+          &nbsp;&nbsp;&lt;!-- External resources --&gt;<br />
+          &nbsp;&nbsp;&lt;link rel="stylesheet" href="styles.css"&gt;<br />
+          &lt;/head&gt;<br />
+          &lt;body&gt;<br />
+          &nbsp;&nbsp;&lt;!-- Content here --&gt;<br />
+          &nbsp;&nbsp;&lt;!-- Scripts at the end --&gt;<br />
+          &nbsp;&nbsp;&lt;script src="script.js"&gt;&lt;/script&gt;<br />
+          &lt;/body&gt;<br />
+          &lt;/html&gt;
+        </code>
+
+        <h4>2. Consistent Indentation and Formatting</h4>
+        <ul>
+          <li>Use 2 or 4 spaces consistently (not tabs)</li>
+          <li>Lowercase tag and attribute names</li>
+          <li>Quote all attribute values</li>
+          <li>One attribute per line for complex elements</li>
+        </ul>
+
+        <h4>3. Meaningful Comments</h4>
+        <code>
+          &lt;!-- Navigation Section --&gt;<br />
+          &lt;nav role="navigation" aria-label="Main navigation"&gt;<br />
+          &nbsp;&nbsp;&lt;!-- TODO: Add search functionality --&gt;<br />
+          &lt;/nav&gt;<br /><br />
+
+          &lt;!-- Main Content Area --&gt;<br />
+          &lt;main&gt;<br />
+          &nbsp;&nbsp;&lt;!-- Hero section with call-to-action --&gt;<br />
+          &lt;/main&gt;
+        </code>
+      </div>
+
+      <!-- 
+      PROFESSIONAL DEVELOPMENT WORKFLOW
+      Tools and practices for professional development
+      -->
+      <h3>Professional Development Workflow</h3>
+      <div class="example">
+        <h4>Essential Tools</h4>
+        <ul>
+          <li>
+            <strong>Code Editor:</strong> VS Code, Sublime Text, or WebStorm
+          </li>
+          <li><strong>Version Control:</strong> Git and GitHub/GitLab</li>
+          <li>
+            <strong>Browser DevTools:</strong> Chrome/Firefox developer tools
+          </li>
+          <li>
+            <strong>Validation Tools:</strong> W3C Validator, accessibility
+            checkers
+          </li>
+          <li>
+            <strong>Performance Tools:</strong> Lighthouse, PageSpeed Insights
+          </li>
+        </ul>
+
+        <h4>Development Process</h4>
+        <ol>
+          <li><strong>Plan:</strong> Wireframe and plan your HTML structure</li>
+          <li>
+            <strong>Semantic HTML:</strong> Write HTML with semantic elements
+            first
+          </li>
+          <li><strong>Validate:</strong> Check HTML validity regularly</li>
+          <li>
+            <strong>Test Accessibility:</strong> Use screen readers and keyboard
+            navigation
+          </li>
+          <li>
+            <strong>Performance Check:</strong> Optimize images and resources
+          </li>
+          <li>
+            <strong>Cross-browser Test:</strong> Test in multiple browsers
+          </li>
+          <li><strong>Mobile Test:</strong> Test on various device sizes</li>
+        </ol>
+
+        <h4>Common Mistakes to Avoid</h4>
+        <ul>
+          <li>❌ Using divs for everything instead of semantic elements</li>
+          <li>❌ Missing alt attributes on images</li>
+          <li>❌ Not testing keyboard navigation</li>
+          <li>❌ Ignoring mobile responsiveness</li>
+          <li>❌ Not validating HTML</li>
+          <li>❌ Poor contrast ratios</li>
+          <li>❌ Overusing classes and IDs</li>
+          <li>❌ Not optimizing images</li>
+        </ul>
+      </div>
+
+      <!-- 
+      FUTURE-PROOFING
+      Staying current with web standards
+      -->
+      <h3>Staying Current</h3>
+      <div class="example">
+        <h4>Learning Resources</h4>
+        <ul>
+          <li><strong>MDN Web Docs:</strong> Comprehensive HTML reference</li>
+          <li><strong>W3C Specifications:</strong> Official web standards</li>
+          <li><strong>Can I Use:</strong> Browser compatibility information</li>
+          <li><strong>A List Apart:</strong> Web development articles</li>
+          <li><strong>WebAIM:</strong> Accessibility guidelines and testing</li>
+        </ul>
+
+        <h4>Key Concepts to Master</h4>
+        <ul>
+          <li>Semantic HTML and document structure</li>
+          <li>Accessibility (WCAG guidelines)</li>
+          <li>Performance optimization</li>
+          <li>Progressive enhancement</li>
+          <li>Cross-browser compatibility</li>
+          <li>SEO best practices</li>
+          <li>Modern web standards (HTML5, CSS3, ES6+)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 
+    FOOTER ELEMENT
+    Use cases:
+    - Copyright information
+    - Contact details
+    - Site navigation links
+    - Social media links
+    - Legal information
+    
+    SEO: Can contain important site-wide links
+    Accessibility: Often contains skip links and site map
+    -->
     <footer
       style="
         margin-top: 40px;
         padding: 20px;
         background-color: #f0f0f0;
         text-align: center;
+        border-top: 1px solid #ddd;
       "
     >
-      <p>
-        &copy; 2025 HTML Tags Guide. This is an example footer using the
-        &lt;footer&gt; tag.
-      </p>
+      <!-- 
+      FOOTER CONTENT EXAMPLE
+      Professional footer with multiple elements
+      -->
+      <div style="max-width: 1200px; margin: 0 auto">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+          "
+        >
+          <div>
+            <p style="margin: 0; font-weight: bold">HTML Tags Guide</p>
+            <p style="margin: 5px 0 0 0; font-size: 0.9em; color: #666">
+              &copy; 2025 - A comprehensive guide to HTML elements and best
+              practices
+            </p>
+          </div>
+
+          <div>
+            <nav style="display: flex; gap: 15px; flex-wrap: wrap">
+              <a href="#privacy" style="color: #007acc; text-decoration: none"
+                >Privacy Policy</a
+              >
+              <a href="#terms" style="color: #007acc; text-decoration: none"
+                >Terms of Use</a
+              >
+              <a href="#contact" style="color: #007acc; text-decoration: none"
+                >Contact</a
+              >
+              <a href="#sitemap" style="color: #007acc; text-decoration: none"
+                >Site Map</a
+              >
+            </nav>
+          </div>
+        </div>
+
+        <div
+          style="
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+          "
+        >
+          <p style="margin: 0; font-size: 0.8em; color: #888">
+            Built with semantic HTML5, accessible design, and modern web
+            standards.
+            <br />Last updated: <time datetime="2025-07-13">July 13, 2025</time>
+          </p>
+        </div>
+      </div>
     </footer>
+
+    <!-- 
+    SCRIPTS AT END OF BODY
+    Performance best practice: Load scripts after content
+    This ensures DOM is ready and page renders faster
+    -->
+    <script>
+      // Example: Simple functionality for the dialog
+      document.addEventListener("DOMContentLoaded", function () {
+        // Close dialog when clicking outside
+        const dialog = document.getElementById("info-dialog");
+        if (dialog) {
+          dialog.addEventListener("click", function (e) {
+            if (e.target === dialog) {
+              dialog.close();
+            }
+          });
+        }
+
+        // Log message for demonstration
+        console.log("HTML Guide loaded successfully!");
+        console.log("This page demonstrates modern HTML best practices.");
+      });
+    </script>
   </body>
 </html>
