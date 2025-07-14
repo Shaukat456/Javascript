@@ -1,0 +1,1176 @@
+<!-- 
+  KEY POINTS:
+  - DOCTYPE html declares this as HTML5 document
+  - lang="en" helps screen readers and search engines
+  - charset="UTF-8" supports international characters
+  - viewport meta tag makes the page responsive on mobile devices
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Character encoding - ALWAYS include this first -->
+    <meta charset="UTF-8" />
+
+    <!-- Responsive design - Essential for mobile compatibility -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Page title - Shows in browser tab and search results -->
+    <title>Common HTML Tags Guide</title>
+    <!-- 
+    INTERNAL CSS STYLES
+    Use cases:
+    - Small projects with minimal styling
+    - Prototyping and testing
+    - When external CSS files aren't practical
+    
+    Best practice: For larger projects, use external CSS files
+    -->
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        line-height: 1.6;
+      }
+      .example {
+        background-color: #f5f5f5;
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 5px;
+      }
+      .tag-category {
+        background-color: #e8f4fd;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+        border-left: 4px solid #007acc;
+      }
+      code {
+        background-color: #f1f1f1;
+        padding: 2px 4px;
+        border-radius: 3px;
+        font-family: "Courier New", monospace;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 10px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+
+  <!-- 
+  BODY ELEMENT
+  Key points:
+  - Contains all visible content
+  - Only one body element per document
+  - Place scripts at end of body for better performance
+  -->
+  <body>
+    <!-- 
+    DIV vs SECTION
+    Use cases:
+    - div: Generic container, styling purposes, layout
+    - section: Semantic grouping, thematic content
+    
+    Key point: Choose semantic elements over generic ones when possible
+    -->
+    <div class="tag-category">
+      <!-- 
+      H1 HEADING
+      SEO importance: Search engines use this for page topic
+      Accessibility: Screen readers use headings for navigation
+      Best practice: Only ONE h1 per page
+      -->
+      <h1>Common HTML Tags Guide</h1>
+
+      <!-- 
+      PARAGRAPH TAG
+      Use cases:
+      - Main text content
+      - Descriptions and explanations
+      - Any block of text that forms a complete thought
+      -->
+      <p>
+        This guide covers the most commonly used HTML tags with examples and use
+        cases.
+      </p>
+    </div>
+
+    <!-- 
+    SEMANTIC SECTION ELEMENT
+    Use cases:
+    - Grouping related content
+    - Creating document outline
+    - Better SEO and accessibility than div
+    
+    Key point: Use semantic HTML5 elements for better structure
+    -->
+    <section class="tag-category">
+      <!-- 
+      HEADING HIERARCHY
+      SEO benefit: Search engines understand content structure
+      Accessibility: Screen readers can navigate by headings
+      Best practice: Don't skip heading levels (h1 → h3 is bad)
+      -->
+      <h2>1. Heading Tags (h1-h6)</h2>
+      <p>
+        <strong>Use for:</strong> Creating hierarchical headings and document
+        structure
+      </p>
+
+      <!-- 
+      EXAMPLE CONTAINER
+      Use case: Demonstrating code examples visually
+      Styling: Background color helps separate examples from text
+      -->
+      <div class="example">
+        <!-- Each heading level has specific use cases -->
+        <h1>Main Heading (h1) - Only one per page</h1>
+        <!-- Page title -->
+        <h2>Section Heading (h2)</h2>
+        <!-- Major sections -->
+        <h3>Subsection Heading (h3)</h3>
+        <!-- Subsections -->
+        <h4>Sub-subsection Heading (h4)</h4>
+        <!-- Minor sections -->
+        <h5>Minor Heading (h5)</h5>
+        <!-- Rarely used -->
+        <h6>Smallest Heading (h6)</h6>
+        <!-- Very rarely used -->
+      </div>
+
+      <p>
+        <!-- 
+        STRONG TAG
+        Semantic meaning: Important content
+        SEO benefit: Search engines recognize important text
+        Accessibility: Screen readers can emphasize important content
+        -->
+        <strong>Best Practice:</strong> Use h1 for the main page title, h2 for
+        major sections, h3 for subsections, etc.
+      </p>
+    </section>
+
+    <!-- 
+    TEXT CONTENT SECTION
+    Purpose: Demonstrate basic text elements
+    Use case: Every website needs these fundamental text tags
+    -->
+    <section class="tag-category">
+      <h2>2. Text Content Tags</h2>
+
+      <!-- 
+      H3 SUBHEADING
+      Use case: Breaking down sections into smaller topics
+      SEO: Helps search engines understand content hierarchy
+      -->
+      <h3>Paragraph Tag (&lt;p&gt;)</h3>
+      <p><strong>Use for:</strong> Regular text content, paragraphs</p>
+      <div class="example">
+        <!-- 
+        PARAGRAPH EXAMPLES
+        Key points:
+        - Automatic spacing above and below
+        - Block-level element (full width)
+        - Most common way to display text content
+        -->
+        <p>
+          This is a paragraph of text. It's the most common way to display
+          regular content on a webpage.
+        </p>
+        <p>
+          Each paragraph creates a new block of text with spacing above and
+          below.
+        </p>
+      </div>
+
+      <!-- 
+      LINE BREAK TAG
+      Use cases:
+      - Poetry or verse
+      - Addresses
+      - When you need line breaks within a paragraph
+      
+      Best practice: Use sparingly - paragraphs are usually better
+      -->
+      <h3>Line Break (&lt;br&gt;)</h3>
+      <p>
+        <strong>Use for:</strong> Creating line breaks within text (sparingly)
+      </p>
+      <div class="example">
+        <p>
+          First line<br />
+          <!-- Self-closing tag -->
+          Second line after break<br />
+          Third line
+        </p>
+      </div>
+
+      <!-- 
+      HORIZONTAL RULE
+      Use cases:
+      - Visual separation between sections
+      - Thematic breaks in content
+      - Dividing different topics
+      -->
+      <h3>Horizontal Rule (&lt;hr&gt;)</h3>
+      <p>
+        <strong>Use for:</strong> Creating visual separation between sections
+      </p>
+      <div class="example">
+        <p>Content above the line</p>
+        <hr />
+        <!-- Self-closing tag -->
+        <p>Content below the line</p>
+      </div>
+    </section>
+
+    <!-- 
+    TEXT FORMATTING SECTION
+    Purpose: Show semantic vs presentational markup
+    Key principle: Choose tags based on MEANING, not appearance
+    -->
+    <section class="tag-category">
+      <h2>3. Text Formatting Tags</h2>
+
+      <div class="example">
+        <!-- 
+        SEMANTIC FORMATTING
+        Use cases for STRONG:
+        - Important warnings
+        - Key terms
+        - Critical information
+        SEO: Search engines recognize importance
+        -->
+        <p>
+          <strong>Bold text using &lt;strong&gt;</strong> - for important
+          content
+        </p>
+
+        <!-- 
+        PRESENTATIONAL FORMATTING
+        Use case for B:
+        - Visual styling only
+        - No semantic meaning
+        - Keywords in product descriptions (without importance)
+        -->
+        <p><b>Bold text using &lt;b&gt;</b> - for styling only</p>
+
+        <!-- 
+        SEMANTIC EMPHASIS
+        Use cases for EM:
+        - Stress emphasis in speech
+        - Subtle importance
+        - Tone or mood changes
+        -->
+        <p><em>Emphasized text using &lt;em&gt;</em> - for emphasis</p>
+
+        <!-- PRESENTATIONAL ITALIC -->
+        <p><i>Italic text using &lt;i&gt;</i> - for styling only</p>
+
+        <!-- 
+        UNDERLINE
+        Use cases:
+        - Misspelled words (in editing contexts)
+        - Proper names in Chinese text
+        Warning: Can be confused with links
+        -->
+        <p><u>Underlined text using &lt;u&gt;</u></p>
+
+        <!-- 
+        HIGHLIGHT/MARK
+        Use cases:
+        - Search results highlighting
+        - Referenced text
+        - Important passages
+        -->
+        <p><mark>Highlighted text using &lt;mark&gt;</mark></p>
+
+        <!-- 
+        DELETED TEXT
+        Use cases:
+        - Document revisions
+        - Showing removed content
+        - Strike-through effect
+        -->
+        <p><del>Deleted text using &lt;del&gt;</del></p>
+
+        <!-- 
+        INSERTED TEXT
+        Use cases:
+        - Document revisions
+        - Showing added content
+        - Usually underlined by default
+        -->
+        <p><ins>Inserted text using &lt;ins&gt;</ins></p>
+
+        <!-- 
+        SMALL TEXT
+        Use cases:
+        - Legal disclaimers
+        - Copyright notices
+        - Fine print
+        -->
+        <p><small>Small text using &lt;small&gt;</small></p>
+
+        <!-- 
+        SUBSCRIPT
+        Use cases:
+        - Chemical formulas
+        - Mathematical expressions
+        - Footnote references
+        -->
+        <p>H<sub>2</sub>O uses &lt;sub&gt; for subscript</p>
+
+        <!-- 
+        SUPERSCRIPT
+        Use cases:
+        - Mathematical exponents
+        - Ordinal numbers (1st, 2nd)
+        - Footnote markers
+        -->
+        <p>E=mc<sup>2</sup> uses &lt;sup&gt; for superscript</p>
+      </div>
+
+      <!-- 
+      CODE ELEMENT
+      Use cases:
+      - Inline code snippets
+      - Variable names
+      - Function names
+      - File names
+      Styling: Usually monospace font with background
+      -->
+      <p>
+        <strong>Semantic vs Styling:</strong> Use
+        <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> for meaning,
+        <code>&lt;b&gt;</code> and <code>&lt;i&gt;</code> for styling.
+      </p>
+    </section>
+
+    <!-- 
+    ANCHOR/LINK SECTION
+    Key point: Links are the foundation of the web
+    SEO importance: Links help search engines understand site structure
+    -->
+    <section class="tag-category">
+      <h2>4. Link Tags (&lt;a&gt;)</h2>
+      <p>
+        <strong>Use for:</strong> Creating hyperlinks to other pages, sections,
+        or resources
+      </p>
+
+      <div class="example">
+        <!-- 
+        EXTERNAL LINK
+        Use cases:
+        - Linking to other websites
+        - References and citations
+        - External resources
+        SEO: Use rel="noopener" for security with target="_blank"
+        -->
+        <p>
+          <a href="https://www.example.com">External link to another website</a>
+        </p>
+
+        <!-- 
+        INTERNAL ANCHOR LINK
+        Use cases:
+        - Table of contents
+        - "Back to top" links
+        - Navigation within long pages
+        Format: href="#id-of-element"
+        -->
+        <p>
+          <a href="#heading-tags">Internal link to a section on this page</a>
+        </p>
+
+        <!-- 
+        EMAIL LINK
+        Use cases:
+        - Contact information
+        - Feedback forms
+        - Support links
+        Behavior: Opens default email client
+        -->
+        <p><a href="mailto:someone@example.com">Email link</a></p>
+
+        <!-- 
+        PHONE LINK
+        Use cases:
+        - Contact numbers on mobile sites
+        - Click-to-call functionality
+        - Business listings
+        -->
+        <p><a href="tel:+1234567890">Phone number link</a></p>
+
+        <!-- 
+        TARGET ATTRIBUTE
+        _blank: Opens in new tab/window
+        Security note: Use rel="noopener" with target="_blank"
+        UX consideration: Warn users about new windows
+        -->
+        <p>
+          <a href="https://www.example.com" target="_blank"
+            >Link opening in new tab</a
+          >
+        </p>
+
+        <!-- 
+        RELATIVE LINK
+        Use cases:
+        - Links within your website
+        - Better for maintenance
+        - Works in different environments
+        -->
+        <p><a href="../other-page.html">Relative link to another page</a></p>
+      </div>
+
+      <p>
+        <strong>Attributes:</strong> <code>href</code> (destination),
+        <code>target</code> (where to open), <code>title</code> (tooltip)
+      </p>
+    </section>
+
+    <!-- 
+    IMAGE SECTION
+    Accessibility importance: Alt text is crucial for screen readers
+    Performance tip: Always specify width/height to prevent layout shifts
+    -->
+    <section class="tag-category">
+      <h2>5. Image Tags (&lt;img&gt;)</h2>
+      <p><strong>Use for:</strong> Displaying images, graphics, photos</p>
+
+      <div class="example">
+        <!-- 
+        STANDARD IMAGE
+        Key points:
+        - Self-closing tag
+        - src: path to image file
+        - alt: description for accessibility and SEO
+        - width/height: prevents layout shifts during loading
+        -->
+        <img
+          src="https://via.placeholder.com/300x200?text=Sample+Image"
+          alt="Sample placeholder image"
+          width="300"
+          height="200"
+        />
+        <br /><br />
+
+        <!-- 
+        STYLED IMAGE
+        Use cases:
+        - Profile pictures
+        - Avatars
+        - Circular images
+        CSS styling: border-radius for rounded corners
+        -->
+        <img
+          src="https://via.placeholder.com/150x150?text=Avatar"
+          alt="User avatar"
+          style="border-radius: 50%"
+        />
+      </div>
+
+      <!-- 
+      IMAGE BEST PRACTICES
+      - Always include alt text for accessibility
+      - Use descriptive alt text that explains the image purpose
+      - Leave alt empty (alt="") for decorative images
+      - Optimize image file sizes for web performance
+      -->
+      <p>
+        <strong>Required attributes:</strong> <code>src</code> (image path),
+        <code>alt</code> (description for accessibility)
+      </p>
+      <p>
+        <strong>Optional attributes:</strong> <code>width</code>,
+        <code>height</code>, <code>title</code>
+      </p>
+    </section>
+
+    <!-- 
+    LIST SECTION
+    Use cases: Navigation menus, feature lists, step-by-step instructions
+    SEO benefit: Search engines understand structured content better
+    -->
+    <section class="tag-category">
+      <h2>6. List Tags</h2>
+
+      <!-- 
+      UNORDERED LIST
+      Use cases:
+      - Navigation menus
+      - Feature lists
+      - Bullet points
+      - When order doesn't matter
+      -->
+      <h3>Unordered List (&lt;ul&gt; with &lt;li&gt;)</h3>
+      <p><strong>Use for:</strong> Lists where order doesn't matter</p>
+      <div class="example">
+        <ul>
+          <li>First item</li>
+          <!-- List item -->
+          <li>Second item</li>
+          <li>
+            Third item with nested list:
+            <!-- Nested lists are allowed -->
+            <ul>
+              <li>Nested item 1</li>
+              <li>Nested item 2</li>
+            </ul>
+          </li>
+          <li>Fourth item</li>
+        </ul>
+      </div>
+
+      <!-- 
+      ORDERED LIST
+      Use cases:
+      - Step-by-step instructions
+      - Rankings
+      - Procedures
+      - When sequence matters
+      -->
+      <h3>Ordered List (&lt;ol&gt; with &lt;li&gt;)</h3>
+      <p>
+        <strong>Use for:</strong> Lists where order matters (steps, rankings)
+      </p>
+      <div class="example">
+        <ol>
+          <li>First step</li>
+          <!-- Numbers automatically generated -->
+          <li>Second step</li>
+          <li>Third step</li>
+          <li>Final step</li>
+        </ol>
+      </div>
+
+      <!-- 
+      DESCRIPTION LIST
+      Use cases:
+      - Glossaries
+      - Metadata
+      - FAQ sections
+      - Key-value pairs
+      -->
+      <h3>Description List (&lt;dl&gt;, &lt;dt&gt;, &lt;dd&gt;)</h3>
+      <p><strong>Use for:</strong> Term and definition pairs</p>
+      <div class="example">
+        <dl>
+          <dt>HTML</dt>
+          <!-- Term -->
+          <dd>HyperText Markup Language</dd>
+          <!-- Definition -->
+          <dt>CSS</dt>
+          <dd>Cascading Style Sheets</dd>
+          <dt>JavaScript</dt>
+          <dd>Programming language for web interactivity</dd>
+        </dl>
+      </div>
+    </section>
+
+    <!-- 
+    TABLE SECTION
+    Use cases: Data presentation, comparison charts, schedules
+    Accessibility: Use proper table structure for screen readers
+    Performance: Tables should only be used for tabular data, not layout
+    -->
+    <section class="tag-category">
+      <h2>7. Table Tags</h2>
+      <p>
+        <strong>Use for:</strong> Displaying tabular data in rows and columns
+      </p>
+
+      <div class="example">
+        <!-- 
+        TABLE STRUCTURE
+        Key points:
+        - thead: Groups header content
+        - tbody: Groups body content
+        - tr: Table row
+        - th: Header cell (bold, centered by default)
+        - td: Data cell
+        
+        Accessibility: Screen readers use table structure for navigation
+        -->
+        <table>
+          <thead>
+            <!-- Table header section -->
+            <tr>
+              <!-- Table row -->
+              <th>Name</th>
+              <!-- Header cells -->
+              <th>Age</th>
+              <th>City</th>
+              <th>Occupation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Table body section -->
+            <tr>
+              <td>John Doe</td>
+              <!-- Data cells -->
+              <td>30</td>
+              <td>New York</td>
+              <td>Developer</td>
+            </tr>
+            <tr>
+              <td>Jane Smith</td>
+              <td>25</td>
+              <td>Los Angeles</td>
+              <td>Designer</td>
+            </tr>
+            <tr>
+              <td>Bob Johnson</td>
+              <td>35</td>
+              <td>Chicago</td>
+              <td>Manager</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 
+      TABLE BEST PRACTICES
+      - Use tables for data, not layout
+      - Include proper headers for accessibility
+      - Consider responsive design for mobile
+      - Use caption element for table description
+      -->
+      <p>
+        <strong>Structure:</strong> <code>&lt;table&gt;</code> →
+        <code>&lt;thead&gt;</code>/<code>&lt;tbody&gt;</code> →
+        <code>&lt;tr&gt;</code> → <code>&lt;th&gt;</code>/<code
+          >&lt;td&gt;</code
+        >
+      </p>
+    </section>
+
+    <!-- 
+    FORM SECTION
+    Critical for user interaction and data collection
+    Accessibility: Proper labeling is essential
+    Security: Always validate on server side
+    -->
+    <section class="tag-category">
+      <h2>8. Form Tags</h2>
+      <p><strong>Use for:</strong> Creating interactive forms for user input</p>
+
+      <div class="example">
+        <!-- 
+        FORM ELEMENT
+        Attributes:
+        - action: Where to send form data
+        - method: GET (visible in URL) or POST (hidden)
+        - enctype: For file uploads, use "multipart/form-data"
+        -->
+        <form action="#" method="POST">
+          <!-- 
+          TEXT INPUT
+          Use cases:
+          - Names, usernames
+          - Single-line text
+          - Search boxes
+          Key attributes: placeholder, required, maxlength
+          -->
+          <div style="margin-bottom: 15px">
+            <label for="name">Name:</label><br />
+            <!-- Always label inputs -->
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Enter your name"
+              required
+              <!--
+              HTML5
+              validation
+              --
+            />
+            />
+          </div>
+
+          <!-- 
+          EMAIL INPUT
+          Use cases:
+          - Contact forms
+          - Registration
+          - Newsletter signups
+          Browser validation: Checks for @ and domain
+          -->
+          <div style="margin-bottom: 15px">
+            <label for="email">Email:</label><br />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+
+          <!-- 
+          NUMBER INPUT
+          Use cases:
+          - Ages, quantities
+          - Ratings, scores
+          - Any numeric input
+          Attributes: min, max, step
+          -->
+          <div style="margin-bottom: 15px">
+            <label for="age">Age:</label><br />
+            <input type="number" id="age" name="age" min="1" max="120" />
+          </div>
+
+          <!-- 
+          SELECT DROPDOWN
+          Use cases:
+          - Country selection
+          - Categories
+          - Limited options
+          Better UX than radio buttons for many options
+          -->
+          <div style="margin-bottom: 15px">
+            <label for="gender">Gender:</label><br />
+            <select id="gender" name="gender">
+              <option value="">Select gender</option>
+              <!-- Default option -->
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <!-- 
+          CHECKBOX INPUT
+          Use cases:
+          - Multiple selections allowed
+          - Terms and conditions
+          - Feature toggles
+          - "Select all that apply" scenarios
+          -->
+          <div style="margin-bottom: 15px">
+            <label>Interests:</label><br />
+            <input
+              type="checkbox"
+              id="sports"
+              name="interests"
+              value="sports"
+            />
+            <label for="sports">Sports</label><br />
+            <input type="checkbox" id="music" name="interests" value="music" />
+            <label for="music">Music</label><br />
+            <input
+              type="checkbox"
+              id="reading"
+              name="interests"
+              value="reading"
+            />
+            <label for="reading">Reading</label>
+          </div>
+
+          <!-- 
+          RADIO BUTTON INPUT
+          Use cases:
+          - Single selection from options
+          - Yes/No questions
+          - Subscription plans
+          Key point: Same 'name' attribute groups radio buttons
+          -->
+          <div style="margin-bottom: 15px">
+            <label>Subscription:</label><br />
+            <input type="radio" id="free" name="subscription" value="free" />
+            <label for="free">Free</label><br />
+            <input
+              type="radio"
+              id="premium"
+              name="subscription"
+              value="premium"
+            />
+            <label for="premium">Premium</label>
+          </div>
+
+          <!-- 
+          TEXTAREA
+          Use cases:
+          - Comments, messages
+          - Multi-line text input
+          - Descriptions
+          Attributes: rows, cols, maxlength
+          -->
+          <div style="margin-bottom: 15px">
+            <label for="message">Message:</label><br />
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              cols="50"
+              placeholder="Enter your message"
+            ></textarea>
+          </div>
+
+          <!-- 
+          BUTTON ELEMENTS
+          submit: Sends form data
+          reset: Clears form fields
+          button: Custom JavaScript functionality
+          -->
+          <div>
+            <button type="submit">Submit</button>
+            <!-- Submits form -->
+            <button type="reset">Reset</button>
+            <!-- Resets form -->
+            <input
+              type="button"
+              value="Custom Button"
+              onclick="alert('Button clicked!')"
+              <!--
+              Custom
+              action
+              --
+            />
+            />
+          </div>
+        </form>
+      </div>
+
+      <!-- 
+      FORM BEST PRACTICES
+      - Always associate labels with inputs (for/id)
+      - Use appropriate input types for better UX
+      - Implement both client and server-side validation
+      - Group related fields with fieldset
+      - Provide clear error messages
+      -->
+      <p>
+        <strong>Key elements:</strong> <code>&lt;form&gt;</code>,
+        <code>&lt;input&gt;</code>, <code>&lt;label&gt;</code>,
+        <code>&lt;select&gt;</code>, <code>&lt;textarea&gt;</code>,
+        <code>&lt;button&gt;</code>
+      </p>
+    </section>
+
+    <!-- Semantic HTML5 Tags -->
+    <section class="tag-category">
+      <h2>9. Semantic HTML5 Tags</h2>
+      <p>
+        <strong>Use for:</strong> Creating meaningful document structure for
+        better SEO and accessibility
+      </p>
+
+      <div class="example">
+        <p><strong>Document structure example:</strong></p>
+        <code>
+          &lt;header&gt; - Page or section header<br />
+          &lt;nav&gt; - Navigation links<br />
+          &lt;main&gt; - Main content area<br />
+          &lt;section&gt; - Thematic grouping of content<br />
+          &lt;article&gt; - Self-contained content<br />
+          &lt;aside&gt; - Sidebar content<br />
+          &lt;footer&gt; - Page or section footer<br />
+        </code>
+      </div>
+
+      <p>
+        <strong>Benefits:</strong> Better SEO, improved accessibility, cleaner
+        code structure
+      </p>
+    </section>
+
+    <!-- Division and Span Tags -->
+    <section class="tag-category">
+      <h2>10. Container Tags</h2>
+
+      <h3>Division (&lt;div&gt;)</h3>
+      <p>
+        <strong>Use for:</strong> Grouping block-level elements, creating layout
+        sections
+      </p>
+      <div class="example">
+        <div style="background-color: #e0e0e0; padding: 10px; margin: 5px">
+          <p>This paragraph is inside a div container.</p>
+          <p>Divs are block-level elements that take full width.</p>
+        </div>
+      </div>
+
+      <h3>Span (&lt;span&gt;)</h3>
+      <p>
+        <strong>Use for:</strong> Styling inline elements, grouping inline
+        content
+      </p>
+      <div class="example">
+        <p>
+          This paragraph has
+          <span style="color: red; font-weight: bold">highlighted text</span>
+          using span.
+        </p>
+        <p>
+          Spans are
+          <span style="background-color: yellow">inline elements</span> that
+          don't break the flow.
+        </p>
+      </div>
+    </section>
+
+    <!-- Media Tags -->
+    <section class="tag-category">
+      <h2>11. Media Tags</h2>
+
+      <h3>Audio (&lt;audio&gt;)</h3>
+      <p><strong>Use for:</strong> Embedding audio content</p>
+      <div class="example">
+        <audio controls>
+          <source src="audio-file.mp3" type="audio/mpeg" />
+          <source src="audio-file.ogg" type="audio/ogg" />
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+
+      <h3>Video (&lt;video&gt;)</h3>
+      <p><strong>Use for:</strong> Embedding video content</p>
+      <div class="example">
+        <video width="320" height="240" controls>
+          <source src="movie.mp4" type="video/mp4" />
+          <source src="movie.ogg" type="video/ogg" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </section>
+
+    <!-- Meta Information -->
+    <section class="tag-category">
+      <h2>12. Meta and Head Tags</h2>
+      <p>
+        <strong>Use for:</strong> Document metadata, external resources, page
+        information
+      </p>
+
+      <div class="example">
+        <code>
+          &lt;meta charset="UTF-8"&gt; - Character encoding<br />
+          &lt;meta name="viewport" content="width=device-width,
+          initial-scale=1.0"&gt; - Responsive design<br />
+          &lt;meta name="description" content="Page description"&gt; - SEO
+          description<br />
+          &lt;meta name="keywords" content="html, css, javascript"&gt; - SEO
+          keywords<br />
+          &lt;link rel="stylesheet" href="styles.css"&gt; - External CSS<br />
+          &lt;script src="script.js"&gt;&lt;/script&gt; - External JavaScript<br />
+        </code>
+      </div>
+    </section>
+
+    <!-- Script Tags with Defer and Async -->
+    <section class="tag-category">
+      <h2>13. Script Tags - Defer vs Async</h2>
+      <p>
+        <strong>Use for:</strong> Controlling how and when JavaScript files are
+        loaded and executed
+      </p>
+
+      <h3>Normal Script Loading (Default)</h3>
+      <div class="example">
+        <code>&lt;script src="script.js"&gt;&lt;/script&gt;</code>
+        <p>
+          <strong>Behavior:</strong> HTML parsing stops → Script downloads →
+          Script executes → HTML parsing resumes
+        </p>
+        <p>
+          <strong>Use when:</strong> Script is critical and must run immediately
+        </p>
+      </div>
+
+      <h3>Async Script Loading</h3>
+      <div class="example">
+        <code>&lt;script src="script.js" async&gt;&lt;/script&gt;</code>
+        <p>
+          <strong>Behavior:</strong> HTML parsing continues while script
+          downloads → Script executes immediately when ready (may interrupt
+          parsing)
+        </p>
+        <p>
+          <strong>Use when:</strong> Script is independent and doesn't rely on
+          DOM or other scripts (e.g., analytics, ads)
+        </p>
+        <p>
+          <strong>Order:</strong> Scripts may execute in any order, not
+          necessarily in the order they appear
+        </p>
+      </div>
+
+      <h3>Defer Script Loading</h3>
+      <div class="example">
+        <code>&lt;script src="script.js" defer&gt;&lt;/script&gt;</code>
+        <p>
+          <strong>Behavior:</strong> HTML parsing continues while script
+          downloads → Script executes only after HTML parsing is complete
+        </p>
+        <p>
+          <strong>Use when:</strong> Script needs the full DOM to be ready and
+          should maintain execution order
+        </p>
+        <p>
+          <strong>Order:</strong> Scripts execute in the order they appear in
+          the document
+        </p>
+      </div>
+
+      <h3>Practical Examples</h3>
+      <div class="example">
+        <code>
+          &lt;!-- In the &lt;head&gt; section --&gt;<br />
+          &lt;script src="analytics.js" async&gt;&lt;/script&gt; &lt;!--
+          Independent script --&gt;<br />
+          &lt;script src="jquery.js" defer&gt;&lt;/script&gt; &lt;!-- Library
+          needed by other scripts --&gt;<br />
+          &lt;script src="main.js" defer&gt;&lt;/script&gt; &lt;!-- Main
+          application script --&gt;<br /><br />
+
+          &lt;!-- At the end of &lt;body&gt; (alternative to defer) --&gt;<br />
+          &lt;script src="dom-manipulation.js"&gt;&lt;/script&gt; &lt;!-- Runs
+          after DOM is ready --&gt;<br />
+        </code>
+      </div>
+
+      <h3>Visual Timeline Comparison</h3>
+      <div
+        class="example"
+        style="font-family: monospace; background-color: #f8f9fa"
+      >
+        <p><strong>Normal:</strong></p>
+        <p>
+          HTML Parsing ████████ (stops) → Script Download + Execute ████ → HTML
+          Parsing ████████
+        </p>
+
+        <p><strong>Async:</strong></p>
+        <p>HTML Parsing ████████████████████████████ (continues)</p>
+        <p>Script Download ████████ → Execute ██ (interrupts parsing)</p>
+
+        <p><strong>Defer:</strong></p>
+        <p>HTML Parsing ████████████████████████████ (completes)</p>
+        <p>Script Download ████████ → Execute ██ (after parsing)</p>
+      </div>
+
+      <h3>Decision Guide</h3>
+      <div class="example">
+        <ul>
+          <li>
+            <strong>Use <code>async</code> for:</strong>
+            <ul>
+              <li>Analytics scripts (Google Analytics, tracking pixels)</li>
+              <li>Advertisement scripts</li>
+              <li>Social media widgets</li>
+              <li>Scripts that don't depend on DOM or other scripts</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Use <code>defer</code> for:</strong>
+            <ul>
+              <li>Scripts that manipulate the DOM</li>
+              <li>Scripts that depend on other deferred scripts</li>
+              <li>Main application JavaScript</li>
+              <li>jQuery and other libraries</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Use normal loading for:</strong>
+            <ul>
+              <li>Critical scripts needed immediately</li>
+              <li>Scripts that other inline scripts depend on</li>
+              <li>Small, essential scripts</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <h3>Important Notes</h3>
+      <div class="example">
+        <ul>
+          <li>
+            <code>defer</code> and <code>async</code> only work with external
+            scripts (src attribute)
+          </li>
+          <li>
+            If both <code>defer</code> and <code>async</code> are present,
+            <code>async</code> takes precedence
+          </li>
+          <li>Inline scripts (without src) always block HTML parsing</li>
+          <li>
+            Scripts in the <code>&lt;head&gt;</code> with
+            <code>defer</code> behave like scripts at the end of
+            <code>&lt;body&gt;</code>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Best Practices Section -->
+    <section class="tag-category">
+      <h2>14. HTML Best Practices</h2>
+      <ul>
+        <li>
+          <strong>Always use semantic HTML:</strong> Choose tags based on
+          meaning, not appearance
+        </li>
+        <li>
+          <strong>Include alt attributes:</strong> Always provide alt text for
+          images
+        </li>
+        <li>
+          <strong>Use proper nesting:</strong> Ensure tags are properly opened
+          and closed
+        </li>
+        <li>
+          <strong>Validate your HTML:</strong> Use tools like W3C Markup
+          Validator
+        </li>
+        <li>
+          <strong>Keep it accessible:</strong> Use proper heading hierarchy,
+          labels for form elements
+        </li>
+        <li>
+          <strong>Use lowercase:</strong> Write all HTML tags and attributes in
+          lowercase
+        </li>
+        <li>
+          <strong>Quote attribute values:</strong> Always use quotes around
+          attribute values
+        </li>
+        <li>
+          <strong>Close self-closing tags:</strong> Use proper syntax for void
+          elements
+        </li>
+      </ul>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      style="
+        margin-top: 40px;
+        padding: 20px;
+        background-color: #f0f0f0;
+        text-align: center;
+      "
+    >
+      <p>
+        &copy; 2025 HTML Tags Guide. This is an example footer using the
+        &lt;footer&gt; tag.
+      </p>
+    </footer>
+  </body>
+</html>
