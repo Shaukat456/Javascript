@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Display Properties - Complete Demo</title>
+    <link rel="stylesheet" href="Displays.css">
+    <style>
+        /* Demo-specific styles */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        .section {
+            background-color: white;
+            margin: 30px 0;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section h2 {
+            color: #1976d2;
+            border-bottom: 3px solid #1976d2;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .demo-box {
+            border: 2px solid #ddd;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        
+        .element-demo {
+            background-color: #e3f2fd;
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #1976d2;
+            border-radius: 4px;
+        }
+        
+        .code-snippet {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        
+        .highlight {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        
+        .warning {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .visual-container {
+            border: 3px dashed #666;
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .element-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Page Header -->
+    <header style="text-align: center; margin-bottom: 40px;">
+        <h1 style="font-size: 3rem; color: #1976d2; margin-bottom: 10px;">
+            CSS Display Properties Complete Demo
+        </h1>
+        <p style="font-size: 1.2rem; color: #666; max-width: 60ch; margin: 0 auto;">
+            Interactive demonstrations of all CSS display values and their behaviors
+        </p>
+    </header>
+
+    <!-- 1. Block Elements -->
+    <section class="section">
+        <h2>1. Block Display (display: block)</h2>
+        <p>Block elements take full width, stack vertically, and respect width/height</p>
+        
+        <div class="demo-box">
+            <div class="element-label">Block Elements Behavior</div>
+            <div class="visual-container">
+                <div class="block-demo">Block Element 1 (100% width)</div>
+                <div class="block-demo">Block Element 2 (stacks below)</div>
+                <div class="block-demo" style="width: 200px;">Block Element 3 (200px width)</div>
+            </div>
+            <div class="code-snippet">
+.block-demo {
+    display: block;
+    padding: 10px;
+    background-color: #e3f2fd;
+    border: 1px solid #1976d2;
+    margin: 5px 0;
+}
+            </div>
+        </div>
+        
+        <h3>Common Block Elements</h3>
+        <div class="demo-box">
+            <div class="element-label">Default Block Elements</div>
+            <div class="visual-container">
+                <h3>Heading (naturally block)</h3>
+                <p>Paragraph (naturally block)</p>
+                <div>Div (naturally block)</div>
+                <span class="span-to-block">Span converted to block</span>
+            </div>
+            <div class="code-snippet">
+/* These are block by default */
+h1, h2, h3, p, div, section, article, header, footer { display: block; }
+
+/* Converting inline to block */
+.span-to-block { display: block; }
+            </div>
+        </div>
+        
+        <div class="success">
+            <strong>Use Block for:</strong> Main content containers, headings, paragraphs, sections
+        </div>
+    </section>
+
+    <!-- 2. Inline Elements -->
+    <section class="section">
+        <h2>2. Inline Display (display: inline)</h2>
+        <p>Inline elements flow with text, don't break lines, ignore width/height</p>
+        
+        <div class="demo-box">
+            <div class="element-label">Inline Elements Behavior</div>
+            <div class="visual-container">
+                <p>This is text with 
+                <span class="inline-demo">inline span 1</span> and 
+                <span class="inline-demo">inline span 2</span> and 
+                <span class="inline-demo">inline span 3</span> flowing naturally with the text content.
+                </p>
+            </div>
+            <div class="code-snippet">
+.inline-demo {
+    display: inline;
+    background-color: #ffeb3b;
+    padding: 2px 6px; /* Only horizontal padding respected */
+    border: 1px solid #f57f17;
+}
+            </div>
+        </div>
+        
+        <h3>Inline Element Limitations</h3>
+        <div class="demo-box">
+            <div class="element-label">Width/Height Ignored</div>
+            <div class="visual-container">
+                <p>Trying to set dimensions: 
+                <span class="inline-with-dimensions">width: 200px; height: 100px;</span> 
+                (dimensions are ignored!)
+                </p>
+            </div>
+            <div class="code-snippet">
+.inline-with-dimensions {
+    display: inline;
+    width: 200px; /* IGNORED */
+    height: 100px; /* IGNORED */
+    background-color: #ffcdd2;
+    border: 2px solid #f44336;
+}
+            </div>
+        </div>
+        
+        <h3>Common Inline Elements</h3>
+        <div class="demo-box">
+            <div class="element-label">Default Inline Elements</div>
+            <div class="visual-container">
+                <p>Text with <strong>strong (bold)</strong>, <em>em (italic)</em>, 
+                <a href="#" style="color: #1976d2;">link</a>, and 
+                <span>span</span> elements flowing inline.
+                </p>
+            </div>
+            <div class="code-snippet">
+/* These are inline by default */
+span, a, strong, em, img, input, button { display: inline; }
+            </div>
+        </div>
+        
+        <div class="warning">
+            <strong>Avoid inline for:</strong> Setting width/height, vertical margins, complex layouts
+        </div>
+    </section>
+
+    <!-- 3. Inline-Block Elements -->
+    <section class="section">
+        <h2>3. Inline-Block Display (display: inline-block)</h2>
+        <p>Best of both: flows inline but respects dimensions and margins</p>
+        
+        <div class="demo-box">
+            <div class="element-label">Inline-Block Behavior</div>
+            <div class="visual-container">
+                <div style="text-align: center;">
+                    <div class="inline-block-demo">Box 1<br>100×80px</div>
+                    <div class="inline-block-demo" style="width: 120px; height: 60px;">Box 2<br>120×60px</div>
+                    <div class="inline-block-demo" style="width: 80px; height: 100px;">Box 3<br>80×100px</div>
+                </div>
+            </div>
+            <div class="code-snippet">
+.inline-block-demo {
+    display: inline-block;
+    width: 100px;
+    height: 80px;
+    background-color: #c8e6c9;
+    border: 2px solid #4caf50;
+    margin: 10px;
+    text-align: center;
+    vertical-align: top; /* Alignment control */
+}
+            </div>
+        </div>
+        
+        <h3>Vertical Alignment Control</h3>
+        <div class="demo-box">
+            <div class="element-label">Vertical-Align Options</div>
+            <div class="visual-container">
+                <div class="inline-block-base">Baseline</div>
+                <div class="inline-block-top">Top</div>
+                <div class="inline-block-middle">Middle</div>
+                <div class="inline-block-bottom">Bottom</div>
+            </div>
+            <div class="code-snippet">
+.inline-block-base { vertical-align: baseline; } /* Default */
+.inline-block-top { vertical-align: top; }
+.inline-block-middle { vertical-align: middle; }
+.inline-block-bottom { vertical-align: bottom; }
+            </div>
+        </div>
+        
+        <h3>Common Use Cases</h3>
+        <div class="demo-box">
+            <div class="element-label">Navigation Menu</div>
+            <div class="visual-container">
+                <nav class="inline-block-nav">
+                    <a href="#" class="nav-item">Home</a>
+                    <a href="#" class="nav-item">About</a>
+                    <a href="#" class="nav-item">Services</a>
+                    <a href="#" class="nav-item">Contact</a>
+                </nav>
+            </div>
+            <div class="code-snippet">
+.nav-item {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #1976d2;
+    color: white;
+    text-decoration: none;
+    margin: 0 5px;
+    border-radius: 4px;
+}
+            </div>
+        </div>
+        
+        <div class="success">
+            <strong>Perfect for:</strong> Navigation menus, button groups, grid-like layouts, thumbnail galleries
+        </div>
+    </section>
+
+    <!-- 4. Flexbox -->
+    <section class="section">
+        <h2>4. Flexbox Display (display: flex)</h2>
+        <p>One-dimensional layout with powerful alignment and distribution</p>
+        
+        <div class="demo-box">
+            <div class="element-label">Basic Flex Container</div>
+            <div class="visual-container">
+                <div class="flex-container-demo">
+                    <div class="flex-item">Item 1</div>
+                    <div class="flex-item">Item 2</div>
+                    <div class="flex-item">Item 3</div>
+                </div>
+            </div>
+            <div class="code-snippet">
+.flex-container-demo {
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    background-color: #e8f5e8;
+    border: 2px solid #4caf50;
+}
+.flex-item {
+    flex: 1; /* Equal distribution */
+    padding: 15px;
+    background-color: #81c784;
+    text-align: center;
+}
+            </div>
+        </div>
+        
+        <h3>Flex Direction Options</h3>
+        <div class="comparison-grid">
+            <div class="demo-box">
+                <div class="element-label">Row (Default)</div>
+                <div class="visual-container">
+                    <div class="flex-row">
+                        <div class="flex-item-small">1</div>
+                        <div class="flex-item-small">2</div>
+                        <div class="flex-item-small">3</div>
+                    </div>
+                </div>
+                <div class="code-snippet">
+.flex-row {
+    display: flex;
+    flex-direction: row; /* Default */
+}
+                </div>
+            </div>
+            
+            <div class="demo-box">
+                <div class="element-label">Column</div>
+                <div class="visual-container">
+                    <div class="flex-column">
+                        <div class="flex-item-small">1</div>
+                        <div class="flex-item-small">2</div>
+                        <div class="flex-item-small">3</div>
+                    </div>
+                </div>
+                <div class="code-snippet">
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+}
+                </div>
+            </div>
+        </div>
+        
+        <h3>Justify Content (Main Axis)</h3>
+        <div class="demo-box">
+            <div class="element-label">Horizontal Alignment Options</div>
+            <div class="visual-container">
+                <div style="margin: 10px 0;">
+                    <strong>Start:</strong>
+                    <div class="justify-start">
+                        <div class="flex-item-small">A</div>
+                        <div class="flex-item-small">B</div>
+                        <div class="flex-item-small">C</div>
+                    </div>
+                </div>
+                <div style="margin: 10px 0;">
+                    <strong>Center:</strong>
+                    <div class="justify-center">
+                        <div class="flex-item-small">A</div>
+                        <div class="flex-item-small">B</div>
+                        <div class="flex-item-small">C</div>
+                    </div>
+                </div>
+                <div style="margin: 10px 0;">
+                    <strong>Space Between:</strong>
+                    <div class="justify-between">
+                        <div class="flex-item-small">A</div>
+                        <div class="flex-item-small">B</div>
+                        <div class="flex-item-small">C</div>
+                    </div>
+                </div>
+                <div style="margin: 10px 0;">
+                    <strong>Space Around:</strong>
+                    <div class="justify-around">
+                        <div class="flex-item-small">A</div>
+                        <div class="flex-item-small">B</div>
+                        <div class="flex-item-small">C</div>
+                    </div>
+                </div>
+            </div>
+            <div class="code-snippet">
+.justify-start { justify-content: flex-start; } /* Default */
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+            </div>
+        </div>
+        
+        <h3>Align Items (Cross Axis)</h3>
+        <div class="demo-box">
+            <div class="element-label">Vertical Alignment Options</div>
+            <div class="visual-container">
+                <div class="flex-align-demo">
+                    <div class="align-start">
+                        <div class="flex-item-varied" style="height: 40px;">Short</div>
+                        <div class="flex-item-varied" style="height: 80px;">Medium</div>
+                        <div class="flex-item-varied" style="height: 60px;">Tall</div>
+                    </div>
+                    <div class="align-center">
+                        <div class="flex-item-varied" style="height: 40px;">Short</div>
+                        <div class="flex-item-varied" style="height: 80px;">Medium</div>
+                        <div class="flex-item-varied" style="height: 60px;">Tall</div>
+                    </div>
+                </div>
+            </div>
+            <div class="code-snippet">
+.align-start { align-items: flex-start; }
+.align-center { align-items: center; }
+.align-end { align-items: flex-end; }
+.align-stretch { align-items: stretch; } /* Default */
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. CSS Grid -->
+    <section class="section">
+        <h2>5. Grid Display (display: grid)</h2>
+        <p>Two-dimensional layout system for complex designs</p>
+        
+        <div class="demo-box">
+            <div class="element-label">Basic Grid Layout</div>
+            <div class="visual-container">
+                <div class="grid-basic">
+                    <div class="grid-item">Header</div>
+                    <div class="grid-item">Sidebar</div>
+                    <div class="grid-item">Main Content</div>
+                    <div class="grid-item">Footer</div>
+                </div>
+            </div>
+            <div class="code-snippet">
+.grid-basic {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 15px;
+    height: 300px;
+}
+.grid-item:nth-child(1) { grid-column: 1 / -1; } /* Header spans all */
+.grid-item:nth-child(4) { grid-column: 1 / -1; } /* Footer spans all */
+            </div>
+        </div>
+        
+        <h3>Grid Template Areas</h3>
+        <div class="demo-box">
+            <div class="element-label">Named Grid Areas</div>
+            <div class="visual-container">
+                <div class="grid-areas">
+                    <div class="grid-header">Header</div>
+                    <div class="grid-nav">Navigation</div>
+                    <div class="grid-main">Main Content</div>
+                    <div class="grid-aside">Sidebar</div>
+                    <div class="grid-footer">Footer</div>
+                </div>
+            </div>
+            <div class="code-snippet">
+.grid-areas {
+    display: grid;
+    grid-template-areas:
+        "header header header"
+        "nav    main   aside"
+        "footer footer footer";
+    grid-template-columns: 150px 1fr 200px;
+    gap: 10px;
+}
+.grid-header { grid-area: header; }
+.grid-nav { grid-area: nav; }
+.grid-main { grid-area: main; }
+            </div>
+        </div>
+        
+        <h3>Responsive Grid</h3>
+        <div class="demo-box">
+            <div class="element-label">Auto-Fit Grid</div>
+            <div class="visual-container">
+                <div class="grid-responsive">
+                    <div class="grid-card">Card 1</div>
+                    <div class="grid-card">Card 2</div>
+                    <div class="grid-card">Card 3</div>
+                    <div class="grid-card">Card 4</div>
+                    <div class="grid-card">Card 5</div>
+                    <div class="grid-card">Card 6</div>
+                </div>
+            </div>
+            <div class="code-snippet">
+.grid-responsive {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+/* Cards automatically wrap to new rows as needed */
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Table Display Family -->
+    <section class="section">
+        <h2>6. Table Display Family</h2>
+        <p>CSS table display for non-table elements</p>
+        
+        <div class="demo-box">
+            <div class="element-label">CSS Table Layout</div>
+            <div class="visual-container">
+                <div class="css-table">
+                    <div class="css-table-header-group">
+                        <div class="css-table-row">
+                            <div class="css-table-cell"><strong>Name</strong></div>
+                            <div class="css-table-cell"><strong>Age</strong></div>
+                            <div class="css-table-cell"><strong>City</strong></div>
+                        </div>
+                    </div>
+                    <div class="css-table-row-group">
+                        <div class="css-table-row">
+                            <div class="css-table-cell">John Doe</div>
+                            <div class="css-table-cell">30</div>
+                            <div class="css-table-cell">New York</div>
+                        </div>
+                        <div class="css-table-row">
+                            <div class="css-table-cell">Jane Smith</div>
+                            <div class="css-table-cell">25</div>
+                            <div class="css-table-cell">Los Angeles</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="code-snippet">
+.css-table { display: table; width: 100%; border-collapse: collapse; }
+.css-table-header-group { display: table-header-group; }
+.css-table-row-group { display: table-row-group; }
+.css-table-row { display: table-row; }
+.css-table-cell { 
+    display: table-cell; 
+    padding: 10px; 
+    border: 1px solid #ddd; 
+}
+            </div>
+        </div>
+        
+        <h3>Equal Height Columns (Legacy)</h3>
+        <div class="demo-box">
+            <div class="element-label">Table-Cell for Equal Heights</div>
+            <div class="visual-container">
+                <div class="table-layout">
+                    <div class="table-cell-column">
+                        <h4>Short Content</h4>
+                        <p>This column has less content.</p>
+                    </div>
+                    <div class="table-cell-column">
+                        <h4>Medium Content</h4>
+                        <p>This column has a moderate amount of content that spans multiple lines.</p>
+                    </div>
+                    <div class="table-cell-column">
+                        <h4>Long Content</h4>
+                        <p>This column has much more content that extends over several lines and demonstrates how table-cell display makes all columns equal height regardless of content length.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="code-snippet">
+.table-layout { display: table; width: 100%; }
+.table-cell-column {
+    display: table-cell;
+    width: 33.333%;
+    padding: 15px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    vertical-align: top;
+}
+            </div>
+        </div>
+        
+        <div class="warning">
+            <strong>Modern Alternative:</strong> Use flexbox or grid instead of table-cell for layout
+        </div>
+    </section>
+
+    <!-- 7. None Display -->
+    <section class="section">
+        <h2>7. None Display (display: none)</h2>
+        <p>Completely removes element from document flow</p>
+        
+        <div class="demo-box">
+            <div class="element-label">Display: None vs Visibility: Hidden</div>
+            <div class="visual-container">
+                <div style="background: #fff3cd; padding: 15px; border: 1px solid #ffeeba;">
+                    <p>Element 1 (visible)</p>
+                    <p class="display-none">Element 2 (display: none - completely removed)</p>
+                    <p>Element 3 (visible - no gap above)</p>
+                </div>
+                <div style="background: #f8d7da; padding: 15px; border: 1px solid #f5c6cb; margin-top: 15px;">
+                    <p>Element 1 (visible)</p>
+                    <p class="visibility-hidden">Element 2 (visibility: hidden - space preserved)</p>
+                    <p>Element 3 (visible - gap above from hidden element)</p>
+                </div>
+            </div>
+            <div class="code-snippet">
+.display-none { display: none; } /* Removes from layout */
+.visibility-hidden { visibility: hidden; } /* Hidden but space preserved */
+            </div>
+        </div>
+        
+        <h3>Interactive Toggle Example</h3>
+        <div class="demo-box">
+            <div class="element-label">Show/Hide Content</div>
+            <div class="visual-container">
+                <button onclick="toggleContent()" style="padding: 10px 20px; background: #1976d2; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                    Toggle Content
+                </button>
+                <div id="toggleable-content" style="margin-top: 15px; padding: 15px; background: #e3f2fd; border: 1px solid #1976d2; border-radius: 4px;">
+                    This content can be shown or hidden using display: none
+                </div>
+            </div>
+            <div class="code-snippet">
+.hidden { display: none; }
+.visible { display: block; }
+
+function toggleContent() {
+    const content = document.getElementById('toggleable-content');
+    content.classList.toggle('hidden');
+}
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. List Item Display -->
+    <section class="section">
+        <h2>8. List Item Display (display: list-item)</h2>
+        <p>Makes elements behave like list items with markers</p>
+        
+        <div class="demo-box">
+            <div class="element-label">Custom List Items</div>
+            <div class="visual-container">
+                <div class="custom-list">
+                    <div class="list-item">First custom list item</div>
+                    <div class="list-item">Second custom list item</div>
+                    <div class="list-item">Third custom list item</div>
+                </div>
+            </div>
+            <div class="code-snippet">
+.list-item {
+    display: list-item;
+    list-style-type: disc;
+    margin-left: 20px;
+    padding: 5px 0;
+}
+            </code>
+        </div>
+        
+        <h3>Different List Styles</h3>
+        <div class="demo-box">
+            <div class="element-label">List Style Types</div>
+            <div class="visual-container">
+                <div style="display: flex; gap: 30px;">
+                    <div>
+                        <strong>Disc:</strong>
+                        <div class="list-disc">Item 1</div>
+                        <div class="list-disc">Item 2</div>
+                    </div>
+                    <div>
+                        <strong>Square:</strong>
+                        <div class="list-square">Item 1</div>
+                        <div class="list-square">Item 2</div>
+                    </div>
+                    <div>
+                        <strong>Decimal:</strong>
+                        <div class="list-decimal">Item 1</div>
+                        <div class="list-decimal">Item 2</div>
+                    </div>
+                </div>
+            </div>
+            <div class="code-snippet">
+.list-disc { list-style-type: disc; }
+.list-square { list-style-type: square; }
+.list-decimal { list-style-type: decimal; }
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Modern Display Values -->
+    <section class="section">
+        <h2>9. Modern Display Values</h2>
+        
+        <h3>Contents Display</h3>
+        <div class="demo-box">
+            <div class="element-label">Display: Contents (Unwraps Container)</div>
+            <div class="visual-container">
+                <div class="flex-parent">
+                    <div>Flex Child 1</div>
+                    <div class="display-contents">
+                        <div>Grandchild 1 (acts as flex child)</div>
+                        <div>Grandchild 2 (acts as flex child)</div>
+                    </div>
+                    <div>Flex Child 3</div>
+                </div>
+            </div>
+            <div class="code-snippet">
+.flex-parent { display: flex; gap: 10px; }
+.display-contents { display: contents; } /* Container "disappears" */
+/* Grandchildren become direct flex children */
+            </div>
+        </div>
+        
+        <h3>Flow-Root Display</h3>
+        <div class="demo-box">
+            <div class="element-label">Display: Flow-Root (Block Formatting Context)</div>
+            <div class="visual-container">
+                <div class="flow-root-demo">
+                    <div class="floating-element">Floating Element</div>
+                    <p>This container uses display: flow-root to contain floated elements without needing clearfix hacks.</p>
+                </div>
+            </div>
+            <div class="code-snippet">
+.flow-root-demo {
+    display: flow-root; /* Creates new block formatting context */
+    background-color: #e8f5e8;
+    border: 2px solid #4caf50;
+    padding: 15px;
+}
+.floating-element {
+    float: left;
+    background-color: #81c784;
+    padding: 10px;
+    margin-right: 15px;
+}
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Responsive Patterns -->
+    <section class="section">
+        <h2>10. Responsive Display Patterns</h2>
+        
+        <h3>Responsive Navigation</h3>
+        <div class="demo-box">
+            <div class="element-label">Mobile-First Navigation</div>
+            <div class="visual-container">
+                <nav class="responsive-nav">
+                    <div class="nav-brand">Logo</div>
+                    <button class="nav-toggle" onclick="toggleNav()">☰</button>
+                    <div class="nav-menu" id="nav-menu">
+                        <a href="#" class="nav-link">Home</a>
+                        <a href="#" class="nav-link">About</a>
+                        <a href="#" class="nav-link">Services</a>
+                        <a href="#" class="nav-link">Contact</a>
+                    </div>
+                </nav>
+            </div>
+            <div class="code-snippet">
+.responsive-nav { display: flex; justify-content: space-between; }
+.nav-menu { display: none; } /* Hidden on mobile */
+.nav-toggle { display: block; } /* Visible on mobile */
+
+@media (min-width: 768px) {
+    .nav-menu { display: flex; } /* Show menu on larger screens */
+    .nav-toggle { display: none; } /* Hide toggle on larger screens */
+}
+            </div>
+        </div>
+        
+        <h3>Responsive Card Layout</h3>
+        <div class="demo-box">
+            <div class="element-label">Adaptive Card Grid</div>
+            <div class="visual-container">
+                <div class="responsive-cards">
+                    <div class="card">Card 1</div>
+                    <div class="card">Card 2</div>
+                    <div class="card">Card 3</div>
+                    <div class="card">Card 4</div>
+                </div>
+            </div>
+            <div class="code-snippet">
+.responsive-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+@media (max-width: 480px) {
+    .responsive-cards {
+        grid-template-columns: 1fr; /* Single column on small screens */
+    }
+}
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. Performance & Best Practices -->
+    <section class="section">
+        <h2>11. Performance & Best Practices</h2>
+        
+        <div class="comparison-grid">
+            <div class="demo-box warning">
+                <div class="element-label">❌ BAD: Display Changes Cause Reflow</div>
+                <div class="expensive-toggle">
+                    Hover me (expensive display change)
+                </div>
+                <div class="code-snippet">
+.expensive-toggle:hover {
+    display: none; /* Causes layout recalculation */
+}
+                </div>
+            </div>
+            
+            <div class="demo-box success">
+                <div class="element-label">✅ GOOD: Use Opacity + Visibility</div>
+                <div class="performant-toggle">
+                    Hover me (optimized hiding)
+                </div>
+                <div class="code-snippet">
+.performant-toggle {
+    transition: opacity 0.3s ease;
+}
+.performant-toggle:hover {
+    opacity: 0; /* No reflow */
+    pointer-events: none;
+}
+                </div>
+            </div>
+        </div>
+        
+        <h3>Accessibility Considerations</h3>
+        <div class="demo-box">
+            <div class="element-label">Screen Reader Friendly</div>
+            <div class="visual-container">
+                <button onclick="toggleAccessibleContent()" style="padding: 10px 20px; background: #1976d2; color: white; border: none; border-radius: 4px;">
+                    Toggle Accessible Content
+                </button>
+                <div id="accessible-content" class="accessible-hidden" aria-hidden="true">
+                    <p>This content is properly hidden from screen readers when not visible.</p>
+                </div>
+            </div>
+            <div class="code-snippet">
+.accessible-hidden {
+    display: none;
+}
+.accessible-visible {
+    display: block;
+}
+/* Always update aria-hidden attribute */
+element.setAttribute('aria-hidden', isHidden);
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. Browser Support & Fallbacks -->
+    <section class="section">
+        <h2>12. Browser Support & Fallbacks</h2>
+        
+        <div class="demo-box">
+            <div class="element-label">Progressive Enhancement</div>
+            <div class="visual-container">
+                <div class="fallback-layout">
+                    <div class="fallback-item">Item 1</div>
+                    <div class="fallback-item">Item 2</div>
+                    <div class="fallback-item">Item 3</div>
+                </div>
+            </div>
+            <div class="code-snippet">
+/* Fallback for older browsers */
+.fallback-layout { display: block; }
+.fallback-item { display: inline-block; width: 30%; }
+
+/* Modern browsers with grid support */
+@supports (display: grid) {
+    .fallback-layout {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    .fallback-item { width: auto; }
+}
+            </code>
+        </div>
+        
+        <div class="demo-box">
+            <div class="element-label">Feature Detection</div>
+            <div class="code-snippet">
+/* Check for flexbox support */
+@supports (display: flex) {
+    .layout { display: flex; }
+}
+
+/* Check for grid support */
+@supports (display: grid) {
+    .layout { display: grid; }
+}
+
+/* Check for display: contents support */
+@supports (display: contents) {
+    .wrapper { display: contents; }
+}
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Reference -->
+    <section class="section">
+        <h2>13. Quick Reference Summary</h2>
+        
+        <div class="comparison-grid">
+            <div class="demo-box">
+                <div class="element-label">Outer Display Types</div>
+                <ul>
+                    <li><strong>block</strong> - Full width, stacks vertically</li>
+                    <li><strong>inline</strong> - Flows with text</li>
+                    <li><strong>inline-block</strong> - Inline flow + dimensions</li>
+                    <li><strong>none</strong> - Completely removed</li>
+                </ul>
+            </div>
+            
+            <div class="demo-box">
+                <div class="element-label">Layout Systems</div>
+                <ul>
+                    <li><strong>flex</strong> - One-dimensional layout</li>
+                    <li><strong>grid</strong> - Two-dimensional layout</li>
+                    <li><strong>table-cell</strong> - Equal height columns</li>
+                    <li><strong>flow-root</strong> - Contains floats</li>
+                </ul>
+            </div>
+            
+            <div class="demo-box">
+                <div class="element-label">Special Display Values</div>
+                <ul>
+                    <li><strong>contents</strong> - Unwraps container</li>
+                    <li><strong>list-item</strong> - Adds list markers</li>
+                    <li><strong>table-*</strong> - CSS table layout</li>
+                    <li><strong>subgrid</strong> - Inherits grid (modern)</li>
+                </ul>
+            </div>
+            
+            <div class="demo-box">
+                <div class="element-label">Best Practices</div>
+                <ul>
+                    <li>Use <strong>flexbox</strong> for 1D layouts</li>
+                    <li>Use <strong>grid</strong> for 2D layouts</li>
+                    <li>Avoid display changes for animations</li>
+                    <li>Provide fallbacks for modern features</li>
+                    <li>Consider accessibility with display: none</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="success">
+            <h3>🎯 Key Decision Framework:</h3>
+            <ul>
+                <li><strong>Text-level elements:</strong> Use inline or inline-block</li>
+                <li><strong>Single-row/column layouts:</strong> Use flexbox</li>
+                <li><strong>Complex 2D layouts:</strong> Use grid</li>
+                <li><strong>Simple stacking:</strong> Use block</li>
+                <li><strong>Hiding content:</strong> Consider UX and accessibility</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="text-align: center; margin-top: 60px; padding: 40px; background-color: #2c3e50; color: white; border-radius: 10px;">
+        <h3 style="margin-bottom: 20px;">CSS Display Properties Complete Demo</h3>
+        <p style="margin-bottom: 10px;">Interactive demonstration of all CSS display values and behaviors</p>
+        <p style="font-size: 0.9rem; opacity: 0.8;">
+            Resize your browser to see responsive behaviors in action!
+        </p>
+    </footer>
+
+    <script>
+        function toggleContent() {
+            const content = document.getElementById('toggleable-content');
+            content.style.display = content.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function toggleNav() {
+            const menu = document.getElementById('nav-menu');
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function toggleAccessibleContent() {
+            const content = document.getElementById('accessible-content');
+            const isHidden = content.classList.contains('accessible-hidden');
+            
+            if (isHidden) {
+                content.classList.remove('accessible-hidden');
+                content.classList.add('accessible-visible');
+                content.setAttribute('aria-hidden', 'false');
+            } else {
+                content.classList.remove('accessible-visible');
+                content.classList.add('accessible-hidden');
+                content.setAttribute('aria-hidden', 'true');
+            }
+        }
+    </script>
+
+</body>
+</html>
