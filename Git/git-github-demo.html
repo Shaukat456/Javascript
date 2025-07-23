@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Git & GitHub - Complete Interactive Guide</title>
+    <style>
+      /* Demo-specific styles */
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        background-color: #f6f8fa;
+        color: #24292f;
+      }
+
+      .section {
+        background-color: white;
+        margin: 30px 0;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        border: 1px solid #d1d9e0;
+      }
+
+      .section h2 {
+        color: #0366d6;
+        border-bottom: 3px solid #0366d6;
+        padding-bottom: 10px;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .section h3 {
+        color: #586069;
+        margin-top: 30px;
+        margin-bottom: 15px;
+      }
+
+      .demo-container {
+        border: 2px dashed #d1d9e0;
+        background-color: #f6f8fa;
+        padding: 20px;
+        margin: 15px 0;
+        border-radius: 8px;
+        position: relative;
+      }
+
+      .terminal {
+        background-color: #0d1117;
+        color: #c9d1d9;
+        padding: 20px;
+        border-radius: 8px;
+        font-family: "Courier New", monospace;
+        font-size: 14px;
+        margin: 15px 0;
+        overflow-x: auto;
+        white-space: pre-line;
+        line-height: 1.4;
+      }
+
+      .terminal::before {
+        content: "$ ";
+        color: #58a6ff;
+        font-weight: bold;
+      }
+
+      .command-output {
+        background-color: #21262d;
+        color: #8b949e;
+        padding: 15px;
+        border-radius: 6px;
+        font-family: "Courier New", monospace;
+        font-size: 13px;
+        margin: 10px 0;
+        white-space: pre-line;
+        line-height: 1.4;
+      }
+
+      .git-workflow {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin: 20px 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #f6f8fa 0%, #e1e4e8 100%);
+        border-radius: 10px;
+        border: 1px solid #d1d9e0;
+      }
+
+      .workflow-step {
+        flex: 1;
+        text-align: center;
+        padding: 15px;
+        background: white;
+        border-radius: 8px;
+        border: 2px solid #e1e4e8;
+        position: relative;
+      }
+
+      .workflow-step.active {
+        border-color: #0366d6;
+        background: #f1f8ff;
+      }
+
+      .workflow-step::after {
+        content: "→";
+        position: absolute;
+        right: -25px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 20px;
+        color: #0366d6;
+        font-weight: bold;
+      }
+
+      .workflow-step:last-child::after {
+        display: none;
+      }
+
+      .git-commands {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+      }
+
+      .command-card {
+        background: white;
+        border: 1px solid #e1e4e8;
+        border-radius: 8px;
+        padding: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .command-card:hover {
+        border-color: #0366d6;
+        box-shadow: 0 3px 10px rgba(3, 102, 214, 0.1);
+      }
+
+      .command-card h4 {
+        color: #0366d6;
+        margin-top: 0;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .branch-visualizer {
+        background: #f6f8fa;
+        border: 1px solid #e1e4e8;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+        font-family: "Courier New", monospace;
+        overflow-x: auto;
+      }
+
+      .branch-line {
+        display: flex;
+        align-items: center;
+        margin: 5px 0;
+        font-size: 14px;
+      }
+
+      .commit-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 10px;
+        flex-shrink: 0;
+      }
+
+      .main-branch {
+        background-color: #238636;
+      }
+      .feature-branch {
+        background-color: #0366d6;
+      }
+      .hotfix-branch {
+        background-color: #da3633;
+      }
+
+      .github-features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+      }
+
+      .feature-card {
+        background: white;
+        border: 1px solid #e1e4e8;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .feature-icon {
+        font-size: 48px;
+        margin-bottom: 15px;
+      }
+
+      .interactive-demo {
+        background: #f6f8fa;
+        border: 2px solid #e1e4e8;
+        border-radius: 10px;
+        padding: 25px;
+        margin: 20px 0;
+      }
+
+      .demo-controls {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        border: 1px solid #e1e4e8;
+      }
+
+      .btn {
+        background: #0366d6;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        margin: 5px;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+      }
+
+      .btn:hover {
+        background: #0256cc;
+      }
+
+      .btn-secondary {
+        background: #6c757d;
+      }
+
+      .btn-secondary:hover {
+        background: #545b62;
+      }
+
+      .btn-success {
+        background: #28a745;
+      }
+
+      .btn-success:hover {
+        background: #218838;
+      }
+
+      .btn-danger {
+        background: #dc3545;
+      }
+
+      .btn-danger:hover {
+        background: #c82333;
+      }
+
+      .status-indicator {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: bold;
+        margin-left: 10px;
+      }
+
+      .status-modified {
+        background: #fff3cd;
+        color: #856404;
+      }
+      .status-staged {
+        background: #d4edda;
+        color: #155724;
+      }
+      .status-untracked {
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #e1e4e8;
+      }
+
+      .comparison-table th {
+        background: #f6f8fa;
+        font-weight: 600;
+        color: #24292f;
+      }
+
+      .comparison-table tr:hover {
+        background: #f6f8fa;
+      }
+
+      .highlight-box {
+        background: #fff3cd;
+        border: 1px solid #ffeeba;
+        color: #856404;
+        padding: 15px;
+        border-radius: 6px;
+        margin: 15px 0;
+      }
+
+      .warning-box {
+        background: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+        padding: 15px;
+        border-radius: 6px;
+        margin: 15px 0;
+      }
+
+      .success-box {
+        background: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+        padding: 15px;
+        border-radius: 6px;
+        margin: 15px 0;
+      }
+
+      .info-box {
+        background: #cce5ff;
+        border: 1px solid #99d3ff;
+        color: #004085;
+        padding: 15px;
+        border-radius: 6px;
+        margin: 15px 0;
+      }
+
+      .emoji {
+        font-size: 1.2em;
+        margin-right: 5px;
+      }
+
+      @media (max-width: 768px) {
+        .git-workflow {
+          flex-direction: column;
+        }
+
+        .workflow-step::after {
+          content: "↓";
+          right: 50%;
+          top: auto;
+          bottom: -25px;
+          transform: translateX(50%);
+        }
+
+        .workflow-step:last-child::after {
+          display: none;
+        }
+
+        .git-commands {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Page Header -->
+    <header
+      style="
+        text-align: center;
+        margin-bottom: 40px;
+        background: linear-gradient(135deg, #0366d6, #58a6ff);
+        color: white;
+        padding: 60px 20px;
+        border-radius: 15px;
+      "
+    >
+      <h1
+        style="
+          font-size: 3rem;
+          margin-bottom: 10px;
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        "
+      >
+        <span class="emoji">🚀</span> Git & GitHub Complete Interactive Guide
+      </h1>
+      <p
+        style="font-size: 1.3rem; max-width: 60ch; margin: 0 auto; opacity: 0.9"
+      >
+        Master version control with interactive demonstrations, real examples,
+        and best practices
+      </p>
+    </header>
+
+    <!-- 1. Introduction -->
+    <section class="section">
+      <h2><span class="emoji">📚</span> What is Git & GitHub?</h2>
+
+      <div class="git-workflow">
+        <div class="workflow-step">
+          <h4><span class="emoji">💻</span> Git</h4>
+          <p>Version Control System</p>
+          <small>Track changes in your code</small>
+        </div>
+        <div class="workflow-step">
+          <h4><span class="emoji">☁️</span> GitHub</h4>
+          <p>Cloud Platform</p>
+          <small>Host and collaborate on Git repos</small>
+        </div>
+        <div class="workflow-step">
+          <h4><span class="emoji">👥</span> Collaboration</h4>
+          <p>Team Development</p>
+          <small>Work together efficiently</small>
+        </div>
+      </div>
+
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Git</th>
+            <th>GitHub</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Type</strong></td>
+            <td>Version control system</td>
+            <td>Hosting platform</td>
+          </tr>
+          <tr>
+            <td><strong>Location</strong></td>
+            <td>Local computer</td>
+            <td>Cloud-based</td>
+          </tr>
+          <tr>
+            <td><strong>Interface</strong></td>
+            <td>Command line / GUI tools</td>
+            <td>Web interface</td>
+          </tr>
+          <tr>
+            <td><strong>Collaboration</strong></td>
+            <td>Basic merging</td>
+            <td>Pull requests, issues, reviews</td>
+          </tr>
+          <tr>
+            <td><strong>Cost</strong></td>
+            <td>Free and open-source</td>
+            <td>Free tier + paid plans</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="info-box">
+        <strong><span class="emoji">💡</span> Think of it this way:</strong> Git
+        is like a powerful filing cabinet that tracks every change to your
+        documents. GitHub is like a shared office space where multiple people
+        can access and collaborate on those filing cabinets.
+      </div>
+    </section>
+
+    <!-- 2. Git Basics Interactive Demo -->
+    <section class="section">
+      <h2><span class="emoji">🎯</span> Interactive Git Workflow</h2>
+
+      <div class="interactive-demo">
+        <h3>Simulate Git Commands</h3>
+        <div class="demo-controls">
+          <button class="btn" onclick="simulateCommand('init')">
+            git init
+          </button>
+          <button class="btn btn-secondary" onclick="simulateCommand('add')">
+            git add .
+          </button>
+          <button class="btn btn-success" onclick="simulateCommand('commit')">
+            git commit
+          </button>
+          <button class="btn" onclick="simulateCommand('push')">
+            git push
+          </button>
+          <button class="btn btn-danger" onclick="simulateCommand('reset')">
+            Reset Demo
+          </button>
+        </div>
+
+        <div id="workflow-status" class="demo-container">
+          <h4>
+            Current Status: <span id="current-status">Not initialized</span>
+          </h4>
+          <div id="file-status">
+            <p>📁 Working Directory: <span id="working-files">Empty</span></p>
+            <p>📋 Staging Area: <span id="staged-files">Empty</span></p>
+            <p>💾 Repository: <span id="committed-files">Empty</span></p>
+          </div>
+        </div>
+
+        <div
+          id="command-history"
+          class="terminal"
+          style="max-height: 200px; overflow-y: auto"
+        >
+          Welcome to Git Interactive Demo! Try the commands above to see how Git
+          workflow works.
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Essential Commands -->
+    <section class="section">
+      <h2><span class="emoji">⚡</span> Essential Git Commands</h2>
+
+      <div class="git-commands">
+        <div class="command-card">
+          <h4><span class="emoji">🏗️</span> Repository Setup</h4>
+          <div class="terminal">
+            git init git clone &lt;repository-url&gt; git config --global
+            user.name "Your Name" git config --global user.email
+            "email@example.com"
+          </div>
+          <p>
+            <strong>Why:</strong> Initialize a new repo or clone an existing
+            one. Configure your identity for commits.
+          </p>
+        </div>
+
+        <div class="command-card">
+          <h4><span class="emoji">📊</span> Check Status</h4>
+          <div class="terminal">git status git log --oneline git diff</div>
+          <p>
+            <strong>Why:</strong> See what's changed, view commit history, and
+            compare differences between versions.
+          </p>
+        </div>
+
+        <div class="command-card">
+          <h4><span class="emoji">📝</span> Making Changes</h4>
+          <div class="terminal">
+            git add &lt;filename&gt; git add . git commit -m "Descriptive
+            message" git commit -am "Add and commit together"
+          </div>
+          <p>
+            <strong>Why:</strong> Stage changes for commit and create snapshots
+            of your project with descriptive messages.
+          </p>
+        </div>
+
+        <div class="command-card">
+          <h4><span class="emoji">🌿</span> Working with Branches</h4>
+          <div class="terminal">
+            git branch git checkout -b &lt;branch-name&gt; git switch
+            &lt;branch-name&gt; git merge &lt;branch-name&gt;
+          </div>
+          <p>
+            <strong>Why:</strong> Create parallel development lines for
+            features, bug fixes, or experiments.
+          </p>
+        </div>
+
+        <div class="command-card">
+          <h4><span class="emoji">☁️</span> Remote Operations</h4>
+          <div class="terminal">
+            git remote add origin &lt;url&gt; git push origin &lt;branch&gt; git
+            pull origin &lt;branch&gt; git fetch
+          </div>
+          <p>
+            <strong>Why:</strong> Sync your local changes with remote
+            repositories and collaborate with others.
+          </p>
+        </div>
+
+        <div class="command-card">
+          <h4><span class="emoji">🔄</span> Undoing Changes</h4>
+          <div class="terminal">
+            git restore &lt;filename&gt; git reset HEAD~1 git revert
+            &lt;commit-hash&gt; git stash
+          </div>
+          <p>
+            <strong>Why:</strong> Fix mistakes, temporarily save changes, or
+            revert to previous versions safely.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Branching Visualizer -->
+    <section class="section">
+      <h2><span class="emoji">🌳</span> Git Branching Visualizer</h2>
+
+      <div class="interactive-demo">
+        <div class="demo-controls">
+          <button class="btn" onclick="visualizeBranch('feature')">
+            Create Feature Branch
+          </button>
+          <button class="btn btn-success" onclick="visualizeBranch('commit')">
+            Make Commit
+          </button>
+          <button class="btn" onclick="visualizeBranch('merge')">
+            Merge Branch
+          </button>
+          <button class="btn btn-danger" onclick="visualizeBranch('hotfix')">
+            Create Hotfix
+          </button>
+          <button class="btn btn-secondary" onclick="visualizeBranch('reset')">
+            Reset
+          </button>
+        </div>
+
+        <div class="branch-visualizer" id="branch-visualizer">
+          <div class="branch-line">
+            <span class="commit-dot main-branch"></span>
+            <span>main: Initial commit</span>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <strong><span class="emoji">💡</span> Branching Benefits:</strong>
+          <ul>
+            <li>
+              <strong>Parallel Development:</strong> Work on multiple features
+              simultaneously
+            </li>
+            <li>
+              <strong>Safe Experimentation:</strong> Try new ideas without
+              affecting main code
+            </li>
+            <li>
+              <strong>Code Reviews:</strong> Review changes before merging
+            </li>
+            <li>
+              <strong>Release Management:</strong> Maintain stable releases
+              while developing new features
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. GitHub Features -->
+    <section class="section">
+      <h2><span class="emoji">🐙</span> GitHub Features</h2>
+
+      <div class="github-features">
+        <div class="feature-card">
+          <div class="feature-icon">📁</div>
+          <h4>Repositories</h4>
+          <p>
+            Store your code in the cloud with full Git history and collaboration
+            features.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔄</div>
+          <h4>Pull Requests</h4>
+          <p>
+            Propose changes, review code, and collaborate with team members
+            before merging.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🐛</div>
+          <h4>Issues</h4>
+          <p>
+            Track bugs, feature requests, and project tasks with labels and
+            milestones.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h4>Actions</h4>
+          <p>
+            Automate testing, building, and deployment with CI/CD workflows.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h4>Projects</h4>
+          <p>
+            Organize work with Kanban boards, track progress, and manage
+            deadlines.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h4>Security</h4>
+          <p>
+            Scan for vulnerabilities, manage secrets, and secure your codebase.
+          </p>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <h4><span class="emoji">🚀</span> GitHub Workflow Example:</h4>
+        <ol>
+          <li><strong>Fork</strong> a repository to your account</li>
+          <li><strong>Clone</strong> your fork locally</li>
+          <li><strong>Create</strong> a feature branch</li>
+          <li><strong>Make</strong> changes and commit</li>
+          <li><strong>Push</strong> to your fork</li>
+          <li><strong>Create</strong> a Pull Request</li>
+          <li><strong>Review</strong> and discuss changes</li>
+          <li><strong>Merge</strong> when approved</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 6. Common Workflows -->
+    <section class="section">
+      <h2><span class="emoji">🔄</span> Common Git Workflows</h2>
+
+      <div class="interactive-demo">
+        <h3>Feature Branch Workflow</h3>
+        <div class="demo-controls">
+          <button class="btn" onclick="showWorkflow('feature')">
+            Feature Workflow
+          </button>
+          <button class="btn" onclick="showWorkflow('gitflow')">Gitflow</button>
+          <button class="btn" onclick="showWorkflow('github')">
+            GitHub Flow
+          </button>
+          <button class="btn" onclick="showWorkflow('collaborative')">
+            Collaborative
+          </button>
+        </div>
+
+        <div id="workflow-display" class="command-output">
+          Select a workflow above to see the step-by-step process.
+        </div>
+      </div>
+
+      <div class="warning-box">
+        <strong><span class="emoji">⚠️</span> Common Workflow Mistakes:</strong>
+        <ul>
+          <li>Working directly on the main branch</li>
+          <li>Not pulling latest changes before starting work</li>
+          <li>Creating huge commits with multiple unrelated changes</li>
+          <li>Not testing before creating pull requests</li>
+          <li>Ignoring merge conflicts</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 7. Best Practices -->
+    <section class="section">
+      <h2><span class="emoji">✅</span> Best Practices & Guidelines</h2>
+
+      <div class="git-commands">
+        <div class="command-card">
+          <h4><span class="emoji">📝</span> Commit Messages</h4>
+          <div class="success-box">
+            <strong>Good Examples:</strong>
+            <div class="terminal">
+              feat: add user authentication system fix: resolve memory leak in
+              image processing docs: update installation instructions style:
+              format code according to style guide
+            </div>
+          </div>
+          <div class="warning-box">
+            <strong>Bad Examples:</strong>
+            <div class="terminal">fix update stuff asdf work in progress</div>
+          </div>
+        </div>
+
+        <div class="command-card">
+          <h4><span class="emoji">🏷️</span> Branch Naming</h4>
+          <div class="success-box">
+            <strong>Good Examples:</strong>
+            <div class="terminal">
+              feature/user-authentication fix/login-button-styling
+              hotfix/security-vulnerability docs/api-documentation
+            </div>
+          </div>
+          <div class="warning-box">
+            <strong>Bad Examples:</strong>
+            <div class="terminal">fix my-branch test123 branch1</div>
+          </div>
+        </div>
+
+        <div class="command-card">
+          <h4><span class="emoji">🔒</span> Security</h4>
+          <ul>
+            <li>Never commit API keys or passwords</li>
+            <li>Use environment variables for secrets</li>
+            <li>Add sensitive files to .gitignore</li>
+            <li>Use GitHub's secret scanning</li>
+            <li>Review commits before pushing</li>
+          </ul>
+        </div>
+
+        <div class="command-card">
+          <h4><span class="emoji">📁</span> Repository Organization</h4>
+          <div class="terminal">
+            project-root/ ├── .github/ # GitHub templates ├── docs/ #
+            Documentation ├── src/ # Source code ├── tests/ # Test files ├──
+            .gitignore # Ignored files ├── README.md # Project info └── LICENSE
+            # License file
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <h4><span class="emoji">📋</span> .gitignore Template</h4>
+        <div class="terminal">
+          # Dependencies node_modules/ vendor/ # Build outputs dist/ build/
+          *.exe # Environment files .env .env.local # IDE files .vscode/ .idea/
+          # OS files .DS_Store Thumbs.db # Logs *.log logs/
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Troubleshooting -->
+    <section class="section">
+      <h2><span class="emoji">🛠️</span> Troubleshooting Common Issues</h2>
+
+      <div class="git-commands">
+        <div class="command-card">
+          <h4><span class="emoji">❌</span> Merge Conflicts</h4>
+          <p><strong>Problem:</strong> Git can't automatically merge changes</p>
+          <div class="terminal">
+            git status # See conflicted files # Edit files to resolve conflicts
+            git add &lt;resolved-file&gt; # Mark as resolved git commit -m
+            "Resolve merge conflict"
+          </div>
+          <div class="info-box">
+            <strong>Conflict markers:</strong>
+            <div class="terminal">
+              &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD Your changes ======= Other
+              changes &gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-name
+            </div>
+          </div>
+        </div>
+
+        <div class="command-card">
+          <h4><span class="emoji">🔄</span> Detached HEAD</h4>
+          <p><strong>Problem:</strong> Not on any branch</p>
+          <div class="terminal">
+            # Create branch from current state git checkout -b new-branch-name #
+            Or return to main branch git checkout main
+          </div>
+        </div>
+
+        <div class="command-card">
+          <h4>
+            <span class="emoji">🗑️</span> Accidentally Committed Sensitive Data
+          </h4>
+          <p><strong>Problem:</strong> API keys or passwords in history</p>
+          <div class="warning-box">
+            <strong>Don't use git filter-branch!</strong> Instead:
+            <ul>
+              <li>Use BFG Repo-Cleaner tool</li>
+              <li>Contact GitHub support</li>
+              <li>Rotate compromised secrets immediately</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="command-card">
+          <h4><span class="emoji">📂</span> Large Files</h4>
+          <p><strong>Problem:</strong> Repository becoming too large</p>
+          <div class="terminal">
+            # Use Git LFS for large files git lfs install git lfs track "*.psd"
+            git add .gitattributes # Add and commit large files git add
+            large-file.psd git commit -m "Add design file"
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Advanced Topics -->
+    <section class="section">
+      <h2><span class="emoji">🎓</span> Advanced Git Topics</h2>
+
+      <div class="git-commands">
+        <div class="command-card">
+          <h4><span class="emoji">🔄</span> Rebasing</h4>
+          <p>Rewrite commit history for cleaner project timeline</p>
+          <div class="terminal">
+            # Interactive rebase last 3 commits git rebase -i HEAD~3 # Rebase
+            feature branch onto main git checkout feature-branch git rebase main
+          </div>
+          <div class="warning-box">
+            <strong>⚠️ Never rebase public commits!</strong> Only rebase local,
+            unpushed commits.
+          </div>
+        </div>
+
+        <div class="command-card">
+          <h4><span class="emoji">📦</span> Stashing</h4>
+          <p>Temporarily save changes without committing</p>
+          <div class="terminal">
+            # Stash current changes git stash # List stashes git stash list #
+            Apply latest stash git stash pop # Apply specific stash git stash
+            apply stash@{1}
+          </div>
+        </div>
+
+        <div class="command-card">
+          <h4><span class="emoji">🍒</span> Cherry-picking</h4>
+          <p>Apply specific commits to current branch</p>
+          <div class="terminal">
+            # Apply specific commit git cherry-pick &lt;commit-hash&gt; #
+            Cherry-pick multiple commits git cherry-pick &lt;commit1&gt;
+            &lt;commit2&gt;
+          </div>
+        </div>
+
+        <div class="command-card">
+          <h4><span class="emoji">📁</span> Submodules</h4>
+          <p>Include other repositories as subdirectories</p>
+          <div class="terminal">
+            # Add submodule git submodule add https://github.com/user/repo.git
+            path/ # Clone with submodules git clone --recursive
+            &lt;repository-url&gt; # Update submodules git submodule update
+            --init --recursive
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Reference -->
+    <section class="section">
+      <h2><span class="emoji">📚</span> Quick Reference Cheat Sheet</h2>
+
+      <div class="git-commands">
+        <div class="command-card">
+          <h4><span class="emoji">🚀</span> Getting Started</h4>
+          <div class="terminal">
+            git config --global user.name "Name" git config --global user.email
+            "email@example.com" git init git clone &lt;url&gt;
+          </div>
+        </div>
+
+        <div class="command-card">
+          <h4><span class="emoji">📝</span> Basic Commands</h4>
+          <div class="terminal">
+            git status git add . git commit -m "message" git push origin main
+          </div>
+        </div>
+
+        <div class="command-card">
+          <h4><span class="emoji">🌿</span> Branching</h4>
+          <div class="terminal">
+            git branch git checkout -b &lt;branch&gt; git merge &lt;branch&gt;
+            git branch -d &lt;branch&gt;
+          </div>
+        </div>
+
+        <div class="command-card">
+          <h4><span class="emoji">☁️</span> Remote</h4>
+          <div class="terminal">
+            git remote -v git pull origin main git push origin &lt;branch&gt;
+            git fetch --all
+          </div>
+        </div>
+
+        <div class="command-card">
+          <h4><span class="emoji">🔄</span> Undoing</h4>
+          <div class="terminal">
+            git restore &lt;file&gt; git reset HEAD~1 git revert &lt;commit&gt;
+            git stash
+          </div>
+        </div>
+
+        <div class="command-card">
+          <h4><span class="emoji">📊</span> Information</h4>
+          <div class="terminal">
+            git log --oneline git diff git show &lt;commit&gt; git blame
+            &lt;file&gt;
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      style="
+        text-align: center;
+        margin-top: 60px;
+        padding: 40px;
+        background: linear-gradient(135deg, #24292f, #0d1117);
+        color: white;
+        border-radius: 15px;
+      "
+    >
+      <h3 style="margin-bottom: 20px">
+        <span class="emoji">🎉</span> Congratulations!
+      </h3>
+      <p style="margin-bottom: 15px; font-size: 1.1rem">
+        You now have a comprehensive understanding of Git and GitHub!
+      </p>
+      <p style="font-size: 0.9rem; opacity: 0.8">
+        Practice with real projects, contribute to open source, and keep
+        learning! 🚀
+      </p>
+      <div
+        style="
+          margin-top: 30px;
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          flex-wrap: wrap;
+        "
+      >
+        <div
+          style="
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+          "
+        >
+          <div style="font-size: 24px">📖</div>
+          <small>Read Documentation</small>
+        </div>
+        <div
+          style="
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+          "
+        >
+          <div style="font-size: 24px">💻</div>
+          <small>Practice Commands</small>
+        </div>
+        <div
+          style="
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+          "
+        >
+          <div style="font-size: 24px">🤝</div>
+          <small>Collaborate</small>
+        </div>
+        <div
+          style="
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+          "
+        >
+          <div style="font-size: 24px">🌟</div>
+          <small>Contribute</small>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Interactive demo state
+      let demoState = {
+        initialized: false,
+        files: [],
+        stagedFiles: [],
+        commits: [],
+        currentBranch: "main",
+        branches: ["main"],
+      };
+
+      let branchState = {
+        commits: [{ branch: "main", message: "Initial commit", id: 1 }],
+        nextId: 2,
+        currentBranch: "main",
+      };
+
+      // Simulate Git commands
+      function simulateCommand(command) {
+        const history = document.getElementById("command-history");
+        const currentStatus = document.getElementById("current-status");
+        const workingFiles = document.getElementById("working-files");
+        const stagedFiles = document.getElementById("staged-files");
+        const committedFiles = document.getElementById("committed-files");
+
+        let output = "";
+
+        switch (command) {
+          case "init":
+            if (!demoState.initialized) {
+              demoState.initialized = true;
+              demoState.files = ["index.html", "style.css", "script.js"];
+              output = `git init
+Initialized empty Git repository in /demo-project/.git/`;
+              currentStatus.textContent = "Repository initialized";
+              workingFiles.innerHTML =
+                'index.html <span class="status-indicator status-untracked">untracked</span><br>style.css <span class="status-indicator status-untracked">untracked</span><br>script.js <span class="status-indicator status-untracked">untracked</span>';
+            } else {
+              output = `git init
+Repository already initialized!`;
+            }
+            break;
+
+          case "add":
+            if (demoState.initialized && demoState.files.length > 0) {
+              demoState.stagedFiles = [...demoState.files];
+              output = `git add .
+Added 3 files to staging area`;
+              currentStatus.textContent = "Files staged for commit";
+              stagedFiles.innerHTML =
+                'index.html <span class="status-indicator status-staged">staged</span><br>style.css <span class="status-indicator status-staged">staged</span><br>script.js <span class="status-indicator status-staged">staged</span>';
+              workingFiles.textContent = "Clean";
+            } else {
+              output = `git add .
+No repository found. Run 'git init' first.`;
+            }
+            break;
+
+          case "commit":
+            if (demoState.stagedFiles.length > 0) {
+              const commitId = Math.random().toString(36).substr(2, 7);
+              demoState.commits.push({
+                id: commitId,
+                message: "Initial commit",
+                files: [...demoState.stagedFiles],
+              });
+              demoState.stagedFiles = [];
+              output = `git commit -m "Initial commit"
+[main ${commitId}] Initial commit
+ 3 files changed, 45 insertions(+)
+ create mode 100644 index.html
+ create mode 100644 style.css
+ create mode 100644 script.js`;
+              currentStatus.textContent = "Changes committed";
+              stagedFiles.textContent = "Empty";
+              committedFiles.innerHTML = `Commit ${commitId}: Initial commit<br>• index.html<br>• style.css<br>• script.js`;
+            } else {
+              output = `git commit -m "Initial commit"
+No changes added to commit. Use 'git add' first.`;
+            }
+            break;
+
+          case "push":
+            if (demoState.commits.length > 0) {
+              output = `git push origin main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (5/5), 1.2 KiB | 1.2 MiB/s, done.
+Total 5 (delta 0), reused 0 (delta 0)
+To https://github.com/username/demo-project.git
+ * [new branch]      main -> main`;
+              currentStatus.textContent = "Pushed to GitHub";
+            } else {
+              output = `git push origin main
+No commits to push. Make some commits first.`;
+            }
+            break;
+
+          case "reset":
+            demoState = {
+              initialized: false,
+              files: [],
+              stagedFiles: [],
+              commits: [],
+              currentBranch: "main",
+              branches: ["main"],
+            };
+            output = `Demo reset!
+Ready to start fresh.`;
+            currentStatus.textContent = "Not initialized";
+            workingFiles.textContent = "Empty";
+            stagedFiles.textContent = "Empty";
+            committedFiles.textContent = "Empty";
+            break;
+        }
+
+        // Add to history
+        history.innerHTML += `\n\n$ ${output}`;
+        history.scrollTop = history.scrollHeight;
+      }
+
+      // Branch visualizer
+      function visualizeBranch(action) {
+        const visualizer = document.getElementById("branch-visualizer");
+
+        switch (action) {
+          case "feature":
+            if (branchState.currentBranch === "main") {
+              branchState.currentBranch = "feature/user-login";
+              addBranchLine(
+                "feature/user-login",
+                "feature-branch",
+                "Create feature branch"
+              );
+            }
+            break;
+
+          case "commit":
+            const commitMsg =
+              branchState.currentBranch === "main"
+                ? `Update main (${branchState.nextId})`
+                : `Add feature code (${branchState.nextId})`;
+            addBranchLine(
+              branchState.currentBranch,
+              branchState.currentBranch === "main"
+                ? "main-branch"
+                : "feature-branch",
+              commitMsg
+            );
+            branchState.nextId++;
+            break;
+
+          case "merge":
+            if (branchState.currentBranch !== "main") {
+              branchState.currentBranch = "main";
+              addBranchLine(
+                "main",
+                "main-branch",
+                `Merge feature branch (${branchState.nextId})`
+              );
+              branchState.nextId++;
+            }
+            break;
+
+          case "hotfix":
+            branchState.currentBranch = "hotfix/critical-bug";
+            addBranchLine(
+              "hotfix/critical-bug",
+              "hotfix-branch",
+              "Emergency fix"
+            );
+            break;
+
+          case "reset":
+            visualizer.innerHTML = `
+                        <div class="branch-line">
+                            <span class="commit-dot main-branch"></span>
+                            <span>main: Initial commit</span>
+                        </div>`;
+            branchState = {
+              commits: [{ branch: "main", message: "Initial commit", id: 1 }],
+              nextId: 2,
+              currentBranch: "main",
+            };
+            break;
+        }
+      }
+
+      function addBranchLine(branch, className, message) {
+        const visualizer = document.getElementById("branch-visualizer");
+        const newLine = document.createElement("div");
+        newLine.className = "branch-line";
+        newLine.innerHTML = `
+                <span class="commit-dot ${className}"></span>
+                <span>${branch}: ${message}</span>
+            `;
+        visualizer.appendChild(newLine);
+      }
+
+      // Workflow demonstrations
+      function showWorkflow(type) {
+        const display = document.getElementById("workflow-display");
+
+        const workflows = {
+          feature: `Feature Branch Workflow:
+
+1. Create feature branch from main:
+   git checkout main
+   git pull origin main
+   git checkout -b feature/user-authentication
+
+2. Work on feature and commit changes:
+   # Make changes to files
+   git add .
+   git commit -m "Add login form component"
+   git commit -m "Implement password validation"
+
+3. Push branch to remote:
+   git push origin feature/user-authentication
+
+4. Create Pull Request on GitHub:
+   - Go to repository on GitHub
+   - Click "Compare & pull request"
+   - Add description and request review
+
+5. After approval, merge and cleanup:
+   git checkout main
+   git pull origin main
+   git branch -d feature/user-authentication
+
+Why this workflow?
+✅ Keeps main branch stable
+✅ Enables code review process
+✅ Allows parallel development
+✅ Easy to revert changes if needed`,
+
+          gitflow: `Gitflow Workflow:
+
+Branch Structure:
+• main: Production-ready code
+• develop: Integration branch for features
+• feature/*: New features
+• release/*: Prepare new releases
+• hotfix/*: Emergency production fixes
+
+Typical Flow:
+1. Start feature from develop:
+   git checkout develop
+   git checkout -b feature/shopping-cart
+
+2. Complete feature and merge to develop:
+   git checkout develop
+   git merge feature/shopping-cart
+
+3. Create release branch:
+   git checkout -b release/v1.2.0
+   # Bug fixes and final preparations
+
+4. Merge release to main and develop:
+   git checkout main
+   git merge release/v1.2.0
+   git tag v1.2.0
+
+5. For emergency fixes:
+   git checkout main
+   git checkout -b hotfix/security-patch
+   # Fix and merge to both main and develop
+
+Why Gitflow?
+✅ Structured release management
+✅ Clear separation of concerns
+✅ Supports continuous deployment
+✅ Handles hotfixes efficiently`,
+
+          github: `GitHub Flow:
+
+Simple workflow for continuous deployment:
+
+1. Create branch from main:
+   git checkout main
+   git pull origin main
+   git checkout -b feature/user-dashboard
+
+2. Make changes and commit:
+   git add .
+   git commit -m "Add user dashboard layout"
+   git push origin feature/user-dashboard
+
+3. Open Pull Request immediately:
+   - Create PR even for work in progress
+   - Use "Draft" status if not ready
+   - Get early feedback from team
+
+4. Collaborate and iterate:
+   - Discuss in PR comments
+   - Make additional commits
+   - Address review feedback
+
+5. Merge when ready:
+   - Squash commits if desired
+   - Delete feature branch
+   - Deploy to production
+
+6. Always deploy from main:
+   - main branch is always deployable
+   - Automated deployment on merge
+
+Why GitHub Flow?
+✅ Simple and lightweight
+✅ Continuous deployment friendly
+✅ Encourages collaboration
+✅ Fast feedback cycles`,
+
+          collaborative: `Collaborative Development:
+
+Multiple developers working together:
+
+1. Start of day synchronization:
+   git checkout main
+   git pull origin main
+   
+2. Create feature branch:
+   git checkout -b feature/payment-integration
+   
+3. Regular commits and pushes:
+   git add .
+   git commit -m "Add payment form validation"
+   git push origin feature/payment-integration
+   
+4. Before merging - sync with latest:
+   git checkout main
+   git pull origin main
+   git checkout feature/payment-integration
+   git merge main  # or git rebase main
+   
+5. Resolve conflicts if any:
+   # Edit conflicted files
+   git add .
+   git commit -m "Resolve merge conflicts"
+   
+6. Create Pull Request:
+   - Assign reviewers
+   - Add detailed description
+   - Link related issues
+   
+7. Team review process:
+   - Code review feedback
+   - Automated testing
+   - Manual testing
+   
+8. Merge and cleanup:
+   git checkout main
+   git pull origin main
+   git branch -d feature/payment-integration
+
+Best Practices:
+✅ Pull before starting work
+✅ Push regularly to backup work
+✅ Write descriptive commit messages
+✅ Test before creating PR
+✅ Review others' code thoroughly`,
+        };
+
+        display.textContent = workflows[type] || "Workflow not found.";
+      }
+
+      // Initialize demos on page load
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize workflow status
+        simulateCommand("reset");
+
+        // Show feature workflow by default
+        showWorkflow("feature");
+      });
+    </script>
+  </body>
+</html>
