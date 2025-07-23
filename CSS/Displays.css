@@ -52,6 +52,7 @@ CHARACTERISTICS:
   display: block;
 
   /* Block elements can have dimensions */
+  /* Dimensions means width and height can be set */
   width: 300px;
   height: 100px;
 
