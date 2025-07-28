@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Box Model Simple Website</title>
+    <style>
+      /* ===== GLOBAL RESET & BASE STYLES ===== */
+      /* Remove default margins and padding from all elements */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box; /* Include padding and border in element's total width/height */
+      }
+
+      /* Base body styling */
+      body {
+        font-family: "Arial", sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f4f4f4;
+      }
+
+      /* ===== HEADER SECTION ===== */
+      .header {
+        /* Box Model Properties */
+        width: 100%; /* Content width: full viewport */
+        height: 80px; /* Content height: 80px */
+        padding: 15px 30px; /* Inner spacing: 15px top/bottom, 30px left/right */
+        margin: 0 0 20px 0; /* Outer spacing: 20px bottom margin */
+        border-bottom: 3px solid #2c3e50; /* Border: 3px solid line at bottom */
+
+        /* Visual styling */
+        background-color: #34495e;
+        color: white;
+
+        /* Layout using box model only */
+        overflow: hidden; /* Clear floats */
+      }
+
+      /* Logo styling */
+      .logo {
+        /* Box Model Properties */
+        padding: 8px 16px; /* Inner spacing around logo text */
+        margin: 0; /* No outer spacing */
+        border-radius: 5px; /* Rounded corners */
+
+        /* Layout using box model */
+        float: left; /* Float to left side */
+        line-height: 50px; /* Vertical centering within header height */
+
+        /* Visual styling */
+        background-color: #e74c3c;
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      /* Navigation styling */
+      .nav {
+        /* Box Model Properties */
+        margin: 0; /* No outer spacing */
+        padding: 0; /* No inner spacing */
+
+        /* Layout using box model */
+        float: right; /* Float to right side */
+        line-height: 50px; /* Vertical centering within header height */
+      }
+
+      .nav-list {
+        /* Box Model Properties */
+        margin: 0; /* No outer spacing */
+        padding: 0; /* No inner spacing */
+
+        /* Layout using box model only */
+        list-style: none;
+      }
+
+      .nav-item {
+        /* Box Model Properties */
+        margin-left: 20px; /* Space between nav items */
+
+        /* Layout using box model */
+        display: inline-block; /* Horizontal arrangement without flexbox */
+        vertical-align: middle; /* Center vertically */
+      }
+
+      .nav-link {
+        /* Box Model Properties */
+        padding: 10px 15px; /* Inner spacing: clickable area */
+        border: 2px solid transparent; /* Invisible border (for hover effect) */
+        border-radius: 4px; /* Slightly rounded corners */
+
+        /* Visual styling */
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      /* Hover effect for navigation */
+      .nav-link:hover {
+        /* Box Model changes on hover */
+        border-color: #3498db; /* Border becomes visible */
+        background-color: rgba(52, 152, 219, 0.1); /* Light blue background */
+      }
+
+      /* ===== MAIN CONTAINER ===== */
+      .container {
+        /* Box Model Properties */
+        width: 1200px; /* Fixed width - not responsive */
+        margin: 0 auto; /* Center horizontally with auto margins */
+        padding: 0 20px; /* Inner spacing: 20px left/right */
+      }
+
+      /* ===== HERO SECTION ===== */
+      .hero {
+        /* Box Model Properties */
+        width: 100%; /* Full width of container */
+        padding: 60px 40px; /* Large inner spacing for visual impact */
+        margin-bottom: 40px; /* Space below hero section */
+        border: 1px solid #ddd; /* Subtle border */
+        border-radius: 10px; /* Rounded corners */
+
+        /* Visual styling */
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        text-align: center;
+      }
+
+      .hero-title {
+        /* Box Model Properties */
+        margin-bottom: 20px; /* Space below title */
+        padding: 0; /* No inner spacing */
+
+        /* Visual styling */
+        font-size: 48px;
+        font-weight: bold;
+      }
+
+      .hero-subtitle {
+        /* Box Model Properties */
+        margin-bottom: 30px; /* Space below subtitle */
+        padding: 0 20px; /* Inner spacing: 20px left/right */
+
+        /* Visual styling */
+        font-size: 20px;
+        opacity: 0.9;
+      }
+
+      .cta-button {
+        /* Box Model Properties */
+        padding: 15px 30px; /* Inner spacing: makes button clickable */
+        margin: 10px; /* Small outer spacing */
+        border: 2px solid white; /* White border */
+        border-radius: 50px; /* Fully rounded corners */
+
+        /* Visual styling */
+        background-color: transparent;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+      }
+
+      /* CTA button hover effect */
+      .cta-button:hover {
+        /* Box Model changes on hover - use transform instead of padding changes */
+        border-width: 3px; /* Slightly thicker border */
+        padding: 14px 29px; /* Compensate for thicker border */
+
+        /* Visual changes */
+        background-color: white;
+        color: #667eea;
+        transform: translateY(-2px); /* Slight lift effect */
+      }
+
+      /* ===== FEATURES SECTION ===== */
+      .features {
+        /* Box Model Properties */
+        width: 100%; /* Full width */
+        margin-bottom: 40px; /* Space below section */
+        padding: 40px 0; /* Inner spacing: 40px top/bottom */
+      }
+
+      .features-grid {
+        /* Box Model Properties */
+        margin: 0 -15px; /* Negative margin to offset column padding */
+        padding: 0; /* No inner spacing */
+
+        /* Layout using box model only - no flexbox */
+        overflow: hidden; /* Clear floats */
+      }
+
+      .feature-card {
+        /* Box Model Properties */
+        width: 350px; /* Fixed width - not responsive */
+        height: 300px; /* Fixed height for consistent layout */
+        padding: 30px 25px; /* Inner spacing around content */
+        margin: 15px; /* Outer spacing around each card */
+        border: 1px solid #e0e0e0; /* Light border */
+        border-radius: 8px; /* Rounded corners */
+
+        /* Layout using box model only */
+        float: left; /* Float for horizontal layout */
+        box-sizing: border-box; /* Include padding and border in width calculation */
+
+        /* Visual styling */
+        background-color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+        transition: all 0.3s ease;
+      }
+
+      /* Feature card hover effect */
+      .feature-card:hover {
+        /* Box Model changes on hover - no margin changes to prevent layout shift */
+        border-color: #3498db; /* Colored border */
+        border-width: 2px; /* Slightly thicker border */
+        
+        /* Compensate for thicker border by reducing padding to maintain same size */
+        padding: 29px 24px; /* Reduce padding by 1px to compensate for border increase */
+
+        /* Visual changes */
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); /* Larger shadow */
+        transform: translateY(-3px); /* Lift effect using transform instead of margin */
+      }
+
+      .feature-icon {
+        /* Box Model Properties */
+        width: 60px; /* Fixed width */
+        height: 60px; /* Fixed height */
+        margin: 0 auto 20px auto; /* Center horizontally, space below */
+        padding: 15px; /* Inner spacing */
+        border: 3px solid #3498db; /* Colored border */
+        border-radius: 50%; /* Make it circular */
+
+        /* Layout using box model */
+        display: block; /* Block element for centering with margin auto */
+        text-align: center; /* Center content horizontally */
+        line-height: 30px; /* Center content vertically (60px - 30px padding) */
+
+        /* Visual styling */
+        background-color: #f8f9fa;
+        font-size: 24px;
+        color: #3498db;
+      }
+
+      .feature-title {
+        /* Box Model Properties */
+        margin-bottom: 15px; /* Space below title */
+        padding: 0; /* No inner spacing */
+
+        /* Visual styling */
+        font-size: 24px;
+        color: #2c3e50;
+        text-align: center;
+      }
+
+      .feature-description {
+        /* Box Model Properties */
+        margin: 0; /* No outer spacing */
+        padding: 0 10px; /* Small inner spacing left/right */
+
+        /* Visual styling */
+        color: #666;
+        text-align: center;
+        line-height: 1.6;
+      }
+
+      /* ===== CONTENT SECTION ===== */
+      .content {
+        /* Box Model Properties */
+        width: 100%; /* Full width */
+        margin-bottom: 40px; /* Space below section */
+        padding: 0; /* No inner spacing */
+
+        /* Layout using box model only */
+        overflow: hidden; /* Clear floats */
+      }
+
+      .main-content {
+        /* Box Model Properties */
+        width: 750px; /* Fixed width - not responsive */
+        padding: 30px; /* Inner spacing around content */
+        margin-right: 40px; /* Space between main content and sidebar */
+        border: 1px solid #ddd; /* Light border */
+        border-radius: 8px; /* Rounded corners */
+
+        /* Layout using box model */
+        float: left; /* Float to left for side-by-side layout */
+        box-sizing: border-box; /* Include padding and border in width calculation */
+
+        /* Visual styling */
+        background-color: white;
+      }
+
+      .content-title {
+        /* Box Model Properties */
+        margin-bottom: 20px; /* Space below title */
+        padding-bottom: 10px; /* Inner spacing below title */
+        border-bottom: 2px solid #3498db; /* Underline effect */
+
+        /* Visual styling */
+        font-size: 32px;
+        color: #2c3e50;
+      }
+
+      .content-text {
+        /* Box Model Properties */
+        margin-bottom: 20px; /* Space between paragraphs */
+        padding: 0; /* No inner spacing */
+
+        /* Visual styling */
+        color: #555;
+        line-height: 1.8;
+      }
+
+      /* ===== SIDEBAR ===== */
+      .sidebar {
+        /* Box Model Properties */
+        width: 350px; /* Fixed width - not responsive */
+        padding: 0; /* No inner spacing on container */
+
+        /* Layout using box model */
+        float: right; /* Float to right for side-by-side layout */
+        box-sizing: border-box; /* Include padding and border in width calculation */
+      }
+
+      .sidebar-widget {
+        /* Box Model Properties */
+        padding: 25px; /* Inner spacing around widget content */
+        margin-bottom: 25px; /* Space between widgets */
+        border: 1px solid #e0e0e0; /* Light border */
+        border-left: 4px solid #e74c3c; /* Accent border on left */
+        border-radius: 5px; /* Slightly rounded corners */
+
+        /* Visual styling */
+        background-color: white;
+      }
+
+      .widget-title {
+        /* Box Model Properties */
+        margin-bottom: 15px; /* Space below widget title */
+        padding: 0; /* No inner spacing */
+
+        /* Visual styling */
+        font-size: 20px;
+        color: #2c3e50;
+      }
+
+      .widget-list {
+        /* Box Model Properties */
+        margin: 0; /* No outer spacing */
+        padding-left: 20px; /* Inner spacing for list bullets */
+      }
+
+      .widget-list li {
+        /* Box Model Properties */
+        margin-bottom: 8px; /* Space between list items */
+        padding: 5px 0; /* Small inner spacing top/bottom */
+      }
+
+      /* ===== FOOTER ===== */
+      .footer {
+        /* Box Model Properties */
+        width: 100%; /* Full width */
+        padding: 30px 0; /* Inner spacing: 30px top/bottom */
+        margin-top: 40px; /* Space above footer */
+        border-top: 1px solid #ddd; /* Top border */
+
+        /* Visual styling */
+        background-color: #2c3e50;
+        color: white;
+        text-align: center;
+      }
+
+      .footer-content {
+        /* Box Model Properties */
+        width: 1200px; /* Fixed width to match container */
+        margin: 0 auto; /* Center horizontally */
+        padding: 0 20px; /* Inner spacing left/right */
+      }
+
+      .footer-text {
+        /* Box Model Properties */
+        margin: 0; /* No outer spacing */
+        padding: 10px 0; /* Inner spacing top/bottom */
+
+        /* Visual styling */
+        font-size: 16px;
+      }
+
+      /* ===== BOX MODEL DEBUGGING STYLES ===== */
+      /* Uncomment the section below to visualize the box model */
+      /*
+        * {
+            border: 1px solid red !important;
+            background-color: rgba(255, 0, 0, 0.1) !important;
+        }
+        </style>
+    </style>
+  </head>
+  <body>
+    <!-- ===== HEADER SECTION ===== -->
+    <!-- Uses padding for inner spacing, margin for outer spacing -->
+    <header class="header">
+      <!-- Logo with padding for visual space -->
+      <div class="logo">BoxModel Site</div>
+
+      <!-- Navigation with margin between items -->
+      <nav class="nav">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+          <li class="nav-item">
+            <a href="#services" class="nav-link">Services</a>
+          </li>
+          <li class="nav-item">
+            <a href="#contact" class="nav-link">Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- ===== MAIN CONTAINER ===== -->
+    <!-- Centered with auto margins, responsive padding -->
+    <div class="container">
+      <!-- ===== HERO SECTION ===== -->
+      <!-- Large padding for visual impact, margin for spacing -->
+      <section class="hero">
+        <h1 class="hero-title">Welcome to Box Model Demo</h1>
+        <p class="hero-subtitle">
+          Understanding CSS Box Model through a real website example
+        </p>
+        <a href="#features" class="cta-button">Explore Features</a>
+        <a href="#content" class="cta-button">Learn More</a>
+      </section>
+
+      <!-- ===== FEATURES SECTION ===== -->
+      <!-- Float layout with cards demonstrating box model properties -->
+      <section class="features" id="features">
+        <div class="features-grid">
+          <!-- Feature Card 1: Demonstrates padding, margin, border -->
+          <div class="feature-card">
+            <div class="feature-icon">📦</div>
+            <h3 class="feature-title">Content Area</h3>
+            <p class="feature-description">
+              The content area is where your text, images, and other elements
+              live. It's the innermost part of the box model, defined by width
+              and height properties.
+            </p>
+          </div>
+
+          <!-- Feature Card 2: Demonstrates hover effects with box model changes -->
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3 class="feature-title">Padding Space</h3>
+            <p class="feature-description">
+              Padding creates space between the content and the border. It's
+              inside the element, increasing the clickable area and improving
+              visual spacing.
+            </p>
+          </div>
+
+          <!-- Feature Card 3: Shows border usage -->
+          <div class="feature-card">
+            <div class="feature-icon">🖼️</div>
+            <h3 class="feature-title">Border Line</h3>
+            <p class="feature-description">
+              Borders wrap around the padding and content. They can be styled
+              with different colors, widths, and styles for visual separation.
+            </p>
+          </div>
+
+          <!-- Feature Card 4: Demonstrates margin spacing -->
+          <div class="feature-card">
+            <div class="feature-icon">📏</div>
+            <h3 class="feature-title">Margin Space</h3>
+            <p class="feature-description">
+              Margins create space between elements. They're outside the
+              element, pushing other elements away and controlling layout.
+            </p>
+          </div>
+
+          <!-- Feature Card 5: Shows box-sizing property effects -->
+          <div class="feature-card">
+            <div class="feature-icon">📐</div>
+            <h3 class="feature-title">Box Sizing</h3>
+            <p class="feature-description">
+              Box-sizing determines how width and height are calculated.
+              Border-box includes padding and border in the total size.
+            </p>
+          </div>
+
+          <!-- Feature Card 6: Responsive design considerations -->
+          <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h3 class="feature-title">Responsive Design</h3>
+            <p class="feature-description">
+              Box model properties can be adjusted for different screen sizes.
+              Padding and margins often scale down on mobile devices.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== MAIN CONTENT AREA ===== -->
+      <!-- Float layout demonstrating content vs sidebar spacing -->
+      <section class="content" id="content">
+        <!-- Main content with generous padding -->
+        <article class="main-content">
+          <h2 class="content-title">Understanding the CSS Box Model</h2>
+
+          <p class="content-text">
+            The CSS box model is fundamental to web design and layout. Every
+            HTML element is essentially a rectangular box, and the box model
+            describes how these boxes are structured and how their dimensions
+            are calculated.
+          </p>
+
+          <p class="content-text">
+            <strong>Content:</strong> This is where your text, images, and other
+            content appears. The width and height properties define this area.
+            For example, if you set width: 300px, that's the space available for
+            your content.
+          </p>
+
+          <p class="content-text">
+            <strong>Padding:</strong> The space between the content and the
+            border. Padding is inside the element, so it increases the overall
+            size of the element while creating breathing room around the
+            content. It's particularly useful for making buttons more clickable
+            and text more readable.
+          </p>
+
+          <p class="content-text">
+            <strong>Border:</strong> A line that goes around the padding and
+            content. Borders can be visible or invisible, thick or thin, solid
+            or dashed. They help define the visual boundaries of elements.
+          </p>
+
+          <p class="content-text">
+            <strong>Margin:</strong> The space outside the border, between this
+            element and other elements. Margins are crucial for layout,
+            controlling how far apart elements appear on the page. They can also
+            be used to center elements with auto values.
+          </p>
+
+          <p class="content-text">
+            <strong>Box-sizing:</strong> This property changes how the total
+            width and height of an element is calculated. The default
+            (content-box) means width only includes content. Border-box includes
+            padding and border in the width, making layouts more predictable.
+          </p>
+        </article>
+
+        <!-- Sidebar with multiple widgets showing different spacing -->
+        <aside class="sidebar">
+          <!-- Widget 1: Quick tips -->
+          <div class="sidebar-widget">
+            <h3 class="widget-title">Quick Tips</h3>
+            <ul class="widget-list">
+              <li>Use border-box for predictable sizing</li>
+              <li>Margins collapse vertically between elements</li>
+              <li>Padding increases clickable area</li>
+              <li>Negative margins can overlap elements</li>
+              <li>Auto margins center block elements</li>
+            </ul>
+          </div>
+
+          <!-- Widget 2: Common patterns -->
+          <div class="sidebar-widget">
+            <h3 class="widget-title">Common Patterns</h3>
+            <ul class="widget-list">
+              <li>Cards with consistent padding</li>
+              <li>Buttons with comfortable click area</li>
+              <li>Containers with responsive margins</li>
+              <li>Sections with visual separation</li>
+              <li>Forms with proper field spacing</li>
+            </ul>
+          </div>
+
+          <!-- Widget 3: Debugging tools -->
+          <div class="sidebar-widget">
+            <h3 class="widget-title">Debugging Tools</h3>
+            <ul class="widget-list">
+              <li>Browser Developer Tools</li>
+              <li>CSS outline property</li>
+              <li>Background colors for visualization</li>
+              <li>Border debugging technique</li>
+              <li>Box model visualization extensions</li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <!-- Full-width footer with centered content -->
+    <footer class="footer">
+      <div class="footer-content">
+        <p class="footer-text">
+          © 2024 Box Model Demo Site. This website demonstrates CSS Box Model
+          concepts through practical examples.
+        </p>
+        <p class="footer-text">
+          Notice how every element uses padding, margins, and borders to create
+          proper spacing and visual hierarchy.
+        </p>
+      </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT FOR INTERACTIVITY ===== -->
+    <script>
+      // Add smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Add visual feedback when clicking on cards
+      document.querySelectorAll(".feature-card").forEach((card) => {
+        card.addEventListener("click", function () {
+          // Temporarily change the border to show interaction
+          this.style.borderColor = "#e74c3c";
+          this.style.borderWidth = "2px";
+
+          // Reset after animation
+          setTimeout(() => {
+            this.style.borderColor = "#e0e0e0";
+            this.style.borderWidth = "1px";
+          }, 300);
+        });
+      });
+
+      // Console logging to show box model values
+      console.log("=== BOX MODEL DEMONSTRATION ===");
+      console.log(
+        "This website demonstrates every aspect of the CSS Box Model:"
+      );
+      console.log("1. Content areas defined by width/height");
+      console.log("2. Padding for inner spacing");
+      console.log("3. Borders for visual definition");
+      console.log("4. Margins for outer spacing");
+      console.log("5. Box-sizing for predictable layouts");
+      console.log("");
+      console.log("Inspect any element to see its box model in action!");
+    </script>
+  </body>
+</html>
