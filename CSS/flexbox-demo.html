@@ -69,8 +69,40 @@
         font-size: 14px;
         margin: 10px 0;
         overflow-x: auto;
-        white-space: pre-line;
+        white-space: pre-wrap;
         line-height: 1.6;
+        position: relative;
+      }
+
+      .copy-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #4a5568;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        transition: background-color 0.2s;
+      }
+
+      .copy-button:hover {
+        background-color: #2d3748;
+      }
+
+      .copy-button:active {
+        background-color: #1a202c;
+      }
+
+      .copy-button.copied {
+        background-color: #38a169;
+      }
+
+      .copy-button.copied::after {
+        content: " ✓";
       }
 
       .controls {
@@ -188,6 +220,50 @@
           <li><strong>Cross Axis:</strong> Perpendicular to main axis</li>
         </ul>
       </div>
+
+      <div class="property-demo">
+        <h3>📋 Complete HTML Example - Copy & Paste</h3>
+        <div class="code-snippet">
+          <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Basic Flexbox Example&lt;/title&gt;
+    &lt;style&gt;
+        .flex-container {
+            display: flex;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border: 2px dashed #666;
+        }
+        
+        .flex-item {
+            background-color: #e3f2fd;
+            padding: 15px;
+            margin: 5px;
+            border: 2px solid #1976d2;
+            border-radius: 4px;
+            text-align: center;
+            min-width: 80px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Basic Flexbox Container&lt;/h1&gt;
+    
+    &lt;div class="flex-container"&gt;
+        &lt;div class="flex-item"&gt;Item 1&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Item 2&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Item 3&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;p&gt;The items automatically arrange in a horizontal row!&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </div>
+      </div>
     </section>
 
     <!-- 2. Flex Direction - Interactive -->
@@ -219,6 +295,95 @@
         <div class="code-snippet" id="direction-code">
           .flex-container { display: flex; flex-direction: row; /* row |
           row-reverse | column | column-reverse */ }
+        </div>
+      </div>
+
+      <div class="property-demo">
+        <h3>📋 Complete HTML Example - Copy & Paste</h3>
+        <div class="code-snippet">
+          <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Flex Direction Example&lt;/title&gt;
+    &lt;style&gt;
+        .container {
+            display: flex;
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px dashed #666;
+        }
+        
+        .flex-item {
+            background-color: #e3f2fd;
+            padding: 15px;
+            margin: 5px;
+            border: 2px solid #1976d2;
+            border-radius: 4px;
+            text-align: center;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .row { flex-direction: row; }
+        .row-reverse { flex-direction: row-reverse; }
+        .column { flex-direction: column; }
+        .column-reverse { flex-direction: column-reverse; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Flex Direction Examples&lt;/h1&gt;
+    
+    &lt;h2&gt;Row (default)&lt;/h2&gt;
+    &lt;div class="container row"&gt;
+        &lt;div class="flex-item"&gt;1&lt;/div&gt;
+        &lt;div class="flex-item"&gt;2&lt;/div&gt;
+        &lt;div class="flex-item"&gt;3&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Row Reverse&lt;/h2&gt;
+    &lt;div class="container row-reverse"&gt;
+        &lt;div class="flex-item"&gt;1&lt;/div&gt;
+        &lt;div class="flex-item"&gt;2&lt;/div&gt;
+        &lt;div class="flex-item"&gt;3&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Column&lt;/h2&gt;
+    &lt;div class="container column"&gt;
+        &lt;div class="flex-item"&gt;1&lt;/div&gt;
+        &lt;div class="flex-item"&gt;2&lt;/div&gt;
+        &lt;div class="flex-item"&gt;3&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Column Reverse&lt;/h2&gt;
+    &lt;div class="container column-reverse"&gt;
+        &lt;div class="flex-item"&gt;1&lt;/div&gt;
+        &lt;div class="flex-item"&gt;2&lt;/div&gt;
+        &lt;div class="flex-item"&gt;3&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </div>
+      </div>
+          Reverse&lt;/h2&gt; &lt;div class="container row-reverse"&gt; &lt;div
+          class="flex-item"&gt;1&lt;/div&gt; &lt;div
+          class="flex-item"&gt;2&lt;/div&gt; &lt;div
+          class="flex-item"&gt;3&lt;/div&gt; &lt;/div&gt;
+          &lt;h2&gt;Column&lt;/h2&gt; &lt;div class="container column"&gt;
+          &lt;div class="flex-item"&gt;1&lt;/div&gt; &lt;div
+          class="flex-item"&gt;2&lt;/div&gt; &lt;div
+          class="flex-item"&gt;3&lt;/div&gt; &lt;/div&gt; &lt;h2&gt;Column
+          Reverse&lt;/h2&gt; &lt;div class="container column-reverse"&gt;
+          &lt;div class="flex-item"&gt;1&lt;/div&gt; &lt;div
+          class="flex-item"&gt;2&lt;/div&gt; &lt;div
+          class="flex-item"&gt;3&lt;/div&gt; &lt;/div&gt; &lt;/body&gt;
+          &lt;/html&gt;
         </div>
       </div>
     </section>
@@ -253,6 +418,72 @@
         <div class="code-snippet" id="wrap-code">
           .flex-container { display: flex; flex-wrap: nowrap; /* nowrap | wrap |
           wrap-reverse */ max-width: 400px; /* Force wrapping when needed */ }
+        </div>
+      </div>
+
+      <div class="property-demo">
+        <h3>📋 Complete HTML Example - Copy & Paste</h3>
+        <div class="code-snippet">
+          <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Flex Wrap Example&lt;/title&gt;
+    &lt;style&gt;
+        .container {
+            display: flex;
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px dashed #666;
+            max-width: 400px;
+        }
+        
+        .flex-item {
+            background-color: #e3f2fd;
+            padding: 15px;
+            margin: 5px;
+            border: 2px solid #1976d2;
+            border-radius: 4px;
+            text-align: center;
+            min-width: 100px;
+        }
+        
+        .nowrap { flex-wrap: nowrap; }
+        .wrap { flex-wrap: wrap; }
+        .wrap-reverse { flex-wrap: wrap-reverse; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Flex Wrap Examples&lt;/h1&gt;
+    
+    &lt;h2&gt;No Wrap (default) - Items squeeze together&lt;/h2&gt;
+    &lt;div class="container nowrap"&gt;
+        &lt;div class="flex-item"&gt;Item 1&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Item 2&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Item 3&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Item 4&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Wrap - Items wrap to new line&lt;/h2&gt;
+    &lt;div class="container wrap"&gt;
+        &lt;div class="flex-item"&gt;Item 1&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Item 2&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Item 3&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Item 4&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Wrap Reverse - Items wrap in reverse order&lt;/h2&gt;
+    &lt;div class="container wrap-reverse"&gt;
+        &lt;div class="flex-item"&gt;Item 1&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Item 2&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Item 3&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Item 4&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
         </div>
       </div>
     </section>
@@ -326,6 +557,102 @@
           <p style="font-size: 0.9rem; color: #666">Equal space everywhere</p>
         </div>
       </div>
+
+      <div class="property-demo">
+        <h3>📋 Complete HTML Example - Copy & Paste</h3>
+        <div class="code-snippet">
+          <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Justify Content Example&lt;/title&gt;
+    &lt;style&gt;
+        .container {
+            display: flex;
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px dashed #666;
+            min-height: 80px;
+        }
+        
+        .flex-item {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border: 2px solid #1976d2;
+            border-radius: 4px;
+            text-align: center;
+            min-width: 60px;
+        }
+        
+        .flex-start { justify-content: flex-start; }
+        .flex-end { justify-content: flex-end; }
+        .center { justify-content: center; }
+        .space-between { justify-content: space-between; }
+        .space-around { justify-content: space-around; }
+        .space-evenly { justify-content: space-evenly; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Justify Content Examples&lt;/h1&gt;
+    
+    &lt;h2&gt;Flex Start (default)&lt;/h2&gt;
+    &lt;div class="container flex-start"&gt;
+        &lt;div class="flex-item"&gt;A&lt;/div&gt;
+        &lt;div class="flex-item"&gt;B&lt;/div&gt;
+        &lt;div class="flex-item"&gt;C&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Flex End&lt;/h2&gt;
+    &lt;div class="container flex-end"&gt;
+        &lt;div class="flex-item"&gt;A&lt;/div&gt;
+        &lt;div class="flex-item"&gt;B&lt;/div&gt;
+        &lt;div class="flex-item"&gt;C&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Center&lt;/h2&gt;
+    &lt;div class="container center"&gt;
+        &lt;div class="flex-item"&gt;A&lt;/div&gt;
+        &lt;div class="flex-item"&gt;B&lt;/div&gt;
+        &lt;div class="flex-item"&gt;C&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Space Between&lt;/h2&gt;
+    &lt;div class="container space-between"&gt;
+        &lt;div class="flex-item"&gt;A&lt;/div&gt;
+        &lt;div class="flex-item"&gt;B&lt;/div&gt;
+        &lt;div class="flex-item"&gt;C&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Space Around&lt;/h2&gt;
+    &lt;div class="container space-around"&gt;
+        &lt;div class="flex-item"&gt;A&lt;/div&gt;
+        &lt;div class="flex-item"&gt;B&lt;/div&gt;
+        &lt;div class="flex-item"&gt;C&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Space Evenly&lt;/h2&gt;
+    &lt;div class="container space-evenly"&gt;
+        &lt;div class="flex-item"&gt;A&lt;/div&gt;
+        &lt;div class="flex-item"&gt;B&lt;/div&gt;
+        &lt;div class="flex-item"&gt;C&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </div>
+          Around&lt;/h2&gt; &lt;div class="container space-around"&gt; &lt;div
+          class="flex-item"&gt;A&lt;/div&gt; &lt;div
+          class="flex-item"&gt;B&lt;/div&gt; &lt;div
+          class="flex-item"&gt;C&lt;/div&gt; &lt;/div&gt; &lt;h2&gt;Space
+          Evenly&lt;/h2&gt; &lt;div class="container space-evenly"&gt; &lt;div
+          class="flex-item"&gt;A&lt;/div&gt; &lt;div
+          class="flex-item"&gt;B&lt;/div&gt; &lt;div
+          class="flex-item"&gt;C&lt;/div&gt; &lt;/div&gt; &lt;/body&gt;
+          &lt;/html&gt;
+        </div>
+      </div>
     </section>
 
     <!-- 5. Align Items - Interactive -->
@@ -360,6 +687,88 @@
           .flex-container { display: flex; align-items: stretch; /* stretch |
           flex-start | flex-end | center | baseline */ height: 200px; /* Fixed
           height to see alignment */ }
+        </div>
+      </div>
+
+      <div class="property-demo">
+        <h3>📋 Complete HTML Example - Copy & Paste</h3>
+        <div class="code-snippet">
+          <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Align Items Example&lt;/title&gt;
+    &lt;style&gt;
+        .container {
+            display: flex;
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px dashed #666;
+            height: 200px;
+        }
+        
+        .flex-item {
+            background-color: #fff3e0;
+            padding: 10px;
+            margin: 3px;
+            border: 2px solid #ff9800;
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .item1 { height: 50px; }
+        .item2 { height: 100px; font-size: 24px; }
+        .item3 { height: 75px; }
+        
+        .stretch { align-items: stretch; }
+        .flex-start { align-items: flex-start; }
+        .flex-end { align-items: flex-end; }
+        .center { align-items: center; }
+        .baseline { align-items: baseline; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Align Items Examples&lt;/h1&gt;
+    
+    &lt;h2&gt;Stretch (default) - Items stretch to fill container height&lt;/h2&gt;
+    &lt;div class="container stretch"&gt;
+        &lt;div class="flex-item"&gt;Short&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Tall&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Medium&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Flex Start - Items align to top&lt;/h2&gt;
+    &lt;div class="container flex-start"&gt;
+        &lt;div class="flex-item item1"&gt;Short&lt;/div&gt;
+        &lt;div class="flex-item item2"&gt;Tall&lt;/div&gt;
+        &lt;div class="flex-item item3"&gt;Medium&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Flex End - Items align to bottom&lt;/h2&gt;
+    &lt;div class="container flex-end"&gt;
+        &lt;div class="flex-item item1"&gt;Short&lt;/div&gt;
+        &lt;div class="flex-item item2"&gt;Tall&lt;/div&gt;
+        &lt;div class="flex-item item3"&gt;Medium&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Center - Items align to middle&lt;/h2&gt;
+    &lt;div class="container center"&gt;
+        &lt;div class="flex-item item1"&gt;Short&lt;/div&gt;
+        &lt;div class="flex-item item2"&gt;Tall&lt;/div&gt;
+        &lt;div class="flex-item item3"&gt;Medium&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Baseline - Items align to text baseline&lt;/h2&gt;
+    &lt;div class="container baseline"&gt;
+        &lt;div class="flex-item item1"&gt;Short&lt;/div&gt;
+        &lt;div class="flex-item item2"&gt;Tall&lt;/div&gt;
+        &lt;div class="flex-item item3"&gt;Medium&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
         </div>
       </div>
     </section>
@@ -409,6 +818,87 @@
       <div class="warning">
         <strong>Note:</strong> align-content only works when flex-wrap is set to
         wrap or wrap-reverse
+      </div>
+
+      <div class="property-demo">
+        <h3>📋 Complete HTML Example - Copy & Paste</h3>
+        <div class="code-snippet">
+          <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Align Content Example&lt;/title&gt;
+    &lt;style&gt;
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px dashed #666;
+            height: 300px;
+            max-width: 300px;
+        }
+        
+        .flex-item {
+            background-color: #e3f2fd;
+            padding: 15px;
+            margin: 5px;
+            border: 2px solid #1976d2;
+            border-radius: 4px;
+            text-align: center;
+            width: 60px;
+            height: 40px;
+        }
+        
+        .stretch { align-content: stretch; }
+        .flex-start { align-content: flex-start; }
+        .flex-end { align-content: flex-end; }
+        .center { align-content: center; }
+        .space-between { align-content: space-between; }
+        .space-around { align-content: space-around; }
+        .space-evenly { align-content: space-evenly; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Align Content Examples (Multi-line Alignment)&lt;/h1&gt;
+    
+    &lt;h2&gt;Stretch (default) - Lines stretch to fill container&lt;/h2&gt;
+    &lt;div class="container stretch"&gt;
+        &lt;div class="flex-item"&gt;1&lt;/div&gt;
+        &lt;div class="flex-item"&gt;2&lt;/div&gt;
+        &lt;div class="flex-item"&gt;3&lt;/div&gt;
+        &lt;div class="flex-item"&gt;4&lt;/div&gt;
+        &lt;div class="flex-item"&gt;5&lt;/div&gt;
+        &lt;div class="flex-item"&gt;6&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Center - Lines centered in container&lt;/h2&gt;
+    &lt;div class="container center"&gt;
+        &lt;div class="flex-item"&gt;1&lt;/div&gt;
+        &lt;div class="flex-item"&gt;2&lt;/div&gt;
+        &lt;div class="flex-item"&gt;3&lt;/div&gt;
+        &lt;div class="flex-item"&gt;4&lt;/div&gt;
+        &lt;div class="flex-item"&gt;5&lt;/div&gt;
+        &lt;div class="flex-item"&gt;6&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Space Between - Equal space between lines&lt;/h2&gt;
+    &lt;div class="container space-between"&gt;
+        &lt;div class="flex-item"&gt;1&lt;/div&gt;
+        &lt;div class="flex-item"&gt;2&lt;/div&gt;
+        &lt;div class="flex-item"&gt;3&lt;/div&gt;
+        &lt;div class="flex-item"&gt;4&lt;/div&gt;
+        &lt;div class="flex-item"&gt;5&lt;/div&gt;
+        &lt;div class="flex-item"&gt;6&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </div>
+          &lt;/html&gt;
+        </div>
       </div>
     </section>
 
@@ -470,6 +960,86 @@
           <div class="code-snippet">
             .flex-container { gap: 10px; } /* Clean spacing, no outer margins */
           </div>
+        </div>
+      </div>
+
+      <div class="property-demo">
+        <h3>📋 Complete HTML Example - Copy & Paste</h3>
+        <div class="code-snippet">
+          <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Gap Property Example&lt;/title&gt;
+    &lt;style&gt;
+        .container {
+            display: flex;
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px dashed #666;
+        }
+        
+        .flex-item {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border: 2px solid #1976d2;
+            border-radius: 4px;
+            text-align: center;
+            min-width: 80px;
+        }
+        
+        /* Different gap sizes */
+        .no-gap { gap: 0; }
+        .small-gap { gap: 10px; }
+        .medium-gap { gap: 20px; }
+        .large-gap { gap: 40px; }
+        
+        /* Old way with margins */
+        .margin-spacing .flex-item { margin: 10px; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Gap Property Examples&lt;/h1&gt;
+    
+    &lt;h2&gt;No Gap&lt;/h2&gt;
+    &lt;div class="container no-gap"&gt;
+        &lt;div class="flex-item"&gt;Item 1&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Item 2&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Item 3&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Small Gap (10px)&lt;/h2&gt;
+    &lt;div class="container small-gap"&gt;
+        &lt;div class="flex-item"&gt;Item 1&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Item 2&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Item 3&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Medium Gap (20px)&lt;/h2&gt;
+    &lt;div class="container medium-gap"&gt;
+        &lt;div class="flex-item"&gt;Item 1&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Item 2&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Item 3&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Large Gap (40px)&lt;/h2&gt;
+    &lt;div class="container large-gap"&gt;
+        &lt;div class="flex-item"&gt;Item 1&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Item 2&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Item 3&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;❌ Old Way (using margins) - Creates outer margins&lt;/h2&gt;
+    &lt;div class="container margin-spacing"&gt;
+        &lt;div class="flex-item"&gt;Item 1&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Item 2&lt;/div&gt;
+        &lt;div class="flex-item"&gt;Item 3&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
         </div>
       </div>
     </section>
@@ -613,6 +1183,106 @@
           /* flex: auto; /* 1 1 auto - grow, shrink, auto basis */ flex: none;
           /* 0 0 auto - don't grow or shrink */ flex: 1; /* 1 1 0% - equal
           distribution */ */
+        </div>
+      </div>
+
+      <div class="property-demo">
+        <h3>📋 Complete HTML Example - Copy & Paste</h3>
+        <div class="code-snippet">
+          <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Flex Properties Example&lt;/title&gt;
+    &lt;style&gt;
+        .container {
+            display: flex;
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px dashed #666;
+            width: 500px;
+        }
+        
+        .flex-item {
+            background-color: #e3f2fd;
+            padding: 15px;
+            margin: 5px;
+            border: 2px solid #1976d2;
+            border-radius: 4px;
+            text-align: center;
+            min-width: 60px;
+        }
+        
+        /* Flex Grow Examples */
+        .grow-example .item1 { flex-grow: 0; }
+        .grow-example .item2 { flex-grow: 1; }
+        .grow-example .item3 { flex-grow: 2; }
+        
+        /* Flex Shorthand Examples */
+        .shorthand-example .item1 { flex: 1; } /* Equal grow */
+        .shorthand-example .item2 { flex: 2; } /* Grows twice as much */
+        .shorthand-example .item3 { flex: 1; } /* Equal grow */
+        
+        .auto-example .item1 { flex: auto; } /* 1 1 auto */
+        .auto-example .item2 { flex: auto; }
+        .auto-example .item3 { flex: auto; }
+        
+        .none-example .item1 { flex: none; } /* 0 0 auto */
+        .none-example .item2 { flex: none; }
+        .none-example .item3 { flex: none; }
+        
+        .initial-example .item1 { flex: initial; } /* 0 1 auto */
+        .initial-example .item2 { flex: initial; }
+        .initial-example .item3 { flex: initial; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Flex Item Properties Examples&lt;/h1&gt;
+    
+    &lt;h2&gt;Flex Grow - Growing to Fill Space&lt;/h2&gt;
+    &lt;p&gt;Item 2 grows 1x, Item 3 grows 2x (twice as much)&lt;/p&gt;
+    &lt;div class="container grow-example"&gt;
+        &lt;div class="flex-item item1"&gt;No Grow (0)&lt;/div&gt;
+        &lt;div class="flex-item item2"&gt;Grow 1&lt;/div&gt;
+        &lt;div class="flex-item item3"&gt;Grow 2&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Flex: 1 2 1 - Custom ratios&lt;/h2&gt;
+    &lt;div class="container shorthand-example"&gt;
+        &lt;div class="flex-item item1"&gt;Flex: 1&lt;/div&gt;
+        &lt;div class="flex-item item2"&gt;Flex: 2&lt;/div&gt;
+        &lt;div class="flex-item item3"&gt;Flex: 1&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Flex: auto - Responsive sizing&lt;/h2&gt;
+    &lt;div class="container auto-example"&gt;
+        &lt;div class="flex-item item1"&gt;Short&lt;/div&gt;
+        &lt;div class="flex-item item2"&gt;Medium content&lt;/div&gt;
+        &lt;div class="flex-item item3"&gt;Much longer content here&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Flex: none - Fixed sizing (no grow/shrink)&lt;/h2&gt;
+    &lt;div class="container none-example"&gt;
+        &lt;div class="flex-item item1"&gt;Fixed&lt;/div&gt;
+        &lt;div class="flex-item item2"&gt;Fixed&lt;/div&gt;
+        &lt;div class="flex-item item3"&gt;Fixed&lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;h2&gt;Flex: initial - Default behavior&lt;/h2&gt;
+    &lt;div class="container initial-example"&gt;
+        &lt;div class="flex-item item1"&gt;Can shrink&lt;/div&gt;
+        &lt;div class="flex-item item2"&gt;Can shrink&lt;/div&gt;
+        &lt;div class="flex-item item3"&gt;Can shrink&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </div>
+          item2"&gt;But won't grow&lt;/div&gt; &lt;div class="flex-item
+          item3"&gt;Content-based size&lt;/div&gt; &lt;/div&gt; &lt;/body&gt;
+          &lt;/html&gt;
         </div>
       </div>
     </section>
@@ -856,6 +1526,247 @@
           .page-layout { display: flex; flex-direction: column; min-height:
           100vh; } .main-content { flex: 1; } /* Grows to fill available space
           */ .footer { /* Stays at bottom */ }
+        </div>
+      </div>
+
+      <div class="property-demo">
+        <h3>📋 Complete HTML Example - Common Patterns - Copy & Paste</h3>
+        <div class="code-snippet">
+          <button class="copy-button" onclick="copyToClipboard(this)">Copy</button>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Common Flexbox Patterns&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        /* Perfect Centering */
+        .perfect-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            background-color: #f0f0f0;
+            border: 2px dashed #666;
+            margin: 20px 0;
+        }
+        
+        .centered-content {
+            background-color: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #1976d2;
+        }
+        
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            align-items: center;
+            background-color: #1976d2;
+            color: white;
+            padding: 10px 20px;
+            margin: 20px 0;
+        }
+        
+        .nav-brand {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .nav-spacer {
+            flex: 1; /* Takes up remaining space */
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        /* Equal Height Cards */
+        .card-container {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .card {
+            flex: 1; /* Equal width */
+            display: flex;
+            flex-direction: column; /* Stack content vertically */
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .card h3 {
+            margin-top: 0;
+            color: #1976d2;
+        }
+        
+        .card-content {
+            flex: 1; /* Grows to fill available space */
+            margin-bottom: 15px;
+        }
+        
+        .card-button {
+            margin-top: auto; /* Pushes button to bottom */
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        /* Sticky Footer Layout */
+        .page-layout {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background-color: #1976d2;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .main-content {
+            flex: 1; /* Grows to fill available space */
+            padding: 40px 20px;
+            background-color: #f8f9fa;
+        }
+        
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .card-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="page-layout"&gt;
+        &lt;!-- Header --&gt;
+        &lt;header class="header"&gt;
+            &lt;h1&gt;Common Flexbox Patterns Demo&lt;/h1&gt;
+        &lt;/header&gt;
+        
+        &lt;!-- Main Content --&gt;
+        &lt;main class="main-content"&gt;
+            &lt;!-- Perfect Centering --&gt;
+            &lt;h2&gt;1. Perfect Centering&lt;/h2&gt;
+            &lt;div class="perfect-center"&gt;
+                &lt;div class="centered-content"&gt;
+                    &lt;h3&gt;Perfectly Centered!&lt;/h3&gt;
+                    &lt;p&gt;Both horizontally and vertically&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            
+            &lt;!-- Navigation Bar --&gt;
+            &lt;h2&gt;2. Navigation Bar&lt;/h2&gt;
+            &lt;nav class="navbar"&gt;
+                &lt;div class="nav-brand"&gt;Logo&lt;/div&gt;
+                &lt;div class="nav-spacer"&gt;&lt;/div&gt;
+                &lt;div class="nav-links"&gt;
+                    &lt;a href="#"&gt;Home&lt;/a&gt;
+                    &lt;a href="#"&gt;About&lt;/a&gt;
+                    &lt;a href="#"&gt;Services&lt;/a&gt;
+                    &lt;a href="#"&gt;Contact&lt;/a&gt;
+                &lt;/div&gt;
+            &lt;/nav&gt;
+            
+            &lt;!-- Equal Height Cards --&gt;
+            &lt;h2&gt;3. Equal Height Cards&lt;/h2&gt;
+            &lt;div class="card-container"&gt;
+                &lt;div class="card"&gt;
+                    &lt;h3&gt;Card 1&lt;/h3&gt;
+                    &lt;div class="card-content"&gt;
+                        &lt;p&gt;Short content here.&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;button class="card-button"&gt;Learn More&lt;/button&gt;
+                &lt;/div&gt;
+                &lt;div class="card"&gt;
+                    &lt;h3&gt;Card 2&lt;/h3&gt;
+                    &lt;div class="card-content"&gt;
+                        &lt;p&gt;This card has much more content to show how flexbox creates equal height columns. The buttons align at the bottom!&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;button class="card-button"&gt;Learn More&lt;/button&gt;
+                &lt;/div&gt;
+                &lt;div class="card"&gt;
+                    &lt;h3&gt;Card 3&lt;/h3&gt;
+                    &lt;div class="card-content"&gt;
+                        &lt;p&gt;Medium amount of content.&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;button class="card-button"&gt;Learn More&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/main&gt;
+        
+        &lt;!-- Footer --&gt;
+        &lt;footer class="footer"&gt;
+            &lt;p&gt;This footer always stays at the bottom!&lt;/p&gt;
+        &lt;/footer&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </div>
+      </div>
+          &lt;h2&gt;1. Perfect Centering&lt;/h2&gt; &lt;div
+          class="perfect-center"&gt; &lt;div class="centered-content"&gt;
+          &lt;h3&gt;Perfectly Centered!&lt;/h3&gt; &lt;p&gt;Both horizontally
+          and vertically&lt;/p&gt; &lt;/div&gt; &lt;/div&gt; &lt;!-- Navigation
+          Bar --&gt; &lt;h2&gt;2. Navigation Bar&lt;/h2&gt; &lt;nav
+          class="navbar"&gt; &lt;div class="nav-brand"&gt;Logo&lt;/div&gt;
+          &lt;div class="nav-spacer"&gt;&lt;/div&gt; &lt;div
+          class="nav-links"&gt; &lt;a href="#"&gt;Home&lt;/a&gt; &lt;a
+          href="#"&gt;About&lt;/a&gt; &lt;a href="#"&gt;Services&lt;/a&gt; &lt;a
+          href="#"&gt;Contact&lt;/a&gt; &lt;/div&gt; &lt;/nav&gt; &lt;!-- Equal
+          Height Cards --&gt; &lt;h2&gt;3. Equal Height Cards&lt;/h2&gt; &lt;div
+          class="card-container"&gt; &lt;div class="card"&gt; &lt;h3&gt;Card
+          1&lt;/h3&gt; &lt;div class="card-content"&gt; &lt;p&gt;Short content
+          here.&lt;/p&gt; &lt;/div&gt; &lt;button class="card-button"&gt;Learn
+          More&lt;/button&gt; &lt;/div&gt; &lt;div class="card"&gt;
+          &lt;h3&gt;Card 2&lt;/h3&gt; &lt;div class="card-content"&gt;
+          &lt;p&gt;This card has much more content to demonstrate how flexbox
+          creates equal height columns. The buttons align at the
+          bottom!&lt;/p&gt; &lt;/div&gt; &lt;button class="card-button"&gt;Learn
+          More&lt;/button&gt; &lt;/div&gt; &lt;div class="card"&gt;
+          &lt;h3&gt;Card 3&lt;/h3&gt; &lt;div class="card-content"&gt;
+          &lt;p&gt;Medium amount of content.&lt;/p&gt; &lt;/div&gt; &lt;button
+          class="card-button"&gt;Learn More&lt;/button&gt; &lt;/div&gt;
+          &lt;/div&gt; &lt;/main&gt; &lt;!-- Footer --&gt; &lt;footer
+          class="footer"&gt; &lt;p&gt;This footer always stays at the
+          bottom!&lt;/p&gt; &lt;/footer&gt; &lt;/div&gt; &lt;/body&gt;
+          &lt;/html&gt;
         </div>
       </div>
     </section>
@@ -1410,6 +2321,39 @@
         document.querySelector(".gap-example").style.display = "flex";
         document.querySelector(".gap-example").style.gap = "10px";
       });
+
+      // Copy to clipboard functionality
+      function copyToClipboard(button) {
+        const codeSnippet = button.parentElement;
+        const code = codeSnippet.textContent.replace('Copy', '').trim();
+        
+        navigator.clipboard.writeText(code).then(function() {
+          // Visual feedback
+          button.textContent = 'Copied!';
+          button.classList.add('copied');
+          
+          // Reset after 2 seconds
+          setTimeout(function() {
+            button.textContent = 'Copy';
+            button.classList.remove('copied');
+          }, 2000);
+        }).catch(function(err) {
+          // Fallback for older browsers
+          const textArea = document.createElement('textarea');
+          textArea.value = code;
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+          
+          button.textContent = 'Copied!';
+          button.classList.add('copied');
+          setTimeout(function() {
+            button.textContent = 'Copy';
+            button.classList.remove('copied');
+          }, 2000);
+        });
+      }
     </script>
   </body>
 </html>
