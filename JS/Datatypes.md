@@ -1,7 +1,7 @@
 
 ---
 
-## 🧠 What Are Data Types?
+## 🧠 What Are Data Types?    
 
 A **data type** defines the kind of value a variable holds. JavaScript is **dynamically typed**, meaning variables can hold any type — and that type can even change.
 
