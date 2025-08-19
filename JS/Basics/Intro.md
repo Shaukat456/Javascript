@@ -79,7 +79,6 @@ console.error("This is an error");
 console.table(["Apple", "Banana", "Cherry"]);
 ```
 
-See it in **F12 → Console tab**.
 
 ---
 

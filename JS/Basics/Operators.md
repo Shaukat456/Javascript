@@ -11,10 +11,10 @@
 // 💡 **Analogy:**
 // Think of operators like **kitchen tools**:
 
-// * Knife = cut (subtraction)
-// * Blender = mix (addition)
-// * Measuring cup = compare sizes (comparison)
-// * Light switch = turn on/off (logical)
+// _ Knife = cut (subtraction)
+// _ Blender = mix (addition)
+// _ Measuring cup = compare sizes (comparison)
+// _ Light switch = turn on/off (logical)
 
 // ---
 
@@ -26,19 +26,18 @@
 
 // Used for math operations.
 
-// | Operator | Example  | Result        |
+// | Operator | Example | Result |
 // | -------- | -------- | ------------- |
-// | `+`      | 5 + 2    | 7             |
-// | `-`      | 5 - 2    | 3             |
-// | `*`      | 5 \* 2   | 10            |
-// | `/`      | 5 / 2    | 2.5           |
-// | `%`      | 5 % 2    | 1 (remainder) |
-// | `**`     | 5 \*\* 2 | 25 (exponent) |
+// | `+` | 5 + 2 | 7 |
+// | `-` | 5 - 2 | 3 |
+// | `*` | 5 \* 2 | 10 |
+// | `/` | 5 / 2 | 2.5 |
+// | `%` | 5 % 2 | 1 (remainder) |
+// | `**` | 5 \*\* 2 | 25 (exponent) |
 
 // 💡 **Real-world example:**
 
-// * Price calculation: `total = price * quantity;`
-// * Finding remainder: `if (year % 4 === 0)` → Leap year check.
+// _ Price calculation: `total = price _ quantity;`// * Finding remainder:`if (year % 4 === 0)` → Leap year check.
 
 // ---
 
@@ -46,21 +45,19 @@
 
 // Assign values to variables.
 
-// | Operator | Example | Same as    |
+// | Operator | Example | Same as |
 // | -------- | ------- | ---------- |
-// | `=`      | x = 5   | x = 5      |
-// | `+=`     | x += 3  | x = x + 3  |
-// | `-=`     | x -= 2  | x = x - 2  |
-// | `*=`     | x \*= 2 | x = x \* 2 |
-// | `/=`     | x /= 2  | x = x / 2  |
+// | `=` | x = 5 | x = 5 |
+// | `+=` | x += 3 | x = x + 3 |
+// | `-=` | x -= 2 | x = x - 2 |
+// | `*=` | x \*= 2 | x = x \* 2 |
+// | `/=` | x /= 2 | x = x / 2 |
 
 // 💡 **Real-world example:**
 // Updating bank balance:
 
-// ```javascript
-// balance += deposit;
-// balance -= withdrawal;
-// ```
+balance += deposit;
+balance -= withdrawal;
 
 // ---
 
@@ -69,27 +66,27 @@
 // Used to compare values.
 // Return **true** or **false**.
 
-// | Operator | Example   | Result                                 |
+// | Operator | Example | Result |
 // | -------- | --------- | -------------------------------------- |
-// | `==`     | 5 == "5"  | true (loose equality, type conversion) |
-// | `===`    | 5 === "5" | false (strict equality, no conversion) |
-// | `!=`     | 5 != "5"  | false                                  |
-// | `!==`    | 5 !== "5" | true                                   |
-// | `>`      | 5 > 3     | true                                   |
-// | `<`      | 5 < 3     | false                                  |
-// | `>=`     | 5 >= 5    | true                                   |
-// | `<=`     | 3 <= 5    | true                                   |
+// | `==` | 5 == "5" | true (loose equality, type conversion) |
+// | `===` | 5 === "5" | false (strict equality, no conversion) |
+// | `!=` | 5 != "5" | false |
+// | `!==` | 5 !== "5" | true |
+// | `>` | 5 > 3 | true |
+// | `<` | 5 < 3 | false |
+// | `>=` | 5 >= 5 | true |
+// | `<=` | 3 <= 5 | true |
 
 // 💡 **Real-world example:**
 // Check if a student passed:
 
-// ```javascript
+// `javascript
 // if (marks >= 50) {
 //   console.log("Pass");
 // } else {
 //   console.log("Fail");
 // }
-// ```
+// `
 
 // ---
 
@@ -97,20 +94,20 @@
 
 // Used for combining conditions.
 
-// | Operator | Meaning | Example             |    |          |   |              |
+// | Operator | Meaning | Example | | | | |
 // | -------- | ------- | ------------------- | -- | -------- | - | ------------ |
-// | `&&`     | AND     | (age > 18 && hasID) |    |          |   |              |
-// | \`       |         | \`                  | OR | (isAdmin |   | isModerator) |
-// | `!`      | NOT     | !isLoggedIn         |    |          |   |              |
+// | `&&` | AND | (age > 18 && hasID) | | | | |
+// | \` | | \` | OR | (isAdmin | | isModerator) |
+// | `!` | NOT | !isLoggedIn | | | | |
 
 // 💡 **Real-world example:**
 // Allow entry if **age ≥ 18** **and** has ticket:
 
-// ```javascript
+// `javascript
 // if (age >= 18 && hasTicket) {
 //   console.log("Entry allowed");
 // }
-// ```
+// `
 
 // ---
 
@@ -120,24 +117,24 @@
 
 // Syntax:
 
-// ```javascript
+// `javascript
 // condition ? valueIfTrue : valueIfFalse
-// ```
+// `
 
 // Example:
 
-// ```javascript
+// `javascript
 // let age = 20;
 // let message = age >= 18 ? "Adult" : "Minor";
 // console.log(message);
-// ```
+// `
 
 // 💡 **Real-world example:**
 // Display:
 
-// ```javascript
+// `javascript
 // isOnline ? "User is online" : "User is offline";
-// ```
+// `
 
 // ---
 
@@ -146,9 +143,9 @@
 // Some operators run before others.
 // Example:
 
-// ```javascript
+// `javascript
 // let result = 5 + 3 * 2; // 5 + (3 * 2) = 11
-// ```
+// `
 
 // 💡 **Tip:** Use parentheses `()` to make the order clear.
 
@@ -171,8 +168,8 @@
 
 // **"Simple Grade Checker"**
 
-// ```javascript
+// `javascript
 // let marks = prompt("Enter your marks:");
 // let result = marks >= 50 ? "Pass" : "Fail";
 // console.log(result);
-// ```
+// `

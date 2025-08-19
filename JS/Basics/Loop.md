@@ -21,9 +21,9 @@ We’ll cover:
 
 Imagine you have to:
 
-* Print all students' names
-* Check every item in a shopping cart
-* Generate 100 buttons
+- Print all students' names
+- Check every item in a shopping cart
+- Generate 100 buttons
 
 Without loops? It would be **repetitive** and **error-prone**.
 
@@ -41,9 +41,9 @@ for (let i = 0; i < 5; i++) {
 
 ### ⚙️ How it works:
 
-* `let i = 0` → initialization
-* `i < 5` → condition
-* `i++` → increment
+- `let i = 0` → initialization
+- `i < 5` → condition
+- `i++` → increment
 
 ### 🧠 Analogy:
 
@@ -139,7 +139,7 @@ for (let key in user) {
 ```javascript
 let items = ["apple", "banana", "mango"];
 
-items.forEach(function(item, index) {
+items.forEach(function (item, index) {
   console.log(index + ": " + item);
 });
 ```
@@ -167,9 +167,9 @@ items.forEach((item) => console.log(item));
 
 ## 🧠 Internals: Memory & Performance
 
-* `for` is fastest but more verbose.
-* `forEach` creates a function call for each item (slightly slower but cleaner).
-* Avoid `for...in` on arrays — it includes **inherited properties** too.
+- `for` is fastest but more verbose.
+- `forEach` creates a function call for each item (slightly slower but cleaner).
+- Avoid `for...in` on arrays — it includes **inherited properties** too.
 
 ---
 
@@ -204,4 +204,3 @@ GRAPE
 | `for...of`   | Loop through values (arrays/strings) | Arrays, Strings |
 | `for...in`   | Loop through object properties       | Objects         |
 | `forEach()`  | Functional array looping             | Arrays          |
-

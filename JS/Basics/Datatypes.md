@@ -1,7 +1,5 @@
 ---
-
 # **📍 Stage 3: JavaScript Data Types**
-
 ---
 
 ## **1. What is a Data Type?**
@@ -11,8 +9,8 @@ A **data type** tells JavaScript **what kind of value** is stored in a variable 
 💡 **Analogy:**
 Imagine you have boxes labeled **"Books"**, **"Clothes"**, and **"Electronics"**.
 
-* You wouldn’t try to *wear* a book or *read* a T-shirt.
-* Similarly, JavaScript treats different types of data differently.
+- You wouldn’t try to _wear_ a book or _read_ a T-shirt.
+- Similarly, JavaScript treats different types of data differently.
 
 ---
 
@@ -29,12 +27,12 @@ Imagine you have boxes labeled **"Books"**, **"Clothes"**, and **"Electronics"**
 
 ```javascript
 let name = "Ali";
-let message = 'Hello!';
+let message = "Hello!";
 let template = `Hi, ${name}!`;
 ```
 
-* Can use **single**, **double**, or **backticks**
-* Backticks allow **template literals** (`${}` interpolation)
+- Can use **single**, **double**, or **backticks**
+- Backticks allow **template literals** (`${}` interpolation)
 
 💡 **Analogy:** Strings are like **sentences written on paper** — they hold text.
 
@@ -42,13 +40,13 @@ let template = `Hi, ${name}!`;
 
 ### **b) Number** — integers & decimals
 
-// ```javascript
+// `javascript
 let age = 25;
 let price = 19.99;
-// ```
+// `
 
-* JavaScript has **only one number type** (64-bit floating point)
-* Special values: `Infinity`, `-Infinity`, `NaN` (Not a Number)
+- JavaScript has **only one number type** (64-bit floating point)
+- Special values: `Infinity`, `-Infinity`, `NaN` (Not a Number)
 
 💡 **Analogy:** Numbers are like **labels on measuring cups** — they represent quantities.
 
@@ -105,7 +103,7 @@ let bigNumber = 123456789012345678901234567890n;
 ```javascript
 let person = {
   name: "Ali",
-  age: 25
+  age: 25,
 };
 ```
 
@@ -141,8 +139,8 @@ Check the type of a value:
 
 ```javascript
 console.log(typeof "Ali"); // string
-console.log(typeof 42);    // number
-console.log(typeof null);  // object (quirk in JS)
+console.log(typeof 42); // number
+console.log(typeof null); // object (quirk in JS)
 ```
 
 ---
@@ -152,35 +150,34 @@ console.log(typeof null);  // object (quirk in JS)
 ### **a) String to Number**
 
 ```javascript
-Number("42");  // 42
+Number("42"); // 42
 parseInt("42"); // 42
 parseFloat(); // 42.5
-
 ```
 
 ### **b) Number to String**
 
 ```javascript
-String(42);   // "42"
-42 + "";      // "42"
+String(42); // "42"
+42 + ""; // "42"
 ```
 
 ### **c) Boolean Conversion**
 
 ```javascript
-Boolean(1);   // true
-Boolean(0);   // false
-Boolean("");  // false
-Boolean("hi");// true
+Boolean(1); // true
+Boolean(0); // false
+Boolean(""); // false
+Boolean("hi"); // true
 ```
 
 ---
 
 ## **7. Real-World Examples**
 
-* **Login system**: Boolean (`isLoggedIn`)
-* **E-commerce**: Number (`price`), String (`productName`), Object (`productDetails`)
-* **Game**: Number (`score`), Boolean (`gameOver`), Array (`levels`)
+- **Login system**: Boolean (`isLoggedIn`)
+- **E-commerce**: Number (`price`), String (`productName`), Object (`productDetails`)
+- **Game**: Number (`score`), Boolean (`gameOver`), Array (`levels`)
 
 ---
 
@@ -224,20 +221,18 @@ console.log(`In Stock: ${inStock}`);
 
 // ## 📚 Summary Table
 
-// | Type      | Mutable? | Stored By | Example             | Use Case           |
+// | Type | Mutable? | Stored By | Example | Use Case |
 // | --------- | -------- | --------- | ------------------- | ------------------ |
-// | String    | ❌        | Value     | `"hello"`           | Text               |
-// | Number    | ❌        | Value     | `42`                | Prices, scores     |
-// | Boolean   | ❌        | Value     | `true/false`        | Conditions         |
-// | Null      | ❌        | Value     | `null`              | Intentional empty  |
-// | Undefined | ❌        | Value     | `undefined`         | Missing value      |
-// | Symbol    | ❌        | Value     | `Symbol("id")`      | Unique keys        |
-// | BigInt    | ❌        | Value     | `9007199254740991n` | Big calculations   |
-// | Object    | ✅        | Reference | `{ name: "Ali" }`   | User, product data |
-// | Array     | ✅        | Reference | `[1, 2, 3]`         | Lists, datasets    |
-// | Function  | ✅        | Reference | `function() {}`     | Reusable logic     |
-
-
+// | String | ❌ | Value | `"hello"` | Text |
+// | Number | ❌ | Value | `42` | Prices, scores |
+// | Boolean | ❌ | Value | `true/false` | Conditions |
+// | Null | ❌ | Value | `null` | Intentional empty |
+// | Undefined | ❌ | Value | `undefined` | Missing value |
+// | Symbol | ❌ | Value | `Symbol("id")` | Unique keys |
+// | BigInt | ❌ | Value | `9007199254740991n` | Big calculations |
+// | Object | ✅ | Reference | `{ name: "Ali" }` | User, product data |
+// | Array | ✅ | Reference | `[1, 2, 3]` | Lists, datasets |
+// | Function | ✅ | Reference | `function() {}` | Reusable logic |
 
 // ## 💾 How JavaScript Uses Memory
 
@@ -245,17 +240,17 @@ console.log(`In Stock: ${inStock}`);
 
 // ### 📍 1. **Stack (Call Stack)**
 
-// * Fast access
-// * Stores **primitive values** and **execution context**
-// * Uses **fixed-size** memory
-// * Last In, First Out (LIFO) structure
+// _ Fast access
+// _ Stores **primitive values** and **execution context**
+// _ Uses **fixed-size** memory
+// _ Last In, First Out (LIFO) structure
 
 // ### 🧠 2. **Heap**
 
-// * Slower, flexible memory space
-// * Stores **reference types** (objects, arrays, functions)
-// * Used for **dynamic memory allocation**
-// * Accessed via pointers (memory addresses)
+// _ Slower, flexible memory space
+// _ Stores **reference types** (objects, arrays, functions)
+// _ Used for **dynamic memory allocation**
+// _ Accessed via pointers (memory addresses)
 
 // ---
 
@@ -263,29 +258,28 @@ console.log(`In Stock: ${inStock}`);
 
 // These are:
 
-// * `String`
-// * `Number`
-// * `Boolean`
-// * `Undefined`
-// * `Null`
-// * `Symbol`
-// * `BigInt`
+// _ `String`
+// _ `Number`
+// _ `Boolean`
+// _ `Undefined`
+// _ `Null`
+// _ `Symbol`
+// \* `BigInt`
 
 // ### 🔧 Example:
 
-// ```javascript
+// `javascript
 // let a = 10;
 // let b = a;
 // b = 20;
-// ```
+// `
 
 // 📦 **In Memory:**
 
-// ```
-// Stack:
+// `// Stack:
 // a = 10
 // b = 10 → changed to 20
-// ```
+//`
 
 // ✅ Each variable gets **its own memory space**. `b = a` copies the value `10`, not the reference. Changing `b` has **no effect on `a`**.
 
@@ -295,9 +289,9 @@ console.log(`In Stock: ${inStock}`);
 
 // These include:
 
-// * `Object`
-// * `Array`
-// * `Function`
+// _ `Object`
+// _ `Array`
+// \* `Function`
 
 // They are **stored in the heap**, and **the variable holds only a reference (memory address)** to the actual object.
 
@@ -327,13 +321,13 @@ console.log(`In Stock: ${inStock}`);
 
 // ## 🧠 Key Differences: Stack vs Heap
 
-// | Feature            | Stack                            | Heap                            |
+// | Feature | Stack | Heap |
 // | ------------------ | -------------------------------- | ------------------------------- |
-// | Stores             | Primitive values, function calls | Objects, arrays, functions      |
-// | Speed              | Very fast                        | Slower                          |
-// | Memory size        | Fixed                            | Dynamic                         |
-// | Access             | Direct                           | Indirect (by reference)         |
-// | Garbage Collected? | Yes (when out of scope)          | Yes (when no references remain) |
+// | Stores | Primitive values, function calls | Objects, arrays, functions |
+// | Speed | Very fast | Slower |
+// | Memory size | Fixed | Dynamic |
+// | Access | Direct | Indirect (by reference) |
+// | Garbage Collected? | Yes (when out of scope) | Yes (when no references remain) |
 
 // ---
 
@@ -341,13 +335,13 @@ console.log(`In Stock: ${inStock}`);
 
 // JavaScript uses **automatic garbage collection** — unused memory is freed when:
 
-// * A variable **goes out of scope** (for stack)
-// * Nothing references an object (for heap)
+// _ A variable **goes out of scope** (for stack)
+// _ Nothing references an object (for heap)
 
-// ```javascript
+// `javascript
 // let obj = { name: "Ali" };
 // obj = null; // 💡 Memory for the object is now eligible for cleanup
-// ```
+// `
 
 // ✅ Engines like **V8 (used in Chrome and Node.js)** use algorithms like **Mark and Sweep** to free up unused heap memory.
 
@@ -357,27 +351,27 @@ console.log(`In Stock: ${inStock}`);
 
 // ### 🟢 Primitive Copy
 
-// ```javascript
+// `javascript
 // let x = 5;
 // let y = x;
 // y = 10;
 // console.log(x); // 5
-// ```
+// `
 
-// * Separate memory slots
-// * Safe from side-effects
+// _ Separate memory slots
+// _ Safe from side-effects
 
 // ### 🔴 Reference Copy
 
-// ```javascript
+// `javascript
 // let arr1 = [1, 2];
 // let arr2 = arr1;
 // arr2.push(3);
 // console.log(arr1); // [1, 2, 3]
-// ```
+// `
 
-// * Shared heap memory
-// * One change affects all references
+// _ Shared heap memory
+// _ One change affects all references
 
 // ---
 
@@ -387,32 +381,32 @@ console.log(`In Stock: ${inStock}`);
 
 // ### ✅ Shallow Copy
 
-// ```javascript
+// `javascript
 // let user = { name: "Ali" };
 // let copy = { ...user }; // New object in memory
-// ```
+// `
 
 // ### ✅ Array Copy
 
-// ```javascript
+// `javascript
 // let fruits = ["apple", "banana"];
 // let copy = [...fruits]; // Not pointing to original
-// ```
+// `
 
 // ---
 
 // ## 💡 Summary Chart
 
-// | Type      | Stored In | Memory Behavior     | Copied By | Mutable? | Use Case                     |
+// | Type | Stored In | Memory Behavior | Copied By | Mutable? | Use Case |
 // | --------- | --------- | ------------------- | --------- | -------- | ---------------------------- |
-// | Number    | Stack     | Direct value        | Value     | ❌        | Calculations, counters       |
-// | String    | Stack     | Direct value        | Value     | ❌        | Names, messages              |
-// | Boolean   | Stack     | Direct value        | Value     | ❌        | Conditions                   |
-// | Undefined | Stack     | Direct value        | Value     | ❌        | Missing values               |
-// | Null      | Stack     | Direct value        | Value     | ❌        | Empty values                 |
-// | Object    | Heap      | Stored by reference | Reference | ✅        | Users, settings, data models |
-// | Array     | Heap      | Stored by reference | Reference | ✅        | Lists, datasets              |
-// | Function  | Heap      | Stored by reference | Reference | ✅        | Reusable logic               |
+// | Number | Stack | Direct value | Value | ❌ | Calculations, counters |
+// | String | Stack | Direct value | Value | ❌ | Names, messages |
+// | Boolean | Stack | Direct value | Value | ❌ | Conditions |
+// | Undefined | Stack | Direct value | Value | ❌ | Missing values |
+// | Null | Stack | Direct value | Value | ❌ | Empty values |
+// | Object | Heap | Stored by reference | Reference | ✅ | Users, settings, data models |
+// | Array | Heap | Stored by reference | Reference | ✅ | Lists, datasets |
+// | Function | Heap | Stored by reference | Reference | ✅ | Reusable logic |
 
 // ---
 
@@ -420,12 +414,12 @@ console.log(`In Stock: ${inStock}`);
 
 // 1. What’s the output?
 
-// ```javascript
+// `javascript
 // let a = [1, 2];
 // let b = a;
 // b.push(3);
 // console.log(a);
-// ```
+// `
 
 // ✅ Output: `[1, 2, 3]` — because both `a` and `b` point to the same heap memory.
 

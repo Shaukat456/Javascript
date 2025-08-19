@@ -203,69 +203,6 @@
 
 // ### 🎯 Practical Example: Shopping Cart Calculator
 
-// ```javascript
-// class ShoppingCart {
-//     constructor() {
-//         this.items = [];
-//         this.taxRate = 0.08; // 8% tax
-//         this.shippingThreshold = 50; // Free shipping over $50
-//         this.shippingCost = 8.99;
-//     }
-
-//     addItem(name, price, quantity = 1) {
-//         this.items.push({
-//             name: name,
-//             price: Number(price),
-//             quantity: Number(quantity)
-//         });
-//     }
-
-//     getSubtotal() {
-//         return this.items.reduce((total, item) => {
-//             return total + (item.price * item.quantity);
-//         }, 0);
-//     }
-
-//     getTax() {
-//         return this.getSubtotal() * this.taxRate;
-//     }
-
-//     getShipping() {
-//         return this.getSubtotal() >= this.shippingThreshold ? 0 : this.shippingCost;
-//     }
-
-//     getTotal() {
-//         return this.getSubtotal() + this.getTax() + this.getShipping();
-//     }
-
-//     getSummary() {
-//         const subtotal = this.getSubtotal();
-//         const tax = this.getTax();
-//         const shipping = this.getShipping();
-//         const total = this.getTotal();
-
-//         return {
-//             subtotal: Number(subtotal.toFixed(2)),
-//             tax: Number(tax.toFixed(2)),
-//             shipping: Number(shipping.toFixed(2)),
-//             total: Number(total.toFixed(2)),
-//             itemCount: this.items.length
-//         };
-//     }
-// }
-
-// // Usage
-// const cart = new ShoppingCart();
-// cart.addItem("Laptop", 999.99, 1);
-// cart.addItem("Mouse", 29.99, 2);
-// cart.addItem("Keyboard", 79.99, 1);
-
-// console.log(cart.getSummary());
-// // { subtotal: 1139.97, tax: 91.20, shipping: 0, total: 1231.17, itemCount: 3 }
-// ```
-
-// ---
-
 // ## ✅ 3. BOOLEAN - True/False Logic
 
 // **Think of booleans like light switches** - they're either ON (true) or OFF (false).

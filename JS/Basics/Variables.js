@@ -50,7 +50,7 @@ console.log(city); // Lahore
 
 * ❌ Cannot be redeclared in the same block
 * ✅ Can be reassigned
-* Hoisted but **not** initialized (Temporal Dead Zone)
+* Hoisted but **not** initialized (Temporal Dead Zone )
 
 Example:
 
