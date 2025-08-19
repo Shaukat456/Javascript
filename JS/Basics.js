@@ -93,7 +93,6 @@
 
 // ```javascript
 // let companyName = "  TechCorp Solutions  ";
-
 // // Length and basic info
 // console.log(companyName.length);        // 19 (includes spaces)
 
