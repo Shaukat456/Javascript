@@ -329,6 +329,7 @@ function createPromise(shouldSucceed = true) {
 console.log("\n⚡ Method 2: Promise.resolve()");
 
 const immediatePromise = Promise.resolve("Immediate value");
+
 immediatePromise.then((value) => console.log("Immediate:", value));
 
 // 3. Promise.reject() - Already rejected
@@ -355,8 +356,9 @@ function promisify(callbackFunction) {
 }
 
 // Example: Promisifying setTimeout
+
 function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise((resolve, reject) => setTimeout(resolve, ms, reject));
 }
 
 // ==========================================
@@ -369,7 +371,9 @@ console.log("==========================");
 // Promise.all() - Wait for all to complete
 console.log("\n🎯 Promise.all() - All or Nothing");
 
-const promise1 = delay(1000).then(() => "First");
+const promise1 = delay(1000)
+  .then(() => "First")
+  .catch((e) => e);
 const promise2 = delay(2000).then(() => "Second");
 const promise3 = delay(1500).then(() => "Third");
 
