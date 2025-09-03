@@ -209,7 +209,7 @@ console.log(`In Stock: ${inStock}`);
 
 // ## 🔍 Primitive vs Reference — Key Difference
 
-// let a = 5;
+ let a = 5;
 // let b = a;
 // b = 10;
 // console.log(a); // 5
