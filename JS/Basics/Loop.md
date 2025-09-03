@@ -194,6 +194,150 @@ GRAPE
 
 ---
 
+## 🧩 More Loop Examples
+
+### 1. Nested `for` Loops (2D Array)
+
+```javascript
+let matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+];
+
+for (let row = 0; row < matrix.length; row++) {
+  for (let col = 0; col < matrix[row].length; col++) {
+    console.log(`matrix[${row}][${col}] = ${matrix[row][col]}`);
+  }
+}
+```
+
+---
+
+### 2. Breaking Out of a Loop
+
+```javascript
+for (let i = 0; i < 10; i++) {
+  if (i === 5) break;
+  console.log(i); // Prints 0 to 4
+}
+```
+
+---
+
+### 3. Skipping Iterations with `continue`
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  if (i === 2) continue;
+  console.log(i); // Prints 0, 1, 3, 4
+}
+```
+
+---
+
+### 4. Looping Over an Array of Objects
+
+```javascript
+let products = [
+  { name: "Pen", price: 20 },
+  { name: "Book", price: 100 },
+  { name: "Bag", price: 250 },
+];
+
+for (let product of products) {
+  console.log(`${product.name}: Rs.${product.price}`);
+}
+```
+
+---
+
+### 5. Using `forEach` with Arrow Functions
+
+```javascript
+let cities = ["Lahore", "Karachi", "Islamabad"];
+cities.forEach((city) => console.log(city.toLowerCase()));
+```
+
+---
+
+### 6. Looping Over Object Values
+
+```javascript
+let marks = { math: 90, english: 85, science: 92 };
+for (let subject in marks) {
+  console.log(`${subject}: ${marks[subject]}`);
+}
+```
+
+---
+
+### 7. While Loop for User Input (Simulated)
+
+```javascript
+let attempts = 0;
+let password = "js123";
+let guess;
+let guesses = ["abc", "js12", "js123"];
+
+while (guess !== password && attempts < guesses.length) {
+  guess = guesses[attempts];
+  console.log(`Attempt ${attempts + 1}: ${guess}`);
+  attempts++;
+}
+console.log("Access granted!");
+```
+
+---
+
+### 8. Do...While for Menu Selection (Simulated)
+
+```javascript
+let menu = ["Home", "About", "Contact"];
+let idx = 0;
+do {
+  console.log(`Menu: ${menu[idx]}`);
+  idx++;
+} while (idx < menu.length);
+```
+
+---
+
+### 9. Looping Backwards
+
+```javascript
+for (let i = 5; i > 0; i--) {
+  console.log(i);
+}
+```
+
+---
+
+### 10. Filtering with Loops
+
+```javascript
+let numbers = [1, 2, 3, 4, 5, 6];
+let evens = [];
+for (let num of numbers) {
+  if (num % 2 === 0) evens.push(num);
+}
+console.log(evens); // [2, 4, 6]
+```
+
+---
+
+## 🧪 Practice Challenge
+
+Write a loop to print all multiples of 3 from 1 to 20.
+
+```javascript
+for (let i = 1; i <= 20; i++) {
+  if (i % 3 === 0) console.log(i);
+}
+```
+
+---
+
 ## 🧱 Summary Table
 
 | Loop Type    | Use Case                             | Data Type       |
