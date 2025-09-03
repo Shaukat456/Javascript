@@ -88,11 +88,11 @@ score += 10; // score becomes 10
 
 ## 4️⃣ Logical Operators — Combine Conditions
 
-| Operator | Meaning | Example         | Result  |        |   |         |        |
-| -------- | ------- | --------------- | ------- | ------ | - | ------- | ------ |
-| `&&`     | AND     | `true && false` | `false` |        |   |         |        |
-| \`       |         | \`              | OR      | \`true |   | false\` | `true` |
-| `!`      | NOT     | `!true`         | `false` |        |   |         |        |
+| Operator | Meaning | Example         | Result  | 
+| -------- | ------- | --------------- | ------- |
+| `&&`     | AND     | `true && false` | `false` |
+| `\|\|` |   OR    | `true \|\| false `| `true` |
+| `!`      | NOT     | `!true`         | `false` |
 
 ### 🧠 Real-World Login Example:
 
