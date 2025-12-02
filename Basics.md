@@ -229,58 +229,6 @@ let isFreeTier = !user.isPremium;
 let canEditProfile = user.isActive && (user.isPremium || user.age >= 21);
 ```
 
-### 🎯 Practical Example: User Permission System
-
-```javascript
-class UserPermissions {
-    constructor(user) {
-        this.user = user;
-    }
-
-    canCreatePost() {
-        return this.user.isActive && this.user.isVerified;
-    }
-
-    canDeletePost(postOwnerId) {
-        return this.user.isAdmin ||
-               (this.user.isActive && this.user.id === postOwnerId);
-    }
-
-    canAccessPremiumContent() {
-        return this.user.isActive &&
-               (this.user.isPremium || this.user.isAdmin);
-    }
-
-    canModerateComments() {
-        return this.user.isActive &&
-               (this.user.isModerator || this.user.isAdmin);
-    }
-
-    getPermissionSummary() {
-        return {
-            canPost: this.canCreatePost(),
-            canModerate: this.canModerateComments(),
-            hasPremiumAccess: this.canAccessPremiumContent(),
-            isEligibleForUpgrade: !this.user.isPremium && this.user.isActive
-        };
-    }
-}
-
- Usage
-let regularUser = {
-    id: 1,
-    isActive: true,
-    isVerified: true,
-    isPremium: false,
-    isAdmin: false,
-    isModerator: false
-};
-
-let permissions = new UserPermissions(regularUser);
-console.log(permissions.getPermissionSummary());
- { canPost: true, canModerate: false, hasPremiumAccess: false, isEligibleForUpgrade: true }
-```
-
 ---
 
 ## 🚫 4. NULL - Intentionally Empty
