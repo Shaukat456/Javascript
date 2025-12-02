@@ -1,14 +1,3 @@
----
-## 🧠 What Is JavaScript?
-
-JavaScript** is a powerful programming language that runs **in the browser** and **on servers** (via Node.js). It's used to:
-  - Make websites interactive (e.g., dropdowns, animations, form validation)
-  - Power real-time features (e.g., chat apps)
-  - Build full-stack applications (frontend + backend)
-  - Control hardware (IoT, robotics)
-  - Create games, mobile apps, and much more
----
-
 ## 🧱 JavaScript Basics — Step-by-Step
 
 We’ll go in logical chunks:
