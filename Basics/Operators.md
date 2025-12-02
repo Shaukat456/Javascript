@@ -142,11 +142,11 @@ if (marks >= 50) {
 
 Used to combine multiple conditions.
 
-| Operator | Meaning | Example         |     |         |     |             |
-| -------- | ------- | --------------- | --- | ------- | --- | ----------- |
-| `&&`     | AND     | a > 18 && hasID |     |         |     |             |
-| `        |         | `               | OR  | isAdmin |     | isModerator |
-| `!`      | NOT     | !isLoggedIn     |     |         |     |             |
+| Operator | Meaning | Example         |             |     |     |     |
+| -------- | ------- | --------------- | ----------- | --- | --- | --- |
+| `&&`     | AND     | a > 18 && hasID |             |     |     |     |
+|          | OR      | isAdmin         | isModerator |     |     |
+| `!`      | NOT     | !isLoggedIn     |             |     |     |     |
 
 ---
 
