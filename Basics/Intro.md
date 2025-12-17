@@ -1,6 +1,6 @@
 # **📍 Stage 1: Getting Started with JavaScript**
 
-*(Now with Hoisting covered in detail)*
+_(Now with Hoisting covered in detail)_
 
 ---
 
@@ -22,9 +22,9 @@ JavaScript = The **electricity, plumbing, and moving parts** (things that make t
 
 **💡 Examples of JavaScript in action:**
 
-* You click “Add to Cart” → number updates instantly → **JavaScript**
-* A live scoreboard updates during a game → **JavaScript**
-* Search suggestions appear as you type → **JavaScript**
+- You click “Add to Cart” → number updates instantly → **JavaScript**
+- A live scoreboard updates during a game → **JavaScript**
+- Search suggestions appear as you type → **JavaScript**
 
 ---
 
@@ -78,7 +78,6 @@ console.log("Hello Students");
 console.error("This is an error");
 console.table(["Apple", "Banana", "Cherry"]);
 ```
-
 
 ---
 
