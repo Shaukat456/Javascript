@@ -297,16 +297,3 @@ DOM Rendering
  ↓
 User Interaction
 ```
-
-This is **React without React**.
-
----
-
-# 🚀 NEXT LEVEL EXTENSIONS (Choose One)
-
-1️⃣ Edit student
-2️⃣ Sort by marks
-3️⃣ Save to `localStorage`
-4️⃣ Convert Promise to `async/await`
-5️⃣ Convert project into React version
-6️⃣ Add search box
