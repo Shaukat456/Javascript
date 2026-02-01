@@ -398,3 +398,368 @@ D) Routing
 ---
 
 ===
+
+Awesome 👍
+Here are **30 SIMPLE JavaScript MCQs** focused on exactly what you asked:
+
+- `.map()`
+- `.filter()`
+- Callbacks
+- Promises
+- API (fetch)
+- Array & Object traversing
+
+Same **clean, beginner-friendly, exam-ready** style.
+
+---
+
+# 🟦 JavaScript MCQs – Arrays, Callbacks, Promises & API (30 Questions)
+
+---
+
+## 🔹 Arrays, map & filter (Q1–Q12)
+
+### **Q1.** What does `map()` return?
+
+A) Same array
+B) New array
+C) Object
+D) Number
+
+---
+
+### **Q2.** What will be the output?
+
+```js
+[1, 2, 3].map((x) => x * 2);
+```
+
+A) [1, 2, 3]
+B) [2, 4, 6]
+C) 6
+D) Error
+
+---
+
+### **Q3.** What does `filter()` return?
+
+A) Single value
+B) New array
+C) Object
+D) Boolean
+
+---
+
+### **Q4.** What will be the output?
+
+```js
+[1, 2, 3, 4].filter((x) => x > 2);
+```
+
+A) [1, 2]
+B) [3, 4]
+C) [2, 3]
+D) Error
+
+---
+
+### **Q5.** Which method is best to transform array values?
+
+A) forEach
+B) map
+C) filter
+D) reduce
+
+---
+
+### **Q6.** What will be the output?
+
+```js
+[1, 2, 3].map((x) => x);
+```
+
+A) [1, 2, 3]
+B) [3, 2, 1]
+C) []
+D) Error
+
+---
+
+### **Q7.** What will be the output?
+
+```js
+[1, 2, 3].filter((x) => x);
+```
+
+A) [1, 2, 3]
+B) []
+C) [true]
+D) Error
+
+---
+
+### **Q8.** Which one skips elements based on condition?
+
+A) map
+B) filter
+C) forEach
+D) push
+
+---
+
+### **Q9.** What does `forEach()` return?
+
+A) New array
+B) Modified array
+C) undefined
+D) Object
+
+---
+
+### **Q10.** What will be printed?
+
+```js
+let arr = [1, 2, 3];
+arr.forEach((x) => console.log(x));
+```
+
+A) 1 2 3
+B) [1,2,3]
+C) undefined
+D) Error
+
+---
+
+### **Q11.** What will be the output?
+
+```js
+[1, 2, 3].map((x) => x > 1);
+```
+
+A) [true, true, true]
+B) [false, true, true]
+C) [1,2,3]
+D) Error
+
+---
+
+### **Q12.** What will be the output?
+
+```js
+[1, 2, 3].filter((x) => x > 5);
+```
+
+A) [1,2,3]
+B) []
+C) null
+D) Error
+
+---
+
+## 🔹 Array & Object Traversing (Q13–Q20)
+
+### **Q13.** How do you access the first element of an array `arr`?
+
+A) arr(0)
+B) arr[0]
+C) arr.first
+D) arr.get(0)
+
+---
+
+### **Q14.** What will be printed?
+
+```js
+let user = { name: "Ali", age: 20 };
+console.log(user.name);
+```
+
+A) Ali
+B) name
+C) 20
+D) undefined
+
+---
+
+### **Q15.** What will be printed?
+
+```js
+let user = { name: "Ali", age: 20 };
+console.log(user["age"]);
+```
+
+A) Ali
+B) name
+C) 20
+D) undefined
+
+---
+
+### **Q16.** Which loop is best to traverse an array?
+
+A) for
+B) for...of
+C) while
+D) All of the above
+
+---
+
+### **Q17.** Which loop is used for object keys?
+
+A) for
+B) for...of
+C) for...in
+D) while
+
+---
+
+### **Q18.** What will be printed?
+
+```js
+let obj = { a: 1, b: 2 };
+for (let key in obj) {
+  console.log(key);
+}
+```
+
+A) 1 2
+B) a b
+C) {a,b}
+D) Error
+
+---
+
+### **Q19.** What will be printed?
+
+```js
+let obj = { a: 1, b: 2 };
+console.log(Object.keys(obj));
+```
+
+A) [1,2]
+B) ["a","b"]
+C) {a,b}
+D) Error
+
+---
+
+### **Q20.** What will be printed?
+
+```js
+let arr = [{ x: 1 }, { x: 2 }];
+console.log(arr[1].x);
+```
+
+A) 1
+B) 2
+C) x
+D) undefined
+
+---
+
+## 🔹 Callbacks, Promises & API (Q21–Q30)
+
+### **Q21.** What is a callback?
+
+A) Function calling itself
+B) Function passed to another function
+C) Async function
+D) Promise
+
+---
+
+### **Q22.** What will be printed?
+
+```js
+function test(cb) {
+  cb();
+}
+test(() => console.log("Done"));
+```
+
+A) test
+B) Done
+C) undefined
+D) Error
+
+---
+
+### **Q23.** What does `then()` do?
+
+A) Handles resolved promise
+B) Handles rejected promise
+C) Creates promise
+D) Cancels promise
+
+---
+
+### **Q24.** What will be printed?
+
+```js
+Promise.resolve(10).then((x) => console.log(x));
+```
+
+A) undefined
+B) Promise
+C) 10
+D) Error
+
+---
+
+### **Q25.** What does `catch()` handle?
+
+A) Success
+B) Error
+C) Data
+D) Callback
+
+---
+
+### **Q26.** Which function is used to call APIs in JS?
+
+A) getData
+B) fetch
+C) request
+D) axios only
+
+---
+
+### **Q27.** What does `fetch()` return?
+
+A) Data
+B) Promise
+C) Object
+D) Array
+
+---
+
+### **Q28.** Which method converts response to JSON?
+
+A) JSON.stringify()
+B) response.parse()
+C) response.json()
+D) response.text()
+
+---
+
+### **Q29.** What will be printed?
+
+```js
+fetch("url").then((res) => console.log(res));
+```
+
+A) Data
+B) Promise
+C) Response object
+D) Error
+
+---
+
+### **Q30.** Which keyword pauses execution inside async function?
+
+A) stop
+B) wait
+C) await
+D) pause
+
+---
