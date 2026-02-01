@@ -399,16 +399,6 @@ D) Routing
 
 ===
 
-Awesome 👍
-Here are **30 SIMPLE JavaScript MCQs** focused on exactly what you asked:
-
-- `.map()`
-- `.filter()`
-- Callbacks
-- Promises
-- API (fetch)
-- Array & Object traversing
-
 Same **clean, beginner-friendly, exam-ready** style.
 
 ---
@@ -419,7 +409,7 @@ Same **clean, beginner-friendly, exam-ready** style.
 
 ## 🔹 Arrays, map & filter (Q1–Q12)
 
-### **Q1.** What does `map()` return?
+### **Q41.** What does `map()` return?
 
 A) Same array
 B) New array
@@ -428,7 +418,7 @@ D) Number
 
 ---
 
-### **Q2.** What will be the output?
+### **Q42.** What will be the output?
 
 ```js
 [1, 2, 3].map((x) => x * 2);
@@ -441,7 +431,7 @@ D) Error
 
 ---
 
-### **Q3.** What does `filter()` return?
+### **Q43.** What does `filter()` return?
 
 A) Single value
 B) New array
@@ -450,7 +440,7 @@ D) Boolean
 
 ---
 
-### **Q4.** What will be the output?
+### **Q44.** What will be the output?
 
 ```js
 [1, 2, 3, 4].filter((x) => x > 2);
@@ -463,7 +453,7 @@ D) Error
 
 ---
 
-### **Q5.** Which method is best to transform array values?
+### **Q45.** Which method is best to transform array values?
 
 A) forEach
 B) map
@@ -472,7 +462,7 @@ D) reduce
 
 ---
 
-### **Q6.** What will be the output?
+### **Q46.** What will be the output?
 
 ```js
 [1, 2, 3].map((x) => x);
@@ -485,7 +475,7 @@ D) Error
 
 ---
 
-### **Q7.** What will be the output?
+### **Q47.** What will be the output?
 
 ```js
 [1, 2, 3].filter((x) => x);
@@ -498,7 +488,7 @@ D) Error
 
 ---
 
-### **Q8.** Which one skips elements based on condition?
+### **Q48.** Which one skips elements based on condition?
 
 A) map
 B) filter
@@ -507,7 +497,7 @@ D) push
 
 ---
 
-### **Q9.** What does `forEach()` return?
+### **Q49.** What does `forEach()` return?
 
 A) New array
 B) Modified array
@@ -516,7 +506,7 @@ D) Object
 
 ---
 
-### **Q10.** What will be printed?
+### **Q50.** What will be printed?
 
 ```js
 let arr = [1, 2, 3];
@@ -530,7 +520,7 @@ D) Error
 
 ---
 
-### **Q11.** What will be the output?
+### **Q51.** What will be the output?
 
 ```js
 [1, 2, 3].map((x) => x > 1);
@@ -543,7 +533,7 @@ D) Error
 
 ---
 
-### **Q12.** What will be the output?
+### **Q52.** What will be the output?
 
 ```js
 [1, 2, 3].filter((x) => x > 5);
@@ -558,7 +548,7 @@ D) Error
 
 ## 🔹 Array & Object Traversing (Q13–Q20)
 
-### **Q13.** How do you access the first element of an array `arr`?
+### **Q53.** How do you access the first element of an array `arr`?
 
 A) arr(0)
 B) arr[0]
@@ -581,7 +571,7 @@ D) undefined
 
 ---
 
-### **Q15.** What will be printed?
+### **Q55.** What will be printed?
 
 ```js
 let user = { name: "Ali", age: 20 };
@@ -595,7 +585,7 @@ D) undefined
 
 ---
 
-### **Q16.** Which loop is best to traverse an array?
+### **Q56.** Which loop is best to traverse an array?
 
 A) for
 B) for...of
@@ -604,7 +594,7 @@ D) All of the above
 
 ---
 
-### **Q17.** Which loop is used for object keys?
+### **Q57.** Which loop is used for object keys?
 
 A) for
 B) for...of
@@ -613,7 +603,7 @@ D) while
 
 ---
 
-### **Q18.** What will be printed?
+### **Q58.** What will be printed?
 
 ```js
 let obj = { a: 1, b: 2 };
@@ -629,7 +619,7 @@ D) Error
 
 ---
 
-### **Q19.** What will be printed?
+### **Q59.** What will be printed?
 
 ```js
 let obj = { a: 1, b: 2 };
@@ -643,7 +633,7 @@ D) Error
 
 ---
 
-### **Q20.** What will be printed?
+### **Q60.** What will be printed?
 
 ```js
 let arr = [{ x: 1 }, { x: 2 }];
@@ -659,7 +649,7 @@ D) undefined
 
 ## 🔹 Callbacks, Promises & API (Q21–Q30)
 
-### **Q21.** What is a callback?
+### **Q61.** What is a callback?
 
 A) Function calling itself
 B) Function passed to another function
@@ -668,7 +658,7 @@ D) Promise
 
 ---
 
-### **Q22.** What will be printed?
+### **Q62.** What will be printed?
 
 ```js
 function test(cb) {
@@ -684,7 +674,7 @@ D) Error
 
 ---
 
-### **Q23.** What does `then()` do?
+### **Q63.** What does `then()` do?
 
 A) Handles resolved promise
 B) Handles rejected promise
@@ -693,7 +683,7 @@ D) Cancels promise
 
 ---
 
-### **Q24.** What will be printed?
+### **Q64.** What will be printed?
 
 ```js
 Promise.resolve(10).then((x) => console.log(x));
@@ -706,7 +696,7 @@ D) Error
 
 ---
 
-### **Q25.** What does `catch()` handle?
+### **Q65.** What does `catch()` handle?
 
 A) Success
 B) Error
@@ -715,7 +705,7 @@ D) Callback
 
 ---
 
-### **Q26.** Which function is used to call APIs in JS?
+### **Q66.** Which function is used to call APIs in JS?
 
 A) getData
 B) fetch
@@ -724,7 +714,7 @@ D) axios only
 
 ---
 
-### **Q27.** What does `fetch()` return?
+### **Q67.** What does `fetch()` return?
 
 A) Data
 B) Promise
@@ -733,7 +723,7 @@ D) Array
 
 ---
 
-### **Q28.** Which method converts response to JSON?
+### **Q68.** Which method converts response to JSON?
 
 A) JSON.stringify()
 B) response.parse()
@@ -742,7 +732,7 @@ D) response.text()
 
 ---
 
-### **Q29.** What will be printed?
+### **Q69.** What will be printed?
 
 ```js
 fetch("url").then((res) => console.log(res));
@@ -755,7 +745,7 @@ D) Error
 
 ---
 
-### **Q30.** Which keyword pauses execution inside async function?
+### **Q70.** Which keyword pauses execution inside async function?
 
 A) stop
 B) wait
