@@ -1,4 +1,4 @@
-Great question 🎉 — let’s dive into **Events in JavaScript**, step by step with concepts + real-world analogies + examples.
+===
 
 ---
 

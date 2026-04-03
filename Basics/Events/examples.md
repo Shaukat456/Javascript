@@ -1,4 +1,4 @@
-Excellent 👌 Let’s dive **deeper into capturing, target, and bubbling phases** with **real-world UI examples**. I’ll show you _when_ each phase actually matters.
+===
 
 ---
 
@@ -24,10 +24,10 @@ document.addEventListener(
   (e) => {
     console.log(
       "Capturing: Click detected at root before anything else",
-      e.target
+      e.target,
     );
   },
-  true
+  true,
 ); // capturing
 ```
 
@@ -105,7 +105,7 @@ parent.addEventListener(
   () => {
     console.log("Parent capturing");
   },
-  true
+  true,
 ); // capturing
 
 btn.addEventListener("click", () => {
@@ -156,4 +156,3 @@ dropdown.addEventListener("click", (e) => {
 - **Bubbling** → delegation, cleanup, UI updates, global shortcuts
 
 ---
-
