@@ -1,281 +1,329 @@
-// 61. Function to update state immutably (array)
+---
+title: "JavaScript Assignment: Preact / React-style JavaScript"
+description: "Practice tasks focused on immutable updates, optional chaining, default parameters, and UI-ready JavaScript logic."
+---
+
+# JavaScript Assignment: Preact / React-style JavaScript
+
+### 61. Add todo immutably
+```js
 function addTodo(todos, newTodo) {
-// Write logic here
+  // Write logic here
 }
+```
+Task: Return a new `todos` array with `newTodo` added using spread operator.
 
-// Task: Return a new todos array with newTodo added using spread operator.
-
-// 62. Function to remove item from array (used in React state)
+### 62. Remove item from array
+```js
 function removeTodo(todos, id) {
-// Write logic here
+  // Write logic here
 }
+```
+Task: Return a new array after removing the todo with matching `id`.
 
-// Task: Return a new array after removing todo with matching id.
-
-// 63. Function to update object inside array
+### 63. Update object inside array
+```js
 function updateUser(users, id, newName) {
-// Write logic here
+  // Write logic here
 }
+```
+Task: Update the user name where `id` matches using `map()`.
 
-// Task: Update the user name where id matches using map().
-
-// 64. Function to toggle boolean value
+### 64. Toggle boolean value
+```js
 function toggleStatus(user) {
-// Write logic here
+  // Write logic here
 }
+```
+Task: Return an updated object with `isActive` toggled using spread operator.
 
-// Task: Return updated object with isActive toggled using spread operator.
-
-// 65. Function for conditional rendering logic
+### 65. Conditional rendering logic
+```js
 function showMessage(isLoggedIn) {
-// Write logic here
+  // Write logic here
 }
+```
+Task: Return `"Welcome Back"` if true, otherwise `"Please Login"`.
 
-// Task: Return "Welcome Back" if true, otherwise return "Please Login".
-
-// 66. Function to safely access nested object (optional chaining concept)
+### 66. Safe nested object access
+```js
 function getUserCity(user) {
-// Write logic here
+  // Write logic here
 }
+```
+Task: Return user city safely using optional chaining.
 
-// Task: Return user city safely using optional chaining.
-
-// 67. Function with default parameter
+### 67. Default parameter function
+```js
 function greet(name = "Guest") {
-// Write logic here
+  // Write logic here
 }
+```
+Task: Return a greeting message using the default parameter.
 
-// Task: Return greeting message using default parameter.
-
-// 68. Function to generate unique list (used in rendering)
+### 68. Generate unique categories
+```js
 function uniqueCategories(products) {
-// Write logic here
+  // Write logic here
 }
+```
+Task: Return unique category names using `Set`.
 
-// Task: Return unique category names using Set.
-
-// 69. Function to filter search results
+### 69. Filter search results
+```js
 function searchUsers(users, keyword) {
-// Write logic here
+  // Write logic here
 }
+```
+Task: Return users whose name includes the keyword.
 
-// Task: Return users whose name includes the keyword.
-
-// 70. Function to sort products by price
+### 70. Sort products by price
+```js
 function sortByPrice(products) {
-// Write logic here
+  // Write logic here
 }
+```
+Task: Return products sorted by price in ascending order.
 
-// Task: Return products sorted by price in ascending order.
-
-// 71. Function to create reusable formatter
+### 71. Format price
+```js
 function formatPrice(price) {
-// Write logic here
+  // Write logic here
 }
+```
+Task: Return price formatted like `"$100"`.
 
-// Task: Return price in format like "$100".
-
-// 72. Function to validate form input
+### 72. Validate email input
+```js
 function validateEmail(email) {
-// Write logic here
+  // Write logic here
 }
+```
+Task: Return `true` if email includes `"@"`, otherwise `false`.
 
-// Task: Return true if email includes "@" otherwise false.
-
-// 73. Function to handle input change pattern
+### 73. Handle input change pattern
+```js
 function handleInput(user, field, value) {
-// Write logic here
+  // Write logic here
 }
+```
+Task: Return an updated object with the dynamic field updated.
 
-// Task: Return updated object with dynamic field updated.
-
-// 74. Function to disable button logic
+### 74. Disable button logic
+```js
 function canSubmit(name, email) {
-// Write logic here
+  // Write logic here
 }
+```
+Task: Return `true` only if both `name` and `email` are not empty.
 
-// Task: Return true only if both name and email are not empty.
-
-// 75. Function to count completed tasks
+### 75. Count completed tasks
+```js
 function completedTasks(tasks) {
-// Write logic here
+  // Write logic here
 }
+```
+Task: Return total completed tasks using `filter()`.
 
-// Task: Return total completed tasks using filter().
-
-// 76. Function to create loading state logic
+### 76. Loading state logic
+```js
 function fetchMessage(isLoading) {
-// Write logic here
+  // Write logic here
 }
+```
+Task: Return `"Loading..."` if true, else `"Data Loaded"`.
 
-// Task: Return "Loading..." if true else return "Data Loaded".
-
-// 77. Function for prop destructuring
+### 77. Prop destructuring example
+```js
 function displayProfile({ name, role }) {
-// Write logic here
+  // Write logic here
 }
+```
+Task: Return a formatted string using destructured props.
 
-// Task: Return formatted string using destructured props.
-
-// 78. Function to merge API response data
+### 78. Merge API response data
+```js
 function mergeData(oldData, newData) {
-// Write logic here
+  // Write logic here
 }
+```
+Task: Merge old and new data arrays using spread operator.
 
-// Task: Merge old and new data arrays using spread operator.
-
-// 79. Function to check if item exists
+### 79. Check if item exists
+```js
 function hasProduct(products, id) {
-// Write logic here
+  // Write logic here
 }
+```
+Task: Return `true` if a product with matching `id` exists using `some()`.
 
-// Task: Return true if product with matching id exists using some().
-
-// 80. Function to transform API data for UI
+### 80. Transform API data for UI
+```js
 function getUserNames(users) {
-// Write logic here
+  // Write logic here
 }
+```
+Task: Return an array of only user names using `map()`.
 
-// Task: Return array of only user names using map().
-// 61. Function to update state immutably (array)
-function addTodo(todos, newTodo) {
-// Write logic here
+### 81. Handle checkbox toggle in list
+```js
+function toggleTask(tasks, id) {
+  // Write logic here
 }
+```
+Task: Toggle the completed status of the task with matching `id` using `map()`.
 
-// Task: Return a new todos array with newTodo added using spread operator.
-
-// 62. Function to remove item from array (used in React state)
-function removeTodo(todos, id) {
-// Write logic here
+### 82. Prepend item in array
+```js
+function addAtStart(items, newItem) {
+  // Write logic here
 }
+```
+Task: Return a new array with `newItem` added at the beginning using spread.
 
-// Task: Return a new array after removing todo with matching id.
-
-// 63. Function to update object inside array
-function updateUser(users, id, newName) {
-// Write logic here
+### 83. Update nested object state
+```js
+function updateAddress(user, newCity) {
+  // Write logic here
 }
+```
+Task: Update `user.address.city` using spread operator without mutating original object.
 
-// Task: Update the user name where id matches using map().
-
-// 64. Function to toggle boolean value
-function toggleStatus(user) {
-// Write logic here
+### 84. Reset form values
+```js
+function resetForm() {
+  // Write logic here
 }
+```
+Task: Return an object with `name`, `email`, and `password` as empty strings.
 
-// Task: Return updated object with isActive toggled using spread operator.
-
-// 65. Function for conditional rendering logic
-function showMessage(isLoggedIn) {
-// Write logic here
+### 85. Check active users
+```js
+function getActiveUsers(users) {
+  // Write logic here
 }
+```
+Task: Return only users where `isActive` is `true` using `filter()`.
 
-// Task: Return "Welcome Back" if true, otherwise return "Please Login".
-
-// 66. Function to safely access nested object (optional chaining concept)
-function getUserCity(user) {
-// Write logic here
+### 86. Count total cart price
+```js
+function totalCartPrice(cart) {
+  // Write logic here
 }
+```
+Task: Return the total price using `reduce()`.
 
-// Task: Return user city safely using optional chaining.
-
-// 67. Function with default parameter
-function greet(name = "Guest") {
-// Write logic here
+### 87. Get latest item
+```js
+function getLastItem(arr) {
+  // Write logic here
 }
+```
+Task: Return the last item of the array.
 
-// Task: Return greeting message using default parameter.
-
-// 68. Function to generate unique list (used in rendering)
-function uniqueCategories(products) {
-// Write logic here
+### 88. Remove falsy values
+```js
+function cleanArray(arr) {
+  // Write logic here
 }
+```
+Task: Remove `false`, `null`, `undefined`, `0`, and empty string using `filter()`.
 
-// Task: Return unique category names using Set.
-
-// 69. Function to filter search results
-function searchUsers(users, keyword) {
-// Write logic here
+### 89. Check admin role
+```js
+function isAdmin(user) {
+  // Write logic here
 }
+```
+Task: Return `true` if `user.role` is `"admin"`.
 
-// Task: Return users whose name includes the keyword.
-
-// 70. Function to sort products by price
-function sortByPrice(products) {
-// Write logic here
+### 90. Capitalize all names
+```js
+function capitalizeNames(names) {
+  // Write logic here
 }
+```
+Task: Return all names with the first letter capitalized using `map()`.
 
-// Task: Return products sorted by price in ascending order.
-
-// 71. Function to create reusable formatter
-function formatPrice(price) {
-// Write logic here
+### 91. Flatten nested array
+```js
+function flattenArray(arr) {
+  // Write logic here
 }
+```
+Task: Convert `[[1,2],[3,4]]` into `[1,2,3,4]`.
 
-// Task: Return price in format like "$100".
-
-// 72. Function to validate form input
-function validateEmail(email) {
-// Write logic here
+### 92. Object keys to array
+```js
+function getKeys(obj) {
+  // Write logic here
 }
+```
+Task: Return all object keys as an array.
 
-// Task: Return true if email includes "@" otherwise false.
-
-// 73. Function to handle input change pattern
-function handleInput(user, field, value) {
-// Write logic here
+### 93. Object values to array
+```js
+function getValues(obj) {
+  // Write logic here
 }
+```
+Task: Return all object values as an array.
 
-// Task: Return updated object with dynamic field updated.
-
-// 74. Function to disable button logic
-function canSubmit(name, email) {
-// Write logic here
+### 94. Create initials from full name
+```js
+function getInitials(name) {
+  // Write logic here
 }
+```
+Task: Convert `"Ali Khan"` into `"AK"`.
 
-// Task: Return true only if both name and email are not empty.
-
-// 75. Function to count completed tasks
-function completedTasks(tasks) {
-// Write logic here
+### 95. Debounce-like callback logic
+```js
+function searchHandler(callback) {
+  // Write logic here
 }
+```
+Task: Accept a callback and execute it after 1 second using `setTimeout()`.
 
-// Task: Return total completed tasks using filter().
-
-// 76. Function to create loading state logic
-function fetchMessage(isLoading) {
-// Write logic here
+### 96. Check if array is empty
+```js
+function isArrayEmpty(arr) {
+  // Write logic here
 }
+```
+Task: Return `true` if array length is 0.
 
-// Task: Return "Loading..." if true else return "Data Loaded".
-
-// 77. Function for prop destructuring
-function displayProfile({ name, role }) {
-// Write logic here
+### 97. Truncate long text
+```js
+function shortText(text) {
+  // Write logic here
 }
+```
+Task: Return first 20 characters followed by `"..."` if text is too long.
 
-// Task: Return formatted string using destructured props.
-
-// 78. Function to merge API response data
-function mergeData(oldData, newData) {
-// Write logic here
+### 98. Generate random ID
+```js
+function generateId() {
+  // Write logic here
 }
+```
+Task: Return a random number between `1000` and `9999`.
 
-// Task: Merge old and new data arrays using spread operator.
-
-// 79. Function to check if item exists
-function hasProduct(products, id) {
-// Write logic here
+### 99. Remove object property
+```js
+function removePassword(user) {
+  // Write logic here
 }
+```
+Task: Return a new object without the `password` property using destructuring.
 
-// Task: Return true if product with matching id exists using some().
-
-// 80. Function to transform API data for UI
-function getUserNames(users) {
-// Write logic here
+### 100. Group students by pass/fail
+```js
+function resultStatus(marks) {
+  // Write logic here
 }
-
-// Task: Return array of only user names using map().
+```
+Task: Return `"Pass"` if `marks >= 40` else return `"Fail"`.
 // 81. Function to handle checkbox toggle in list
 function toggleTask(tasks, id) {
 // Write logic here
