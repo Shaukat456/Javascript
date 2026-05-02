@@ -52,222 +52,523 @@ This raises an obvious question: how does a browser stay responsive while fetchi
 
 ---
 
-### The JavaScript Runtime Architecture — Clean Overview
+### The JavaScript Runtime Architecture — Visual Breakdown
 
-Here's how async JavaScript actually works under the hood:
-
-**LAYER 1: The Single-Threaded JS Engine**
-
-```
-┌─────────────────────────────┐
-│   📦 CALL STACK             │
-│  (Your code executes here)  │
-│  Only ONE thing at a time   │
-└─────────────────────────────┘
-```
-
-Your synchronous code runs here. When the stack is empty, the Event Loop checks the queues.
+Here's how async JavaScript works under the hood:
 
 ---
 
-**LAYER 2: Web APIs (Browser) / Node.js Runtime**
+#### **LAYER 1: The Call Stack (Single-Threaded Execution)**
 
-```
-┌──────────────────────────────────┐
-│   🌐 WEB APIs                    │
-│   (Multi-threaded C++)           │
-│                                  │
-│  • setTimeout / setInterval      │
-│  • fetch / XHR (network)         │
-│  • fs.readFile (disk I/O)        │
-│  • geolocation, DOM events, etc. │
-└──────────────────────────────────┘
-```
+<svg width="500" height="200" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="500" height="200" fill="#f0f4f8"/>
+  
+  <!-- Title -->
+  <text x="10" y="25" font-size="18" font-weight="bold" fill="#1a202c">📦 CALL STACK</text>
+  <text x="10" y="45" font-size="12" fill="#4a5568">(Your synchronous code executes here)</text>
+  
+  <!-- Stack frames -->
+  <!-- Frame 3 (top) -->
+  <rect x="100" y="60" width="300" height="35" fill="#e6f3ff" stroke="#3182ce" stroke-width="2" rx="5"/>
+  <text x="115" y="82" font-size="13" font-weight="bold" fill="#1e40af">[multiply(5, 10)]</text>
+  
+  <!-- Frame 2 -->
+  <rect x="80" y="100" width="320" height="35" fill="#dbeafe" stroke="#2563eb" stroke-width="2" rx="5"/>
+  <text x="95" y="122" font-size="13" font-weight="bold" fill="#1e40af">[square(5)]</text>
+  
+  <!-- Frame 1 (bottom) -->
+  <rect x="60" y="140" width="340" height="35" fill="#bfdbfe" stroke="#1d4ed8" stroke-width="2" rx="5"/>
+  <text x="75" y="162" font-size="13" font-weight="bold" fill="#1e40af">[printSquare()]</text>
+  
+  <!-- Arrow indicating LIFO -->
+  <text x="410" y="110" font-size="11" fill="#666">← LIFO</text>
+  <text x="410" y="125" font-size="11" fill="#666">(pops from top)</text>
+</svg>
 
-These operations don't block JavaScript. They run in the browser/Node.js background, then queue their callbacks when done.
-
----
-
-**LAYER 3: The Event Loop & Queues**
-
-```
-EVENT LOOP (continuously checks):
-  ┌─────────────────────────────┐
-  │ Step 1: Is Call Stack empty?│
-  │   YES ↓                     │
-  ├─────────────────────────────┤
-  │ Step 2: Drain Microtask Q  │
-  │  (ALL Promise callbacks)    │
-  │   ↓                         │
-  ├─────────────────────────────┤
-  │ Step 3: Pick 1 Macrotask   │
-  │  (setTimeout, I/O, etc.)    │
-  │   ↓ Execute it              │
-  │   ↓ Go back to Step 1       │
-  └─────────────────────────────┘
-
-MICROTASK QUEUE (⭐ High Priority)    CALLBACK QUEUE (⏱️ Lower Priority)
-─────────────────────────────────    ────────────────────────────────
-• Promise .then()                    • setTimeout
-• Promise .catch()                   • setInterval
-• async/await                        • I/O callbacks
-• .finally()                         • UI events (click, scroll)
-• queueMicrotask()                   • requestAnimationFrame
-                                     • setImmediate (Node.js)
-
-ALL microtasks run                   Only ONE macrotask runs
-before the NEXT macrotask            per event loop cycle
-```
+**Key insight:** Only ONE function executes at a time. When a function finishes, it's removed from the stack. The stack must be EMPTY before the Event Loop can process queued callbacks.
 
 ---
 
-### Event Loop Execution — Step by Step
+#### **LAYER 2: Web APIs (Multi-Threaded Runtime)**
 
-Watch how code flows through the runtime:
-
-**STEP 1: Synchronous code runs first**
-
-```
-Call Stack                     Queues
-─────────────                  ──────
-[print]   ← Your code          Microtask: [ ]
- |                             Callback:  [ ]
- └─ runs to completion
-
-[empty]
-```
-
-**STEP 2: Async calls go to Web APIs**
-
-```
-Call Stack       Web APIs              Queues
-─────────────    ────────────────────  ──────
-[empty]          setTimeout waiting    Microtask: [ ]
-                 Promise pending       Callback:  [ ]
-                 fetch in progress
-```
-
-**STEP 3: When async operations finish, callbacks are queued**
-
-```
-Call Stack       Queues
-─────────────    ─────────────────────────────────
-[empty]          Microtask: [promise.then]
-                 Callback:  [setTimeout, fetch]
-```
-
-**STEP 4: Event Loop processes microtasks (all of them)**
-
-```
-Event Loop checks → Call Stack empty? YES
-                 → Drain Microtask Queue
-
-Call Stack       Queues
-─────────────    ─────────────────────────────────
-[promise.then]   Microtask: [ ]
- ↓ runs          Callback:  [setTimeout, fetch]
-[empty]
-```
-
-**STEP 5: Event Loop processes ONE macrotask**
-
-```
-Event Loop checks → Microtasks empty? YES
-                 → Pick ONE from Callback Queue
-
-Call Stack       Queues
-─────────────    ─────────────────────────────────
-[setTimeout]     Microtask: [ ]
- ↓ runs          Callback:  [fetch]
-[empty]
-```
-
-**STEP 6: Repeat**
-
-```
-Event Loop checks → Is Call Stack empty? YES
-                 → Are Microtasks pending? NO
-                 → Pick next macrotask
-
-Call Stack       Queues
-─────────────    ─────────────────────────────────
-[fetch]          Microtask: [ ]
- ↓ runs          Callback:  [ ]
-[empty]
-```
+<svg width="500" height="240" viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="500" height="240" fill="#f7fee7"/>
+  
+  <!-- Title -->
+  <text x="10" y="25" font-size="18" font-weight="bold" fill="#1a202c">🌐 WEB APIs</text>
+  <text x="10" y="45" font-size="12" fill="#4a5568">(Browser/Node.js handles this — doesn't block JavaScript)</text>
+  
+  <!-- API boxes -->
+  <!-- setTimeout -->
+  <rect x="20" y="60" width="140" height="50" fill="#dcfce7" stroke="#22c55e" stroke-width="2" rx="5"/>
+  <text x="30" y="78" font-size="12" font-weight="bold" fill="#15803d">setTimeout</text>
+  <text x="30" y="95" font-size="11" fill="#166534">⏳ waiting</text>
+  <text x="30" y="107" font-size="10" fill="#16a34a">3000ms</text>
+  
+  <!-- fetch -->
+  <rect x="180" y="60" width="140" height="50" fill="#dcfce7" stroke="#22c55e" stroke-width="2" rx="5"/>
+  <text x="190" y="78" font-size="12" font-weight="bold" fill="#15803d">fetch(API)</text>
+  <text x="190" y="95" font-size="11" fill="#166534">🌐 network</text>
+  <text x="190" y="107" font-size="10" fill="#16a34a">getting data</text>
+  
+  <!-- fs.readFile -->
+  <rect x="340" y="60" width="140" height="50" fill="#dcfce7" stroke="#22c55e" stroke-width="2" rx="5"/>
+  <text x="350" y="78" font-size="12" font-weight="bold" fill="#15803d">fs.readFile</text>
+  <text x="350" y="95" font-size="11" fill="#166534">💾 disk I/O</text>
+  <text x="350" y="107" font-size="10" fill="#16a34a">reading file</text>
+  
+  <!-- Arrow down to queues -->
+  <text x="230" y="140" font-size="12" fill="#666">⬇️ When complete, moves callback to queue ⬇️</text>
+  
+  <!-- Example -->
+  <rect x="20" y="160" width="460" height="65" fill="#ffffff" stroke="#ddd" stroke-width="1" rx="3"/>
+  <text x="30" y="180" font-size="11" font-weight="bold" fill="#333">Example: fetch() doesn't freeze the page</text>
+  <text x="30" y="197" font-size="10" fill="#555">✓ User can click, scroll, type while fetch is downloading</text>
+  <text x="30" y="212" font-size="10" fill="#555">✓ When download finishes, the callback goes to the Callback Queue</text>
+</svg>
 
 ---
 
-### What Each Queue Does — In Plain English
+#### **LAYER 3: Event Loop & Queues (The Orchestrator)**
 
-#### **Microtask Queue (Promise Queue) — Runs First**
+<svg width="600" height="280" viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="600" height="280" fill="#fef3c7"/>
+  
+  <!-- Title -->
+  <text x="10" y="25" font-size="18" font-weight="bold" fill="#1a202c">🔄 EVENT LOOP</text>
+  <text x="10" y="45" font-size="12" fill="#4a5568">(Continuous cycle: check stack → process queues)</text>
+  
+  <!-- Decision diamond -->
+  <polygon points="300,70 350,100 300,130 250,100" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+  <text x="270" y="105" font-size="11" font-weight="bold" fill="#78350f">Stack</text>
+  <text x="265" y="120" font-size="11" font-weight="bold" fill="#78350f">empty?</text>
+  
+  <!-- YES path -->
+  <text x="360" y="105" font-size="12" font-weight="bold" fill="#dc2626">YES ↓</text>
+  
+  <!-- Microtask Queue -->
+  <rect x="50" y="150" width="200" height="110" fill="#fce7f3" stroke="#ec4899" stroke-width="2" rx="5"/>
+  <text x="60" y="170" font-size="12" font-weight="bold" fill="#be185d">⭐ MICROTASK QUEUE</text>
+  <text x="60" y="190" font-size="10" fill="#831843">Priority: HIGH</text>
+  <text x="60" y="205" font-size="10" fill="#be185d">• Promise .then()</text>
+  <text x="60" y="218" font-size="10" fill="#be185d">• async/await</text>
+  <text x="60" y="231" font-size="10" fill="#be185d">• .catch() / .finally()</text>
+  <text x="60" y="244" font-size="11" font-weight="bold" fill="#9d174d">Drains COMPLETELY</text>
+  
+  <!-- Arrow -->
+  <path d="M 260 200 L 320 200" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="280" y="195" font-size="10" fill="#666">then</text>
+  
+  <!-- Callback Queue -->
+  <rect x="350" y="150" width="200" height="110" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" rx="5"/>
+  <text x="360" y="170" font-size="12" font-weight="bold" fill="#1e40af">⏱️ CALLBACK QUEUE</text>
+  <text x="360" y="190" font-size="10" fill="#1e3a8a">Priority: LOWER</text>
+  <text x="360" y="205" font-size="10" fill="#1e40af">• setTimeout</text>
+  <text x="360" y="218" font-size="10" fill="#1e40af">• I/O callbacks</text>
+  <text x="360" y="231" font-size="10" fill="#1e40af">• UI events</text>
+  <text x="360" y="244" font-size="11" font-weight="bold" fill="#1e3a8a">ONE task/cycle</text>
+  
+  <!-- Arrow definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666" />
+    </marker>
+  </defs>
+</svg>
 
-This is where **Promise callbacks** wait. After ANY piece of code finishes, the Event Loop checks here first.
+---
+
+### Event Loop Execution — 6-Step Visual Flow
+
+Follow how code flows through the runtime:
+
+#### **STEP 1: Synchronous Code Executes**
+
+<svg width="600" height="180" viewBox="0 0 600 180" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="180" fill="#f0f4f8"/>
+  
+  <text x="15" y="30" font-size="14" font-weight="bold" fill="#1a202c">STEP 1: Sync Code</text>
+  
+  <!-- Call Stack -->
+  <rect x="20" y="50" width="150" height="110" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2" rx="5"/>
+  <text x="35" y="70" font-size="11" font-weight="bold" fill="#3730a3">CALL STACK</text>
+  
+  <rect x="30" y="80" width="130" height="30" fill="#818cf8" stroke="#4f46e5" stroke-width="1" rx="3"/>
+  <text x="40" y="102" font-size="10" font-weight="bold" fill="#fff">console.log("A")</text>
+  
+  <text x="35" y="158" font-size="10" fill="#4b5563">Output: A</text>
+  
+  <!-- Queues -->
+  <rect x="220" y="50" width="150" height="110" fill="#f0fdf4" stroke="#22c55e" stroke-width="2" rx="5"/>
+  <text x="235" y="70" font-size="11" font-weight="bold" fill="#166534">MICROTASK Q.</text>
+  <text x="235" y="95" font-size="10" fill="#4b5563">[ ]</text>
+  <text x="235" y="115" font-size="10" fill="#4b5563">empty</text>
+  
+  <rect x="420" y="50" width="150" height="110" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" rx="5"/>
+  <text x="435" y="70" font-size="11" font-weight="bold" fill="#92400e">CALLBACK Q.</text>
+  <text x="435" y="95" font-size="10" fill="#4b5563">[ ]</text>
+  <text x="435" y="115" font-size="10" fill="#4b5563">empty</text>
+</svg>
+
+---
+
+#### **STEP 2: Async Calls Go to Web APIs**
+
+<svg width="600" height="180" viewBox="0 0 600 180" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="180" fill="#f0f4f8"/>
+  
+  <text x="15" y="30" font-size="14" font-weight="bold" fill="#1a202c">STEP 2: Async Calls</text>
+  
+  <!-- Call Stack -->
+  <rect x="20" y="50" width="150" height="110" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2" rx="5"/>
+  <text x="35" y="70" font-size="11" font-weight="bold" fill="#3730a3">CALL STACK</text>
+  <text x="35" y="95" font-size="10" fill="#666">setTimeout()</text>
+  <text x="35" y="112" font-size="10" fill="#666">Promise.resolve()</text>
+  <text x="35" y="145" font-size="10" fill="#4b5563">Processing...</text>
+  
+  <!-- Web APIs -->
+  <rect x="220" y="50" width="150" height="110" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" rx="5"/>
+  <text x="235" y="70" font-size="11" font-weight="bold" fill="#1e40af">WEB APIs</text>
+  <circle cx="255" cy="95" r="12" fill="#3b82f6"/>
+  <text x="270" y="100" font-size="9" fill="#333">setTimeout ⏳</text>
+  <circle cx="255" cy="125" r="12" fill="#3b82f6"/>
+  <text x="270" y="130" font-size="9" fill="#333">fetch 🌐</text>
+  
+  <!-- Queues (still empty) -->
+  <rect x="420" y="50" width="150" height="110" fill="#f0fdf4" stroke="#22c55e" stroke-width="2" rx="5"/>
+  <text x="435" y="70" font-size="11" font-weight="bold" fill="#166534">QUEUES</text>
+  <text x="435" y="95" font-size="9" fill="#666">Microtask: [ ]</text>
+  <text x="435" y="112" font-size="9" fill="#666">Callback: [ ]</text>
+  <text x="435" y="145" font-size="9" fill="#4b5563">(still waiting...)</text>
+</svg>
+
+---
+
+#### **STEP 3: Operations Complete → Callbacks Queued**
+
+<svg width="600" height="180" viewBox="0 0 600 180" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="180" fill="#f0f4f8"/>
+  
+  <text x="15" y="30" font-size="14" font-weight="bold" fill="#1a202c">STEP 3: Callbacks Queued</text>
+  
+  <!-- Call Stack Empty -->
+  <rect x="20" y="50" width="150" height="110" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2" rx="5"/>
+  <text x="35" y="70" font-size="11" font-weight="bold" fill="#3730a3">CALL STACK</text>
+  <rect x="35" y="85" width="120" height="35" fill="#fecaca" stroke="#ef4444" stroke-width="1" rx="2"/>
+  <text x="50" y="108" font-size="10" fill="#991b1b">EMPTY ✓</text>
+  
+  <!-- Queues Now Filled -->
+  <rect x="220" y="50" width="150" height="110" fill="#fce7f3" stroke="#ec4899" stroke-width="2" rx="5"/>
+  <text x="235" y="70" font-size="11" font-weight="bold" fill="#be185d">MICROTASK Q.</text>
+  <rect x="230" y="82" width="135" height="25" fill="#ec4899" stroke="#be185d" stroke-width="1" rx="2"/>
+  <text x="240" y="101" font-size="9" font-weight="bold" fill="#fff">Promise.then()</text>
+  
+  <!-- Callback Queue -->
+  <rect x="420" y="50" width="150" height="110" fill="#fed7aa" stroke="#fb923c" stroke-width="2" rx="5"/>
+  <text x="435" y="70" font-size="11" font-weight="bold" fill="#92400e">CALLBACK Q.</text>
+  <rect x="430" y="82" width="135" height="25" fill="#fb923c" stroke="#ea580c" stroke-width="1" rx="2"/>
+  <text x="440" y="101" font-size="9" font-weight="bold" fill="#fff">setTimeout</text>
+</svg>
+
+---
+
+#### **STEP 4: Event Loop Drains Microtasks (ALL of them)**
+
+<svg width="600" height="180" viewBox="0 0 600 180" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="180" fill="#f0f4f8"/>
+  
+  <text x="15" y="30" font-size="14" font-weight="bold" fill="#1a202c">STEP 4: Process Microtasks</text>
+  
+  <!-- Call Stack Running Promise -->
+  <rect x="20" y="50" width="150" height="110" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2" rx="5"/>
+  <text x="35" y="70" font-size="11" font-weight="bold" fill="#3730a3">CALL STACK</text>
+  <rect x="35" y="85" width="120" height="35" fill="#a5f3fc" stroke="#06b6d4" stroke-width="2" rx="2"/>
+  <text x="50" y="108" font-size="9" font-weight="bold" fill="#fff">Promise.then() ⚡</text>
+  
+  <!-- Microtask Queue Empty Now -->
+  <rect x="220" y="50" width="150" height="110" fill="#dcfce7" stroke="#22c55e" stroke-width="2" rx="5"/>
+  <text x="235" y="70" font-size="11" font-weight="bold" fill="#15803d">MICROTASK Q.</text>
+  <rect x="230" y="82" width="135" height="40" fill="#86efac" stroke="#22c55e" stroke-width="1" rx="2"/>
+  <text x="240" y="108" font-size="10" font-weight="bold" fill="#166534">EMPTY ✓</text>
+  
+  <!-- Callback Queue Still Waiting -->
+  <rect x="420" y="50" width="150" height="110" fill="#fed7aa" stroke="#fb923c" stroke-width="2" rx="5"/>
+  <text x="435" y="70" font-size="11" font-weight="bold" fill="#92400e">CALLBACK Q.</text>
+  <rect x="430" y="82" width="135" height="25" fill="#fb923c" stroke="#ea580c" stroke-width="1" rx="2"/>
+  <text x="440" y="101" font-size="9" font-weight="bold" fill="#fff">setTimeout</text>
+  
+  <text x="435" y="155" font-size="9" fill="#d97706">⏳ Still waiting</text>
+</svg>
+
+---
+
+#### **STEP 5: Event Loop Picks ONE Macrotask**
+
+<svg width="600" height="180" viewBox="0 0 600 180" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="180" fill="#f0f4f8"/>
+  
+  <text x="15" y="30" font-size="14" font-weight="bold" fill="#1a202c">STEP 5: Process One Macrotask</text>
+  
+  <!-- Call Stack Running setTimeout -->
+  <rect x="20" y="50" width="150" height="110" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2" rx="5"/>
+  <text x="35" y="70" font-size="11" font-weight="bold" fill="#3730a3">CALL STACK</text>
+  <rect x="35" y="85" width="120" height="35" fill="#fcd34d" stroke="#f59e0b" stroke-width="2" rx="2"/>
+  <text x="50" y="108" font-size="9" font-weight="bold" fill="#92400e">setTimeout ⚡</text>
+  
+  <!-- Microtask Queue Still Empty -->
+  <rect x="220" y="50" width="150" height="110" fill="#dcfce7" stroke="#22c55e" stroke-width="2" rx="5"/>
+  <text x="235" y="70" font-size="11" font-weight="bold" fill="#15803d">MICROTASK Q.</text>
+  <text x="235" y="110" font-size="10" fill="#166534">EMPTY</text>
+  
+  <!-- Callback Queue One Task Left -->
+  <rect x="420" y="50" width="150" height="110" fill="#fed7aa" stroke="#fb923c" stroke-width="2" rx="5"/>
+  <text x="435" y="70" font-size="11" font-weight="bold" fill="#92400e">CALLBACK Q.</text>
+  <rect x="430" y="95" width="135" height="25" fill="#86efac" stroke="#22c55e" stroke-width="1" rx="2"/>
+  <text x="440" y="114" font-size="9" fill="#15803d">[ ]</text>
+  
+  <text x="435" y="155" font-size="9" fill="#15803d">✓ Only ONE</text>
+</svg>
+
+---
+
+#### **STEP 6: Repeat (Back to Top)**
+
+<svg width="600" height="180" viewBox="0 0 600 180" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="180" fill="#f0f4f8"/>
+  
+  <text x="15" y="30" font-size="14" font-weight="bold" fill="#1a202c">STEP 6: Repeat Cycle</text>
+  
+  <!-- All Empty -->
+  <rect x="20" y="50" width="150" height="110" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2" rx="5"/>
+  <text x="35" y="70" font-size="11" font-weight="bold" fill="#3730a3">CALL STACK</text>
+  <text x="35" y="110" font-size="10" fill="#666">EMPTY</text>
+  
+  <rect x="220" y="50" width="150" height="110" fill="#dcfce7" stroke="#22c55e" stroke-width="2" rx="5"/>
+  <text x="235" y="70" font-size="11" font-weight="bold" fill="#15803d">MICROTASK Q.</text>
+  <text x="235" y="110" font-size="10" fill="#666">EMPTY</text>
+  
+  <rect x="420" y="50" width="150" height="110" fill="#fed7aa" stroke="#fb923c" stroke-width="2" rx="5"/>
+  <text x="435" y="70" font-size="11" font-weight="bold" fill="#92400e">CALLBACK Q.</text>
+  <text x="435" y="110" font-size="10" fill="#666">EMPTY</text>
+  
+  <text x="30" y="175" font-size="11" font-weight="bold" fill="#666">→ Loop waits for more tasks</text>
+</svg>
+
+---
+
+### Queue Priority Explained — Visual Hierarchy
+
+This diagram shows EXACTLY what gets processed and in what order:
+
+<svg width="600" height="320" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="320" fill="#fafafa"/>
+  
+  <text x="20" y="30" font-size="16" font-weight="bold" fill="#1a202c">Event Loop Priority Order</text>
+  
+  <!-- 1. Sync -->
+  <rect x="25" y="50" width="550" height="50" fill="#dbeafe" stroke="#0284c7" stroke-width="2" rx="5"/>
+  <text x="45" y="70" font-size="13" font-weight="bold" fill="#0c4a6e">1️⃣ SYNCHRONOUS CODE</text>
+  <text x="45" y="90" font-size="11" fill="#333">All your regular JavaScript code (for loops, function calls, console.log, etc.)</text>
+  
+  <!-- Arrow 1 -->
+  <path d="M 300 110 L 300 125" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  
+  <!-- 2. Microtask -->
+  <rect x="25" y="135" width="550" height="65" fill="#fce7f3" stroke="#be185d" stroke-width="3" rx="5"/>
+  <text x="45" y="155" font-size="13" font-weight="bold" fill="#be185d">2️⃣ MICROTASK QUEUE ⭐ (HIGH PRIORITY)</text>
+  <text x="45" y="175" font-size="11" fill="#333">Promise.then(), async/await, .catch(), .finally(), queueMicrotask()</text>
+  <text x="45" y="191" font-size="11" font-weight="bold" fill="#be185d">✓ ALL microtasks run completely before next macrotask</text>
+  
+  <!-- Arrow 2 -->
+  <path d="M 300 210 L 300 225" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  
+  <!-- 3. Macrotask -->
+  <rect x="25" y="235" width="550" height="70" fill="#fed7aa" stroke="#ea580c" stroke-width="3" rx="5"/>
+  <text x="45" y="255" font-size="13" font-weight="bold" fill="#92400e">3️⃣ CALLBACK QUEUE (LOWER PRIORITY)</text>
+  <text x="45" y="275" font-size="11" fill="#333">setTimeout, setInterval, I/O callbacks, UI events, requestAnimationFrame</text>
+  <text x="45" y="291" font-size="11" font-weight="bold" fill="#92400e">✓ ONE task per cycle → Loop returns to Microtask Queue</text>
+  
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666" />
+    </marker>
+  </defs>
+</svg>
+
+---
+
+### What Goes In Each Queue — Code Examples
+
+#### **Microtask Queue Examples**
+
+<svg width="600" height="260" viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="260" fill="#f0fdf4"/>
+  
+  <text x="20" y="30" font-size="14" font-weight="bold" fill="#1a202c">Code that goes to MICROTASK Queue:</text>
+  
+  <!-- Boxes -->
+  <g>
+    <rect x="20" y="50" width="180" height="80" fill="#dcfce7" stroke="#22c55e" stroke-width="2" rx="5"/>
+    <text x="30" y="70" font-size="11" font-weight="bold" fill="#166534">Promise .then()</text>
+    <rect x="30" y="78" width="160" height="42" fill="#fff" stroke="#ddd" stroke-width="1" rx="2"/>
+    <text x="38" y="95" font-size="9" fill="#333">Promise.resolve()</text>
+    <text x="38" y="108" font-size="9" fill="#333">  .then(() => {})</text>
+  </g>
+  
+  <g>
+    <rect x="220" y="50" width="180" height="80" fill="#dcfce7" stroke="#22c55e" stroke-width="2" rx="5"/>
+    <text x="230" y="70" font-size="11" font-weight="bold" fill="#166534">async/await</text>
+    <rect x="230" y="78" width="160" height="42" fill="#fff" stroke="#ddd" stroke-width="1" rx="2"/>
+    <text x="238" y="95" font-size="9" fill="#333">const x =</text>
+    <text x="238" y="108" font-size="9" fill="#333">  await fetch()</text>
+  </g>
+  
+  <g>
+    <rect x="420" y="50" width="160" height="80" fill="#dcfce7" stroke="#22c55e" stroke-width="2" rx="5"/>
+    <text x="430" y="70" font-size="11" font-weight="bold" fill="#166534">.catch() /.finally()</text>
+    <rect x="430" y="78" width="140" height="42" fill="#fff" stroke="#ddd" stroke-width="1" rx="2"/>
+    <text x="438" y="95" font-size="9" fill="#333">.catch(e => {})</text>
+    <text x="438" y="108" font-size="9" fill="#333">.finally(() => {})</text>
+  </g>
+  
+  <!-- Bottom note -->
+  <rect x="20" y="150" width="560" height="100" fill="#fff" stroke="#ddd" stroke-width="1" rx="3"/>
+  <text x="30" y="170" font-size="11" font-weight="bold" fill="#15803d">✓ Why Microtasks Have Priority:</text>
+  <text x="30" y="190" font-size="10" fill="#333">• Promises are "almost done" — just need callbacks</text>
+  <text x="30" y="207" font-size="10" fill="#333">• Microtasks run BEFORE rendering, so UI stays reactive</text>
+  <text x="30" y="224" font-size="10" fill="#333">• If ANY microtask queues another microtask, it runs immediately</text>
+</svg>
+
+---
+
+#### **Callback Queue Examples**
+
+<svg width="600" height="260" viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="260" fill="#fef3c7"/>
+  
+  <text x="20" y="30" font-size="14" font-weight="bold" fill="#1a202c">Code that goes to CALLBACK Queue:</text>
+  
+  <!-- Boxes -->
+  <g>
+    <rect x="20" y="50" width="160" height="80" fill="#fed7aa" stroke="#fb923c" stroke-width="2" rx="5"/>
+    <text x="30" y="70" font-size="11" font-weight="bold" fill="#92400e">setTimeout</text>
+    <rect x="30" y="78" width="140" height="42" fill="#fff" stroke="#ddd" stroke-width="1" rx="2"/>
+    <text x="38" y="95" font-size="9" fill="#333">setTimeout(() =></text>
+    <text x="38" y="108" font-size="9" fill="#333">  {}, 1000)</text>
+  </g>
+  
+  <g>
+    <rect x="200" y="50" width="160" height="80" fill="#fed7aa" stroke="#fb923c" stroke-width="2" rx="5"/>
+    <text x="210" y="70" font-size="11" font-weight="bold" fill="#92400e">I/O & fetch</text>
+    <rect x="210" y="78" width="140" height="42" fill="#fff" stroke="#ddd" stroke-width="1" rx="2"/>
+    <text x="218" y="95" font-size="9" fill="#333">fetch("/api")</text>
+    <text x="218" y="108" font-size="9" fill="#333">fs.readFile(...)</text>
+  </g>
+  
+  <g>
+    <rect x="380" y="50" width="200" height="80" fill="#fed7aa" stroke="#fb923c" stroke-width="2" rx="5"/>
+    <text x="390" y="70" font-size="11" font-weight="bold" fill="#92400e">DOM Events & RAF</text>
+    <rect x="390" y="78" width="180" height="42" fill="#fff" stroke="#ddd" stroke-width="1" rx="2"/>
+    <text x="398" y="95" font-size="9" fill="#333">element.addEventListener</text>
+    <text x="398" y="108" font-size="9" fill="#333">requestAnimationFrame</text>
+  </g>
+  
+  <!-- Bottom note -->
+  <rect x="20" y="150" width="560" height="100" fill="#fff" stroke="#ddd" stroke-width="1" rx="3"/>
+  <text x="30" y="170" font-size="11" font-weight="bold" fill="#92400e">⏱️ Why Only ONE Per Cycle:</text>
+  <text x="30" y="190" font-size="10" fill="#333">• Browser needs time to render between macrotasks</text>
+  <text x="30" y="207" font-size="10" fill="#333">• Allows UI events to be handled responsively</text>
+  <text x="30" y="224" font-size="10" fill="#333">• After ONE macrotask → Check microtasks → Then next macrotask</text>
+</svg>
+
+---
+
+### Real Code Trace: Promise vs setTimeout
+
+Here's how a simple example actually executes:
 
 ```javascript
-// ALL of these go to Microtask Queue:
-Promise.resolve().then(() => { }); // Promise chain
-async function foo() { await bar(); } // await is a Promise under the hood
-.catch(() => { }); // catch is a microtask
-.finally(() => { }); // finally is a microtask
-```
-
-**Key rule: The entire Microtask Queue drains before moving to the Callback Queue.**
-
-This is why Promises appear to "jump the line" ahead of setTimeout:
-
-```javascript
-console.log("1"); // sync → runs immediately
+console.log("A");
 
 setTimeout(() => {
-  // goes to CALLBACK queue
-  console.log("3");
+  console.log("C");
 }, 0);
 
 Promise.resolve().then(() => {
-  // goes to MICROTASK queue
-  console.log("2");
+  console.log("B");
 });
 
-// Output: 1, 2, 3
-// Even though setTimeout is called FIRST, Promise runs FIRST
-// because the Event Loop drains microtasks before macrotasks
+console.log("D");
 ```
+
+**Visual Execution Timeline:**
+
+<svg width="600" height="320" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="320" fill="#f0f4f8"/>
+  
+  <!-- Phase 1 -->
+  <text x="20" y="25" font-size="12" font-weight="bold" fill="#1a202c">PHASE 1: Synchronous Code</text>
+  <rect x="20" y="35" width="560" height="60" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" rx="5"/>
+  <text x="30" y="55" font-size="11" fill="#1e40af">console.log("A") → Output: A</text>
+  <text x="30" y="70" font-size="11" fill="#1e40af">setTimeout → goes to Web API → Callback Q: [setTimeout]</text>
+  <text x="30" y="85" font-size="11" fill="#1e40af">Promise → Microtask Q: [promise], console.log("D") → Output: D</text>
+  
+  <!-- Phase 2 -->
+  <text x="20" y="115" font-size="12" font-weight="bold" fill="#1a202c">PHASE 2: Drain Microtask Queue</text>
+  <rect x="20" y="125" width="560" height="60" fill="#fce7f3" stroke="#ec4899" stroke-width="2" rx="5"/>
+  <text x="30" y="145" font-size="11" fill="#be185d">Call Stack Empty ✓ → Check Microtask Queue</text>
+  <text x="30" y="160" font-size="11" fill="#be185d">Execute: promise.then() → Output: B</text>
+  <text x="30" y="175" font-size="11" fill="#be185d">Microtask Q is now EMPTY ✓</text>
+  
+  <!-- Phase 3 -->
+  <text x="20" y="205" font-size="12" font-weight="bold" fill="#1a202c">PHASE 3: Execute ONE Macrotask</text>
+  <rect x="20" y="215" width="560" height="60" fill="#fed7aa" stroke="#fb923c" stroke-width="2" rx="5"/>
+  <text x="30" y="235" font-size="11" fill="#92400e">Pick ONE from Callback Queue: setTimeout</text>
+  <text x="30" y="250" font-size="11" fill="#92400e">Execute: setTimeout callback → Output: C</text>
+  <text x="30" y="265" font-size="11" fill="#92400e">Callback Q is now EMPTY ✓</text>
+  
+  <!-- Final output -->
+  <rect x="20" y="290" width="560" height="25" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2" rx="5"/>
+  <text x="30" y="308" font-size="12" font-weight="bold" fill="#3730a3">✓ Final Output: A, D, B, C</text>
+</svg>
 
 ---
 
-#### **Callback Queue (Macrotask Queue) — Runs After Microtasks**
+### Performance Impact — The Starvation Problem
 
-This is where **timers and I/O operations** wait. The Event Loop picks **ONE** task from here per cycle.
-
-```javascript
-// ALL of these go to CALLBACK queue:
-setTimeout(() => {}); // timers
-setInterval(() => {}); // repeating timers
-fs.readFile("file.txt", (err, data) => {}); // disk I/O
-fetch("/api").then((r) => r.json()); // network I/O completion
-element.addEventListener("click", () => {}); // DOM events
-```
-
-**Key rule: Only ONE macrotask runs per Event Loop cycle, then the loop goes back to check microtasks again.**
-
-This is why Microtasks can starve Macrotasks if you queue too many:
-
-```javascript
-console.log("Start");
-
-setTimeout(() => {
-  console.log("Timeout"); // stuck waiting!
-}, 0);
-
-// Queue 1000 microtasks
-for (let i = 0; i < 1000; i++) {
-  Promise.resolve().then(() => console.log(i));
-}
-
-// Output: "Start", then all 1000 promise logs, THEN "Timeout"
-// The setTimeout waits while ALL microtasks finish first!
-```
+<svg width="600" height="280" viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="280" fill="#fef2f2"/>
+  
+  <text x="20" y="25" font-size="14" font-weight="bold" fill="#991b1b">❌ PROBLEM: Microtask Starving</text>
+  
+  <!-- Bad timeline -->
+  <text x="20" y="55" font-size="11" fill="#666">Time → → →</text>
+  
+  <rect x="20" y="70" width="560" height="50" fill="#fecaca" stroke="#dc2626" stroke-width="2" rx="5"/>
+  <text x="30" y="90" font-size="12" font-weight="bold" fill="#991b1b">1,000,000 Microtasks Running</text>
+  <text x="30" y="108" font-size="10" fill="#991b1b">🔴 Browser FROZEN — Can't click, can't scroll, can't render</text>
+  
+  <!-- Solution -->
+  <text x="20" y="150" font-size="14" font-weight="bold" fill="#15803d">✅ SOLUTION: Batch with setTimeout</text>
+  
+  <rect x="20" y="170" width="100" height="40" fill="#86efac" stroke="#22c55e" stroke-width="2" rx="5"/>
+  <text x="28" y="185" font-size="10" font-weight="bold" fill="#15803d">1000 items</text>
+  <text x="28" y="200" font-size="9" fill="#166534">sync</text>
+  
+  <text x="130" y="190" font-size="11" fill="#666">⏸️ Browser renders</text>
+  
+  <rect x="310" y="170" width="100" height="40" fill="#86efac" stroke="#22c55e" stroke-width="2" rx="5"/>
+  <text x="318" y="185" font-size="10" font-weight="bold" fill="#15803d">1000 items</text>
+  <text x="318" y="200" font-size="9" fill="#166534">sync</text>
+  
+  <text x="420" y="190" font-size="11" fill="#666">⏸️ Browser renders</text>
+  
+  <text x="20" y="230" font-size="12" fill="#15803d">Result: 🟢 User interactions are smooth</text>
+  <text x="20" y="250" font-size="11" fill="#666">Each setTimeout creates a macrotask boundary, giving browser time to render and handle events</text>
+</svg>
 
 ### Complete Trace: Watching Code Flow Through the Event Loop
 
@@ -330,7 +631,7 @@ Notice: Promise ran AFTER the sync D, but BEFORE the setTimeout C. This is becau
 
 ---
 
-### A More Complex Example
+### A More Complex Example — Visual Trace
 
 ```javascript
 console.log("1");
@@ -352,63 +653,119 @@ Promise.resolve()
 console.log("2");
 ```
 
-**TRACE:**
+**Step-by-Step Visualization:**
 
-```
-PHASE 1: Sync code runs
-─────────────────────────────
-Output: 1, 2
-
-Microtask Queue: [promise1, promise2]
-Callback Queue: [setTimeout1]
-
-PHASE 2: Event Loop drains microtasks
-─────────────────────────────
-Execute promise1:
-  → Output: 3
-  → Queues setTimeout2
-
-Callback Queue: [setTimeout1, setTimeout2]
-
-Execute promise2:
-  → Output: 4
-
-Microtask Queue is EMPTY
-
-PHASE 3: Execute ONE macrotask
-─────────────────────────────
-Execute setTimeout1:
-  → Output: 5
-  → Queues a microtask!
-
-Microtask Queue: [microtask from setTimeout1]
-
-Check Microtask Queue again:
-Execute microtask:
-  → Output: 6
-
-PHASE 4: Execute next macrotask
-─────────────────────────────
-Execute setTimeout2:
-  → Output: 7
-
-FINAL OUTPUT:
-1
-2
-3
-4
-5
-6
-7
-```
+<svg width="600" height="360" viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="360" fill="#f0f4f8"/>
+  
+  <!-- Phase 1 -->
+  <text x="20" y="25" font-size="12" font-weight="bold" fill="#1a202c">PHASE 1: Synchronous Code</text>
+  <rect x="20" y="35" width="560" height="50" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" rx="5"/>
+  <text x="30" y="55" font-size="10" fill="#1e40af">Output: 1, 2 (console.log runs first)</text>
+  <text x="30" y="70" font-size="10" fill="#1e40af">Queues filled: Microtask: [promise1], Callback: [setTimeout1]</text>
+  
+  <!-- Phase 2 -->
+  <text x="20" y="105" font-size="12" font-weight="bold" fill="#1a202c">PHASE 2: Drain Microtasks</text>
+  <rect x="20" y="115" width="560" height="65" fill="#fce7f3" stroke="#ec4899" stroke-width="2" rx="5"/>
+  <text x="30" y="135" font-size="10" fill="#be185d">Execute: promise1 → Output: 3</text>
+  <text x="30" y="150" font-size="10" fill="#be185d">Inside promise1: setTimeout → Callback Q: [setTimeout1, setTimeout2]</text>
+  <text x="30" y="165" font-size="10" fill="#be185d">Execute: promise2 → Output: 4</text>
+  <text x="30" y="175" font-size="10" fill="#be185d">Microtask Q is EMPTY ✓</text>
+  
+  <!-- Phase 3 -->
+  <text x="20" y="210" font-size="12" font-weight="bold" fill="#1a202c">PHASE 3: Execute ONE Macrotask (1st)</text>
+  <rect x="20" y="220" width="560" height="50" fill="#fed7aa" stroke="#fb923c" stroke-width="2" rx="5"/>
+  <text x="30" y="240" font-size="10" fill="#92400e">Execute: setTimeout1 → Output: 5</text>
+  <text x="30" y="255" font-size="10" fill="#92400e">Queues another microtask: Microtask Q: [promise3]</text>
+  
+  <!-- Phase 4 -->
+  <text x="20" y="290" font-size="12" font-weight="bold" fill="#1a202c">PHASE 4: Check Microtasks Again</text>
+  <rect x="20" y="300" width="560" height="35" fill="#fce7f3" stroke="#ec4899" stroke-width="2" rx="5"/>
+  <text x="30" y="320" font-size="10" fill="#be185d">Execute: promise3 → Output: 6</text>
+  
+  <!-- Final output -->
+  <rect x="20" y="350" width="560" height="25" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2" rx="5"/>
+  <text x="30" y="368" font-size="11" font-weight="bold" fill="#3730a3">✓ Output Order: 1, 2, 3, 4, 5, 6, 7</text>
+</svg>
 
 Key observations:
 
-- ✓ Sync runs first: 1, 2
-- ✓ Then ALL microtasks: 3, 4
-- ✓ Then ONE macrotask: 5
-- ✓ Then check microtasks again: 6
-- ✓ Then next macrotask: 7
+- ✓ Sync runs first: **1, 2**
+- ✓ Then ALL microtasks: **3, 4**
+- ✓ Then ONE macrotask: **5**
+- ✓ Then check microtasks again: **6**
+- ✓ Then next macrotask: **7**
+
+---
+
+### The Complete Picture — How Everything Connects
+
+<svg width="600" height="340" viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="340" fill="#fafafa"/>
+  
+  <!-- Title -->
+  <text x="20" y="30" font-size="15" font-weight="bold" fill="#1a202c">Event Loop Complete Cycle</text>
+  
+  <!-- Call Stack -->
+  <rect x="20" y="50" width="160" height="280" fill="#e0e7ff" stroke="#4f46e5" stroke-width="2" rx="5"/>
+  <text x="30" y="70" font-size="11" font-weight="bold" fill="#3730a3">CALL STACK</text>
+  <text x="30" y="90" font-size="9" fill="#666">(Executes</text>
+  <text x="30" y="102" font-size="9" fill="#666">ONE function</text>
+  <text x="30" y="114" font-size="9" fill="#666">at a time)</text>
+  
+  <circle cx="100" cy="160" r="30" fill="#818cf8" stroke="#4f46e5" stroke-width="1"/>
+  <text x="85" y="165" font-size="9" fill="#fff">🔄 Runs</text>
+  
+  <!-- Arrow to queues -->
+  <path d="M 190 190 L 240 190" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arr2)"/>
+  
+  <!-- Microtask -->
+  <rect x="250" y="50" width="160" height="130" fill="#fce7f3" stroke="#ec4899" stroke-width="2" rx="5"/>
+  <text x="260" y="70" font-size="11" font-weight="bold" fill="#be185d">MICROTASK Q</text>
+  <text x="260" y="90" font-size="9" fill="#be185d">⭐ Priority: 1</text>
+  
+  <rect x="260" y="105" width="140" height="60" fill="#fff" stroke="#ddd" stroke-width="1" rx="2"/>
+  <text x="268" y="122" font-size="8" fill="#333">Promise.then()</text>
+  <text x="268" y="133" font-size="8" fill="#333">async/await</text>
+  <text x="268" y="144" font-size="8" fill="#333">.finally()</text>
+  <text x="268" y="156" font-size="8" fill="#333">Drains: ALL</text>
+  
+  <!-- Arrow -->
+  <path d="M 420 100 L 470 100" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arr2)"/>
+  
+  <!-- Callback -->
+  <rect x="480" y="50" width="100" height="130" fill="#fed7aa" stroke="#fb923c" stroke-width="2" rx="5"/>
+  <text x="490" y="70" font-size="11" font-weight="bold" fill="#92400e">CALLBACK Q</text>
+  <text x="490" y="90" font-size="9" fill="#92400e">⏱️ Priority: 2</text>
+  
+  <rect x="490" y="105" width="80" height="60" fill="#fff" stroke="#ddd" stroke-width="1" rx="2"/>
+  <text x="498" y="120" font-size="8" fill="#333">setTimeout</text>
+  <text x="498" y="131" font-size="8" fill="#333">I/O</text>
+  <text x="498" y="142" font-size="8" fill="#333">Events</text>
+  <text x="498" y="156" font-size="8" fill="#333">ONE/cycle</text>
+  
+  <!-- Event Loop center -->
+  <circle cx="410" cy="220" r="50" fill="#fbbf24" stroke="#f59e0b" stroke-width="3"/>
+  <text x="380" y="215" font-size="11" font-weight="bold" fill="#78350f">EVENT</text>
+  <text x="377" y="230" font-size="11" font-weight="bold" fill="#78350f">LOOP</text>
+  
+  <!-- Bottom explanation -->
+  <rect x="20" y="210" width="560" height="115" fill="#fff" stroke="#ddd" stroke-width="1" rx="3"/>
+  <text x="30" y="230" font-size="11" font-weight="bold" fill="#1a202c">🔄 The Infinite Loop:</text>
+  <text x="30" y="250" font-size="10" fill="#333">1. Is Call Stack empty? If NO → wait. If YES → continue.</text>
+  <text x="30" y="267" font-size="10" fill="#333">2. Process ALL Microtasks (drain completely)</text>
+  <text x="30" y="284" font-size="10" fill="#333">3. Process ONE Macrotask</text>
+  <text x="30" y="301" font-size="10" fill="#333">4. Check if browser needs to render</text>
+  <text x="30" y="318" font-size="10" fill="#333">5. Go back to step 1 (repeat forever)</text>
+  
+  <defs>
+    <marker id="arr2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666" />
+    </marker>
+  </defs>
+</svg>
+
+---
 
 ### Visual: The Queue Priority System
 
