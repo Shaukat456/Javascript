@@ -52,340 +52,436 @@ This raises an obvious question: how does a browser stay responsive while fetchi
 
 ---
 
-### The JavaScript Runtime Architecture — A Complete Visual
+### The JavaScript Runtime Architecture — Clean Overview
 
-Understanding the runtime means understanding HOW async actually works. Here's what's really happening under the hood:
+Here's how async JavaScript actually works under the hood:
 
-```
-╔══════════════════════════════════════════════════════════════════════════════╗
-║                      JAVASCRIPT RUNTIME ARCHITECTURE                         ║
-╚══════════════════════════════════════════════════════════════════════════════╝
-
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃                         SINGLE-THREADED JS ENGINE                          ┃
-┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                                                                            ┃
-┃  ┌────────────────────────────────────────────────────────────────────┐  ┃
-┃  │                      📦 CALL STACK                                  │  ┃
-┃  │              (Your synchronous code executes here)                  │  ┃
-┃  │                    LIFO: Last In, First Out                         │  ┃
-┃  │                                                                     │  ┃
-┃  │  When a function is called → frame pushed ON                       │  ┃
-┃  │  When it returns → frame popped OFF                                │  ┃
-┃  │  Only ONE frame executes at a time (truly single-threaded)         │  ┃
-┃  │                                                                     │  ┃
-┃  │  Example: [printSquare] → [square] → [multiply]                  │  ┃
-┃  │           ↓ multiply returns                                       │  ┃
-┃  │           [printSquare] → [square]                                │  ┃
-┃  │           ↓ square returns                                         │  ┃
-┃  │           [printSquare]                                            │  ┃
-┃  │           ↓ printSquare returns                                    │  ┃
-┃  │           []  ← EMPTY = Event Loop can fetch next task!           │  ┃
-┃  └────────────────────────────────────────────────────────────────────┘  ┃
-┃                                                                            ┃
-┃  ┌─────────────────────────┐      ┌────────────────────────────────────┐  ┃
-┃  │  🌐 WEB APIS            │      │  🔄 EVENT LOOP (The Gatekeeper)   │  ┃
-┃  │  (Browser/Node.js)      │      │                                    │  ┃
-┃  │  Multi-threaded C++     │      │  While (true) {                   │  ┃
-┃  │                         │      │    if (callStack is empty) {       │  ┃
-┃  │  • setTimeout           │  ←→  │      process ALL microtasks       │  ┃
-┃  │  • setInterval          │      │      process ONE macrotask        │  ┃
-┃  │  • fetch / XHR          │      │      render if needed             │  ┃
-┃  │  • fs.readFile          │      │    }                              │  ┃
-┃  │  • geolocation          │      │  }                                │  ┃
-┃  │  • DOM events           │      │                                    │  ┃
-┃  │  • etc.                 │      │  Re-checks ~60x per second        │  ┃
-┃  │                         │      └────────────────────────────────────┘  ┃
-┃  └─────────────────────────┘                                              ┃
-┃         (HANDLES                                                           ┃
-┃        BLOCKING I/O                                                        ┃
-┃         & TIMERS)                                                          ┃
-┃                                                                            ┃
-┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-
-              ⬇️ When Web APIs finish their work...
-
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃                            QUEUE SYSTEM                                    ┃
-┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃                                                                            ┃
-┃  ┌─ PRIORITY 1: MICROTASK QUEUE ─────────────────────────────────────┐  ┃
-┃  │  ⭐ HIGHER PRIORITY — Drains completely before next macrotask     │  ┃
-┃  │                                                                  │  ┃
-┃  │  What goes in:                                                  │  ┃
-┃  │  • Promise .then() / .catch() / .finally()                      │  ┃
-┃  │  • async/await (under the hood, it's Promises)                  │  ┃
-┃  │  • MutationObserver callbacks                                   │  ┃
-┃  │  • queueMicrotask()                                             │  ┃
-┃  │  • process.nextTick() [Node.js only — even higher priority!]   │  ┃
-┃  │                                                                  │  ┃
-┃  │  When it runs:                                                  │  ┃
-┃  │  → After current task finishes, BEFORE re-rendering            │  ┃
-┃  │  → Drains COMPLETELY (all microtasks run before any macrotask)  │  ┃
-┃  │  → Can starve macrotasks if you queue too many microtasks       │  ┃
-┃  │                                                                  │  ┃
-┃  │  Example queue state: [Promise.then, Promise.then, fetch.then]  │  ┃
-┃  └──────────────────────────────────────────────────────────────────┘  ┃
-┃                                                                            ┃
-┃  ┌─ PRIORITY 2: CALLBACK QUEUE (Macrotask Queue) ──────────────────┐  ┃
-┃  │  ⏱️ LOWER PRIORITY — One task per event loop cycle               │  ┃
-┃  │                                                                  │  ┃
-┃  │  What goes in:                                                  │  ┃
-┃  │  • setTimeout / setInterval callbacks                           │  ┃
-┃  │  • setImmediate() [Node.js]                                     │  ┃
-┃  │  • requestAnimationFrame [Browser]                              │  ┃
-┃  │  • I/O callbacks (fs.readFile, network responses after fetch)   │  ┃
-┃  │  • UI events (click, scroll, input)                             │  ┃
-┃  │                                                                  │  ┃
-┃  │  When it runs:                                                  │  ┃
-┃  │  → Only ONE task is picked per event loop cycle                 │  ┃
-┃  │  → After that one task, Event Loop checks microtasks again      │  ┃
-┃  │  → Can be delayed if microtask queue is backed up               │  ┃
-┃  │                                                                  │  ┃
-┃  │  Example queue state: [setTimeout1, I/O_response, setTimeout2]  │  ┃
-┃  └──────────────────────────────────────────────────────────────────┘  ┃
-┃                                                                            ┃
-┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-```
-
-### The Event Loop Execution Order — Exactly How It Works
-
-This is the definitive algorithm. **Memorize this.**
+**LAYER 1: The Single-Threaded JS Engine**
 
 ```
-while (eventLoop.waitForTask()) {
-  // 1. Execute ONE macrotask (if any)
-  const macrotask = macrotaskQueue.pop();
-  if (macrotask) {
-    execute(macrotask);
-  }
-
-  // 2. Execute ALL microtasks
-  while (microtaskQueue.hasTasks()) {
-    execute(microtaskQueue.pop());
-  }
-
-  // 3. Render (if needed)
-  if (needsRepaint()) {
-    repaint();
-  }
-}
-
-// Key insight: All microtasks run before the next macrotask
-// This is why Promise callbacks appear to jump the queue
+┌─────────────────────────────┐
+│   📦 CALL STACK             │
+│  (Your code executes here)  │
+│  Only ONE thing at a time   │
+└─────────────────────────────┘
 ```
 
-### Queue Explanations in Depth
+Your synchronous code runs here. When the stack is empty, the Event Loop checks the queues.
 
-#### **Callback Queue (Macrotask Queue) — The Slower One**
+---
 
-The callback queue handles operations that involve I/O or timing. These are operations that can't run on the JS thread (like fetching data, reading files, or waiting for timers).
+**LAYER 2: Web APIs (Browser) / Node.js Runtime**
+
+```
+┌──────────────────────────────────┐
+│   🌐 WEB APIs                    │
+│   (Multi-threaded C++)           │
+│                                  │
+│  • setTimeout / setInterval      │
+│  • fetch / XHR (network)         │
+│  • fs.readFile (disk I/O)        │
+│  • geolocation, DOM events, etc. │
+└──────────────────────────────────┘
+```
+
+These operations don't block JavaScript. They run in the browser/Node.js background, then queue their callbacks when done.
+
+---
+
+**LAYER 3: The Event Loop & Queues**
+
+```
+EVENT LOOP (continuously checks):
+  ┌─────────────────────────────┐
+  │ Step 1: Is Call Stack empty?│
+  │   YES ↓                     │
+  ├─────────────────────────────┤
+  │ Step 2: Drain Microtask Q  │
+  │  (ALL Promise callbacks)    │
+  │   ↓                         │
+  ├─────────────────────────────┤
+  │ Step 3: Pick 1 Macrotask   │
+  │  (setTimeout, I/O, etc.)    │
+  │   ↓ Execute it              │
+  │   ↓ Go back to Step 1       │
+  └─────────────────────────────┘
+
+MICROTASK QUEUE (⭐ High Priority)    CALLBACK QUEUE (⏱️ Lower Priority)
+─────────────────────────────────    ────────────────────────────────
+• Promise .then()                    • setTimeout
+• Promise .catch()                   • setInterval
+• async/await                        • I/O callbacks
+• .finally()                         • UI events (click, scroll)
+• queueMicrotask()                   • requestAnimationFrame
+                                     • setImmediate (Node.js)
+
+ALL microtasks run                   Only ONE macrotask runs
+before the NEXT macrotask            per event loop cycle
+```
+
+---
+
+### Event Loop Execution — Step by Step
+
+Watch how code flows through the runtime:
+
+**STEP 1: Synchronous code runs first**
+
+```
+Call Stack                     Queues
+─────────────                  ──────
+[print]   ← Your code          Microtask: [ ]
+ |                             Callback:  [ ]
+ └─ runs to completion
+
+[empty]
+```
+
+**STEP 2: Async calls go to Web APIs**
+
+```
+Call Stack       Web APIs              Queues
+─────────────    ────────────────────  ──────
+[empty]          setTimeout waiting    Microtask: [ ]
+                 Promise pending       Callback:  [ ]
+                 fetch in progress
+```
+
+**STEP 3: When async operations finish, callbacks are queued**
+
+```
+Call Stack       Queues
+─────────────    ─────────────────────────────────
+[empty]          Microtask: [promise.then]
+                 Callback:  [setTimeout, fetch]
+```
+
+**STEP 4: Event Loop processes microtasks (all of them)**
+
+```
+Event Loop checks → Call Stack empty? YES
+                 → Drain Microtask Queue
+
+Call Stack       Queues
+─────────────    ─────────────────────────────────
+[promise.then]   Microtask: [ ]
+ ↓ runs          Callback:  [setTimeout, fetch]
+[empty]
+```
+
+**STEP 5: Event Loop processes ONE macrotask**
+
+```
+Event Loop checks → Microtasks empty? YES
+                 → Pick ONE from Callback Queue
+
+Call Stack       Queues
+─────────────    ─────────────────────────────────
+[setTimeout]     Microtask: [ ]
+ ↓ runs          Callback:  [fetch]
+[empty]
+```
+
+**STEP 6: Repeat**
+
+```
+Event Loop checks → Is Call Stack empty? YES
+                 → Are Microtasks pending? NO
+                 → Pick next macrotask
+
+Call Stack       Queues
+─────────────    ─────────────────────────────────
+[fetch]          Microtask: [ ]
+ ↓ runs          Callback:  [ ]
+[empty]
+```
+
+---
+
+### What Each Queue Does — In Plain English
+
+#### **Microtask Queue (Promise Queue) — Runs First**
+
+This is where **Promise callbacks** wait. After ANY piece of code finishes, the Event Loop checks here first.
 
 ```javascript
-// These all go to the CALLBACK QUEUE:
-
-setTimeout(() => console.log("2 — timeout"), 0);
-
-setInterval(() => console.log("repeat"), 1000);
-
-fs.readFile("file.txt", (err, data) => {
-  console.log("3 — file data"); // goes to callback queue when file is ready
-});
-
-fetch("/api/data").then((r) => r.json()); // the .then() goes to MICROTASK, but
-// the I/O completion goes to callback queue first
-
-element.addEventListener("click", () => {
-  console.log("4 — click"); // goes to callback queue when user clicks
-});
+// ALL of these go to Microtask Queue:
+Promise.resolve().then(() => { }); // Promise chain
+async function foo() { await bar(); } // await is a Promise under the hood
+.catch(() => { }); // catch is a microtask
+.finally(() => { }); // finally is a microtask
 ```
 
-**Key rule:** Only **ONE** macrotask is executed per event loop cycle. After each macrotask, the event loop checks if the microtask queue has anything. This is why you can get starved:
+**Key rule: The entire Microtask Queue drains before moving to the Callback Queue.**
+
+This is why Promises appear to "jump the line" ahead of setTimeout:
 
 ```javascript
-// Macrotask getting starved
+console.log("1"); // sync → runs immediately
+
+setTimeout(() => {
+  // goes to CALLBACK queue
+  console.log("3");
+}, 0);
+
+Promise.resolve().then(() => {
+  // goes to MICROTASK queue
+  console.log("2");
+});
+
+// Output: 1, 2, 3
+// Even though setTimeout is called FIRST, Promise runs FIRST
+// because the Event Loop drains microtasks before macrotasks
+```
+
+---
+
+#### **Callback Queue (Macrotask Queue) — Runs After Microtasks**
+
+This is where **timers and I/O operations** wait. The Event Loop picks **ONE** task from here per cycle.
+
+```javascript
+// ALL of these go to CALLBACK queue:
+setTimeout(() => {}); // timers
+setInterval(() => {}); // repeating timers
+fs.readFile("file.txt", (err, data) => {}); // disk I/O
+fetch("/api").then((r) => r.json()); // network I/O completion
+element.addEventListener("click", () => {}); // DOM events
+```
+
+**Key rule: Only ONE macrotask runs per Event Loop cycle, then the loop goes back to check microtasks again.**
+
+This is why Microtasks can starve Macrotasks if you queue too many:
+
+```javascript
 console.log("Start");
 
 setTimeout(() => {
-  console.log("Timeout"); // macrotask
+  console.log("Timeout"); // stuck waiting!
 }, 0);
 
-// 1000 synchronous microtasks
+// Queue 1000 microtasks
 for (let i = 0; i < 1000; i++) {
-  Promise.resolve().then(() => console.log(i)); // 1000 microtasks
+  Promise.resolve().then(() => console.log(i));
 }
 
-// Output: "Start", then 1000 microtask logs, THEN "Timeout"
-// The setTimeout waits while all microtasks drain!
+// Output: "Start", then all 1000 promise logs, THEN "Timeout"
+// The setTimeout waits while ALL microtasks finish first!
 ```
 
-#### **Microtask Queue — The Faster One (Promises!)**
+### Complete Trace: Watching Code Flow Through the Event Loop
 
-The microtask queue is where Promises live. These are operations that are "almost done" — they just need a callback to run.
+Here's a real example traced step-by-step. Follow the execution:
 
 ```javascript
-// These all go to the MICROTASK QUEUE:
+console.log("A");
 
-Promise.resolve().then(() => console.log("2 — promise"));
+setTimeout(() => {
+  console.log("C");
+}, 0);
 
-Promise.reject(new Error()).catch(() => console.log("3 — catch"));
-
-async function example() {
-  await fetch("/api"); // await is syntactic sugar for .then()
-}
-
-queueMicrotask(() => console.log("4 — queueMicrotask"));
-
-element.addEventListener("click", () => {
-  Promise.resolve().then(() => {
-    console.log("5 — microtask inside event handler");
-  });
+Promise.resolve().then(() => {
+  console.log("B");
 });
+
+console.log("D");
 ```
 
-**Key rule:** The microtask queue **drains completely** before moving to the next macrotask. This means:
+**STEP-BY-STEP EXECUTION:**
+
+```
+[0ms] SYNC CODE RUNS
+      ↓
+Call Stack: [main]
+  → console.log("A")  → Output: A
+  → setTimeout → moved to Web API → Callback Queue: [setTimeout]
+  → Promise → moved to Microtask Queue: [promise.then]
+  → console.log("D")  → Output: D
+  → [main] finishes
+      ↓
+Call Stack: [empty]
+
+[1ms] EVENT LOOP: "Is Call Stack empty?"
+      YES ✓
+      → Check Microtask Queue: [promise.then]
+      ↓
+Call Stack: [promise.then]
+  → console.log("B")  → Output: B
+Call Stack: [empty]
+      ↓
+[2ms] EVENT LOOP: "Are Microtasks done?"
+      YES ✓
+      → Pick ONE from Callback Queue: [setTimeout]
+      ↓
+Call Stack: [setTimeout]
+  → console.log("C")  → Output: C
+Call Stack: [empty]
+      ↓
+[3ms] Callback Queue is empty → Done
+
+FINAL OUTPUT:
+A
+D
+B
+C
+```
+
+Notice: Promise ran AFTER the sync D, but BEFORE the setTimeout C. This is because the Event Loop drains microtasks before macrotasks.
+
+---
+
+### A More Complex Example
 
 ```javascript
-console.log("1 — sync");
+console.log("1");
 
-setTimeout(() => console.log("7 — setTimeout"), 0); // macrotask
+setTimeout(() => {
+  console.log("5");
+  Promise.resolve().then(() => console.log("6"));
+}, 0);
 
 Promise.resolve()
   .then(() => {
-    console.log("3 — promise 1");
-    return Promise.resolve();
+    console.log("3");
+    setTimeout(() => console.log("7"), 0);
   })
   .then(() => {
-    console.log("5 — promise 2");
-    return Promise.resolve();
-  })
-  .then(() => {
-    console.log("6 — promise 3");
+    console.log("4");
   });
 
-Promise.resolve().then(() => console.log("4 — promise 4"));
-
-console.log("2 — sync");
-
-// Output:
-// 1 — sync
-// 2 — sync            ← all sync runs first
-// 3 — promise 1       ← THEN microtasks drain
-// 4 — promise 4
-// 5 — promise 2
-// 6 — promise 3
-// 7 — setTimeout      ← FINALLY macrotask runs
+console.log("2");
 ```
 
-### Complete Step-by-Step Event Loop Trace
+**TRACE:**
 
-Here's a real example with full annotations showing exactly what's in each queue at each moment:
+```
+PHASE 1: Sync code runs
+─────────────────────────────
+Output: 1, 2
 
-```javascript
-console.log("1 — script start");
+Microtask Queue: [promise1, promise2]
+Callback Queue: [setTimeout1]
 
-setTimeout(() => {
-  console.log("7 — setTimeout 1");
-}, 0);
+PHASE 2: Event Loop drains microtasks
+─────────────────────────────
+Execute promise1:
+  → Output: 3
+  → Queues setTimeout2
 
-Promise.resolve().then(() => {
-  console.log("3 — promise 1");
-  setTimeout(() => {
-    console.log("8 — setTimeout 2 (inside promise)");
-  }, 0);
-});
+Callback Queue: [setTimeout1, setTimeout2]
 
-setTimeout(() => {
-  console.log("9 — setTimeout 3");
-}, 0);
+Execute promise2:
+  → Output: 4
 
-Promise.resolve().then(() => {
-  console.log("4 — promise 2");
-});
+Microtask Queue is EMPTY
 
-console.log("2 — script end");
+PHASE 3: Execute ONE macrotask
+─────────────────────────────
+Execute setTimeout1:
+  → Output: 5
+  → Queues a microtask!
 
-// ─── EXECUTION TRACE ────────────────────────────────────────
-// [TIME 0ms]
-// Call Stack: [global]
-//   ↓ Sync code runs
-// Output: "1 — script start"
-//
-// [TIME 5ms] — setTimeout #1 goes to Web API
-// [TIME 10ms] — Promise #1 goes to Microtask Queue
-// [TIME 15ms] — setTimeout #3 goes to Web API
-// [TIME 20ms] — Promise #2 goes to Microtask Queue
-// Output: "2 — script end"
-//
-// [TIME 25ms] — Call Stack is EMPTY
-// Event Loop: "Check microtask queue..."
-//   Microtask Queue: [promise 1, promise 2]
-//   ↓ Execute promise 1
-// Output: "3 — promise 1"
-//   ↓ Inside promise 1: setTimeout #2 → Callback Queue
-// Callback Queue: [setTimeout 1, setTimeout 2, setTimeout 3]
-//   ↓ Microtask queue still has promise 2
-//   ↓ Execute promise 2
-// Output: "4 — promise 2"
-//   ↓ Microtask Queue is now EMPTY
-//
-// [TIME 30ms] — Event Loop: "Get ONE macrotask from callback queue"
-//   ↓ Execute setTimeout 1
-// Output: "7 — setTimeout 1"
-//   ↓ Check microtask queue (empty)
-//
-// [TIME 35ms] — Event Loop: "Get next macrotask"
-//   ↓ Execute setTimeout 2
-// Output: "8 — setTimeout 2 (inside promise)"
-//   ↓ Check microtask queue (empty)
-//
-// [TIME 40ms] — Event Loop: "Get next macrotask"
-//   ↓ Execute setTimeout 3
-// Output: "9 — setTimeout 3"
-//   ↓ Check microtask queue (empty)
-//
-// [TIME 45ms] — Callback Queue is EMPTY, no more tasks
+Microtask Queue: [microtask from setTimeout1]
 
-// FINAL OUTPUT (in order):
-// 1 — script start
-// 2 — script end
-// 3 — promise 1
-// 4 — promise 2
-// 7 — setTimeout 1
-// 8 — setTimeout 2 (inside promise)
-// 9 — setTimeout 3
+Check Microtask Queue again:
+Execute microtask:
+  → Output: 6
+
+PHASE 4: Execute next macrotask
+─────────────────────────────
+Execute setTimeout2:
+  → Output: 7
+
+FINAL OUTPUT:
+1
+2
+3
+4
+5
+6
+7
 ```
 
-### Why This Matters for Performance
+Key observations:
 
-Understanding the queues lets you write efficient async code:
+- ✓ Sync runs first: 1, 2
+- ✓ Then ALL microtasks: 3, 4
+- ✓ Then ONE macrotask: 5
+- ✓ Then check microtasks again: 6
+- ✓ Then next macrotask: 7
+
+### Visual: The Queue Priority System
+
+This diagram shows exactly what gets processed and in what order:
+
+```
+┌─────────────────────────────────────────┐
+│  SYNCHRONOUS CODE RUNS FIRST            │
+│  (Everything else waits)                │
+└─────────────────────────────────────────┘
+              ↓
+┌─────────────────────────────────────────┐
+│  MICROTASK QUEUE                        │
+│  (ALL Promises, ALL await callbacks)    │
+│  ⭐ Priority: HIGH                      │
+│  Drains COMPLETELY                      │
+└─────────────────────────────────────────┘
+              ↓
+┌─────────────────────────────────────────┐
+│  ONE MACROTASK FROM CALLBACK QUEUE      │
+│  (ONE setTimeout, ONE I/O, etc.)        │
+│  ⏱️ Priority: LOWER                     │
+│  Only ONE per cycle                     │
+└─────────────────────────────────────────┘
+              ↓
+┌─────────────────────────────────────────┐
+│  (Then go back to Microtask Queue)      │
+│  Keep repeating until all queues empty  │
+└─────────────────────────────────────────┘
+```
+
+---
+
+### Why This Matters: Performance & User Experience
+
+Understanding queue priority helps you write responsive code:
+
+**❌ PROBLEM: Too many microtasks freeze the browser**
 
 ```javascript
-// ❌ BAD: Creates unnecessary microtask starving
-function processData() {
+// This will freeze the UI — browser can't update
+function processMillionRecords() {
   for (let i = 0; i < 1_000_000; i++) {
     Promise.resolve().then(() => {
-      // Heavy computation
-      expensiveCalculation();
+      processRecord(i); // 1 million microtasks queued!
     });
   }
-  // The callback queue (macrotasks, rendering, user events) starves!
-  // Browser is frozen — no renders, no responsiveness
 }
 
-// ✅ GOOD: Let browser breathe with macrotasks
-function processData() {
-  function processBatch() {
-    for (let i = 0; i < 1000; i++) {
-      expensiveCalculation(); // run sync in batches
-    }
-    if (hasMore) {
-      setTimeout(processBatch, 0); // yield back to event loop
-    }
-  }
-  processBatch();
-}
+// Result: User can't click, scroll, or interact while these run
+// Browser is waiting for all microtasks to drain before handling events
 ```
+
+**✅ SOLUTION: Use setTimeout to yield to the browser**
+
+```javascript
+// Browser gets time to render and handle events
+async function processMillionRecords() {
+  for (let i = 0; i < 1_000_000; i += 1000) {
+    // Process 1000 at a time synchronously
+    for (let j = i; j < i + 1000; j++) {
+      processRecord(j);
+    }
+    // Yield: let browser handle events, render, then continue
+    await new Promise((resolve) => setTimeout(resolve, 0));
+  }
+}
+
+// Timeline:
+// [Batch 1: 1000 records] → [Browser renders] → [Batch 2: 1000 records] → ...
+```
+
+**Key insight:** setTimeout creates a macrotask, which gives the browser time to update the display, handle clicks, etc. Promises don't — they run synchronously after the current task.
 
 ---
 
