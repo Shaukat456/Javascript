@@ -1,78 +1,80 @@
-{/_ ============================================================
-ASYNC JAVASCRIPT — FROM ZERO TO CONFIDENT
-A beginner-friendly visual guide
-============================================================ _/}
+---
+
+{/* ============================================================
+    ASYNC JAVASCRIPT — FROM ZERO TO CONFIDENT
+    A beginner-friendly visual guide
+    ============================================================ */}
 
 import { useState, useEffect, useRef } from "react";
 
 export const CallStackVisual = () => {
-const [step, setStep] = useState(0);
-const steps = [
-{
-label: "Program starts",
-stack: [],
-heap: ["greet = function", "name = 'Alice'"],
-output: [],
-highlight: null,
-code: `const name = "Alice";\nfunction greet(n) {\n  return "Hello, " + n;\n}\nconsole.log(greet(name));`,
-explain: "The program starts. Variables and functions are stored in the Heap (memory).",
-},
-{
-label: "main() pushed",
-stack: ["main()"],
-heap: ["greet = function", "name = 'Alice'"],
-output: [],
-highlight: "main()",
-code: `→ const name = "Alice";\nfunction greet(n) {\n  return "Hello, " + n;\n}\nconsole.log(greet(name));`,
-explain: "JavaScript creates a Global Execution Context (think of it as 'main') and pushes it to the call stack.",
-},
-{
-label: "greet() called",
-stack: ["main()", "greet('Alice')"],
-heap: ["greet = function", "name = 'Alice'"],
-output: [],
-highlight: "greet('Alice')",
-code: `const name = "Alice";\nfunction greet(n) {\n  return "Hello, " + n;\n}\n→ console.log(greet(name));`,
-explain: "greet(name) is called. A new Execution Context is created for greet() and pushed on top of the stack.",
-},
-{
-label: "greet() returns",
-stack: ["main()", 'console.log("Hello, Alice")'],
-heap: ["greet = function", "name = 'Alice'"],
-output: [],
-highlight: 'console.log("Hello, Alice")',
-code: `const name = "Alice";\nfunction greet(n) {\n→  return "Hello, " + n;\n}\nconsole.log(greet(name));`,
-explain: "greet() finishes and is popped off the stack. Its return value is passed to console.log().",
-},
-{
-label: "Output printed",
-stack: ["main()"],
-heap: ["greet = function", "name = 'Alice'"],
-output: ["Hello, Alice"],
-highlight: null,
-code: `const name = "Alice";\nfunction greet(n) {\n  return "Hello, " + n;\n}\n→ console.log(greet(name));`,
-explain: "console.log() runs, prints to output, then is popped. We're back to main().",
-},
-{
-label: "Program done",
-stack: [],
-heap: ["greet = function", "name = 'Alice'"],
-output: ["Hello, Alice"],
-highlight: null,
-code: `const name = "Alice";\nfunction greet(n) {\n  return "Hello, " + n;\n}\nconsole.log(greet(name)); ✓`,
-explain: "All code has executed. The call stack is empty. Program complete!",
-},
-];
+  const [step, setStep] = useState(0);
+  const steps = [
+    {
+      label: "Program starts",
+      stack: [],
+      heap: ["greet = function", "name = 'Alice'"],
+      output: [],
+      highlight: null,
+      code: `const name = "Alice";\nfunction greet(n) {\n  return "Hello, " + n;\n}\nconsole.log(greet(name));`,
+      explain: "The program starts. Variables and functions are stored in the Heap (memory).",
+    },
+    {
+      label: "main() pushed",
+      stack: ["main()"],
+      heap: ["greet = function", "name = 'Alice'"],
+      output: [],
+      highlight: "main()",
+      code: `→ const name = "Alice";\nfunction greet(n) {\n  return "Hello, " + n;\n}\nconsole.log(greet(name));`,
+      explain: "JavaScript creates a Global Execution Context (think of it as 'main') and pushes it to the call stack.",
+    },
+    {
+      label: "greet() called",
+      stack: ["main()", "greet('Alice')"],
+      heap: ["greet = function", "name = 'Alice'"],
+      output: [],
+      highlight: "greet('Alice')",
+      code: `const name = "Alice";\nfunction greet(n) {\n  return "Hello, " + n;\n}\n→ console.log(greet(name));`,
+      explain: "greet(name) is called. A new Execution Context is created for greet() and pushed on top of the stack.",
+    },
+    {
+      label: "greet() returns",
+      stack: ["main()", 'console.log("Hello, Alice")'],
+      heap: ["greet = function", "name = 'Alice'"],
+      output: [],
+      highlight: 'console.log("Hello, Alice")',
+      code: `const name = "Alice";\nfunction greet(n) {\n→  return "Hello, " + n;\n}\nconsole.log(greet(name));`,
+      explain: "greet() finishes and is popped off the stack. Its return value is passed to console.log().",
+    },
+    {
+      label: "Output printed",
+      stack: ["main()"],
+      heap: ["greet = function", "name = 'Alice'"],
+      output: ["Hello, Alice"],
+      highlight: null,
+      code: `const name = "Alice";\nfunction greet(n) {\n  return "Hello, " + n;\n}\n→ console.log(greet(name));`,
+      explain: "console.log() runs, prints to output, then is popped. We're back to main().",
+    },
+    {
+      label: "Program done",
+      stack: [],
+      heap: ["greet = function", "name = 'Alice'"],
+      output: ["Hello, Alice"],
+      highlight: null,
+      code: `const name = "Alice";\nfunction greet(n) {\n  return "Hello, " + n;\n}\nconsole.log(greet(name)); ✓`,
+      explain: "All code has executed. The call stack is empty. Program complete!",
+    },
+  ];
 
-const s = steps[step];
+  const s = steps[step];
 
-return (
-<div style={{ fontFamily: "monospace", background: "var(--color-background-secondary)", borderRadius: 12, padding: 24, margin: "20px 0" }}>
-<div style={{ display: "flex", gap: 8, marginBottom: 16, flexWrap: "wrap" }}>
-<span style={{ fontFamily: "sans-serif", fontWeight: 500, fontSize: 14, color: "var(--color-text-secondary)" }}>
-Step {step + 1} / {steps.length}: {s.label}
-</span>
-</div>
+  return (
+    <div style={{ fontFamily: "monospace", background: "var(--color-background-secondary)", borderRadius: 12, padding: 24, margin: "20px 0" }}>
+      <div style={{ display: "flex", gap: 8, marginBottom: 16, flexWrap: "wrap" }}>
+        <span style={{ fontFamily: "sans-serif", fontWeight: 500, fontSize: 14, color: "var(--color-text-secondary)" }}>
+          Step {step + 1} / {steps.length}: {s.label}
+        </span>
+      </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 16 }}>
         {/* Call Stack */}
@@ -142,53 +144,52 @@ Step {step + 1} / {steps.length}: {s.label}
         <button onClick={() => setStep(0)} style={{ padding: "8px 16px", borderRadius: 8, border: "0.5px solid var(--color-border-secondary)", background: "transparent", color: "var(--color-text-secondary)", cursor: "pointer", fontSize: 13, marginLeft: "auto" }}>↺ Reset</button>
       </div>
     </div>
-
-);
+  );
 };
 
 export const EventLoopVisual = () => {
-const [running, setRunning] = useState(false);
-const [step, setStep] = useState(-1);
-const intervalRef = useRef(null);
+  const [running, setRunning] = useState(false);
+  const [step, setStep] = useState(-1);
+  const intervalRef = useRef(null);
 
-const sequence = [
-{ callStack: ["console.log('Start')"], callbackQueue: [], webApis: [], output: ["Start"], explain: "console.log('Start') is synchronous — runs immediately, prints 'Start', then is removed from the stack." },
-{ callStack: ["setTimeout(fn, 2000)"], callbackQueue: [], webApis: ["⏱ Timer: 2000ms (fn)"], output: ["Start"], explain: "setTimeout() is called. The timer is handed off to the Browser's Web API. JavaScript does NOT wait. The call stack is now free!" },
-{ callStack: ["console.log('End')"], callbackQueue: [], webApis: ["⏱ Timer: 2000ms (fn)"], output: ["Start", "End"], explain: "JavaScript immediately continues to the next line. console.log('End') runs. Timer is still ticking in the background." },
-{ callStack: [], callbackQueue: [], webApis: ["⏱ Timer: running... (fn)"], output: ["Start", "End"], explain: "The call stack is now empty. JavaScript is idle — but the timer is still running in the Web API zone." },
-{ callStack: [], callbackQueue: ["fn() — timer done!"], webApis: [], output: ["Start", "End"], explain: "Timer expires! The callback (fn) moves to the Callback Queue, waiting for its turn." },
-{ callStack: ["fn() ← Event Loop pushed this"], callbackQueue: [], webApis: [], output: ["Start", "End"], explain: "The Event Loop sees: call stack is empty + queue has a job. It pushes fn() onto the call stack." },
-{ callStack: ["console.log('Timeout!')"], callbackQueue: [], webApis: [], output: ["Start", "End", "Timeout!"], explain: "fn() runs — printing 'Timeout!'. This is why async callbacks run after synchronous code, even with a 0ms timer." },
-{ callStack: [], callbackQueue: [], webApis: [], output: ["Start", "End", "Timeout!"], explain: "All done! The key insight: JavaScript is single-threaded, but offloads waiting work to the browser's Web APIs." },
-];
+  const sequence = [
+    { callStack: ["console.log('Start')"], callbackQueue: [], webApis: [], output: ["Start"], explain: "console.log('Start') is synchronous — runs immediately, prints 'Start', then is removed from the stack." },
+    { callStack: ["setTimeout(fn, 2000)"], callbackQueue: [], webApis: ["⏱ Timer: 2000ms (fn)"], output: ["Start"], explain: "setTimeout() is called. The timer is handed off to the Browser's Web API. JavaScript does NOT wait. The call stack is now free!" },
+    { callStack: ["console.log('End')"], callbackQueue: [], webApis: ["⏱ Timer: 2000ms (fn)"], output: ["Start", "End"], explain: "JavaScript immediately continues to the next line. console.log('End') runs. Timer is still ticking in the background." },
+    { callStack: [], callbackQueue: [], webApis: ["⏱ Timer: running... (fn)"], output: ["Start", "End"], explain: "The call stack is now empty. JavaScript is idle — but the timer is still running in the Web API zone." },
+    { callStack: [], callbackQueue: ["fn() — timer done!"], webApis: [], output: ["Start", "End"], explain: "Timer expires! The callback (fn) moves to the Callback Queue, waiting for its turn." },
+    { callStack: ["fn()  ← Event Loop pushed this"], callbackQueue: [], webApis: [], output: ["Start", "End"], explain: "The Event Loop sees: call stack is empty + queue has a job. It pushes fn() onto the call stack." },
+    { callStack: ["console.log('Timeout!')"], callbackQueue: [], webApis: [], output: ["Start", "End", "Timeout!"], explain: "fn() runs — printing 'Timeout!'. This is why async callbacks run after synchronous code, even with a 0ms timer." },
+    { callStack: [], callbackQueue: [], webApis: [], output: ["Start", "End", "Timeout!"], explain: "All done! The key insight: JavaScript is single-threaded, but offloads waiting work to the browser's Web APIs." },
+  ];
 
-useEffect(() => {
-if (running) {
-intervalRef.current = setInterval(() => {
-setStep(prev => {
-if (prev >= sequence.length - 1) { setRunning(false); return prev; }
-return prev + 1;
-});
-}, 1600);
-}
-return () => clearInterval(intervalRef.current);
-}, [running]);
+  useEffect(() => {
+    if (running) {
+      intervalRef.current = setInterval(() => {
+        setStep(prev => {
+          if (prev >= sequence.length - 1) { setRunning(false); return prev; }
+          return prev + 1;
+        });
+      }, 1600);
+    }
+    return () => clearInterval(intervalRef.current);
+  }, [running]);
 
-const s = step >= 0 ? sequence[step] : { callStack: [], callbackQueue: [], webApis: [], output: [], explain: "Press Play to watch the Event Loop in action!" };
+  const s = step >= 0 ? sequence[step] : { callStack: [], callbackQueue: [], webApis: [], output: [], explain: "Press Play to watch the Event Loop in action!" };
 
-const code = `console.log('Start');
+  const code = `console.log('Start');
 
 setTimeout(() => {
-console.log('Timeout!');
+  console.log('Timeout!');
 }, 2000);
 
 console.log('End');`;
 
-return (
-<div style={{ background: "var(--color-background-secondary)", borderRadius: 12, padding: 24, margin: "20px 0", fontFamily: "monospace" }}>
-<div style={{ fontFamily: "sans-serif", fontSize: 14, fontWeight: 500, color: "var(--color-text-secondary)", marginBottom: 16 }}>
-Interactive Event Loop — watch how async works
-</div>
+  return (
+    <div style={{ background: "var(--color-background-secondary)", borderRadius: 12, padding: 24, margin: "20px 0", fontFamily: "monospace" }}>
+      <div style={{ fontFamily: "sans-serif", fontSize: 14, fontWeight: 500, color: "var(--color-text-secondary)", marginBottom: 16 }}>
+        Interactive Event Loop — watch how async works
+      </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
         {/* Left column: Code */}
@@ -267,71 +268,71 @@ Interactive Event Loop — watch how async works
         <button onClick={() => { setRunning(false); setStep(prev => Math.min(sequence.length - 1, prev + 1)); }} style={{ padding: "8px 16px", borderRadius: 8, border: "0.5px solid var(--color-border-secondary)", background: "transparent", color: "var(--color-text-secondary)", cursor: "pointer", fontSize: 13 }}>Step →</button>
       </div>
     </div>
-
-);
+  );
 };
 
 export const PromiseStatesVisual = () => {
-const [active, setActive] = useState(null);
-const states = [
-{ id: "pending", label: "Pending", icon: "⏳", color: "#FAEEDA", border: "#FAC775", text: "#633806", desc: "The initial state. The async work is in progress. Like a pizza order that's being prepared — you're waiting!" },
-{ id: "fulfilled", label: "Fulfilled", icon: "✅", color: "#EAF3DE", border: "#C0DD97", text: "#3B6D11", desc: "The operation succeeded! The Promise now holds a value. Like your pizza arriving — time to enjoy the result with .then()." },
-{ id: "rejected", label: "Rejected", icon: "❌", color: "#FCEBEB", border: "#F7C1C1", text: "#501313", desc: "Something went wrong. The Promise holds an error reason. Like the pizza place calling to say they can't deliver — handle it with .catch()." },
-];
+  const [active, setActive] = useState(null);
+  const states = [
+    { id: "pending", label: "Pending", icon: "⏳", color: "#FAEEDA", border: "#FAC775", text: "#633806", desc: "The initial state. The async work is in progress. Like a pizza order that's being prepared — you're waiting!" },
+    { id: "fulfilled", label: "Fulfilled", icon: "✅", color: "#EAF3DE", border: "#C0DD97", text: "#3B6D11", desc: "The operation succeeded! The Promise now holds a value. Like your pizza arriving — time to enjoy the result with .then()." },
+    { id: "rejected", label: "Rejected", icon: "❌", color: "#FCEBEB", border: "#F7C1C1", text: "#501313", desc: "Something went wrong. The Promise holds an error reason. Like the pizza place calling to say they can't deliver — handle it with .catch()." },
+  ];
 
-return (
-<div style={{ display: "flex", gap: 12, margin: "20px 0", flexWrap: "wrap" }}>
-{states.map(state => (
-<div
-key={state.id}
-onClick={() => setActive(active === state.id ? null : state.id)}
-style={{
+  return (
+    <div style={{ display: "flex", gap: 12, margin: "20px 0", flexWrap: "wrap" }}>
+      {states.map(state => (
+        <div
+          key={state.id}
+          onClick={() => setActive(active === state.id ? null : state.id)}
+          style={{
             flex: "1 1 160px", background: active === state.id ? state.color : "var(--color-background-secondary)",
             border: `${active === state.id ? "1.5px" : "0.5px"} solid ${active === state.id ? state.border : "var(--color-border-tertiary)"}`,
             borderRadius: 12, padding: "20px 16px", cursor: "pointer", transition: "all 0.2s ease",
             transform: active === state.id ? "scale(1.02)" : "scale(1)"
-          }} >
-<div style={{ fontSize: 28, marginBottom: 8 }}>{state.icon}</div>
-<div style={{ fontWeight: 500, fontSize: 16, color: active === state.id ? state.text : "var(--color-text-primary)", marginBottom: 4 }}>{state.label}</div>
-{active === state.id && (
-<div style={{ fontSize: 13, color: state.text, lineHeight: 1.6, marginTop: 8 }}>{state.desc}</div>
-)}
-{active !== state.id && (
-<div style={{ fontSize: 12, color: "var(--color-text-tertiary)" }}>click to learn</div>
-)}
-</div>
-))}
-</div>
-);
+          }}
+        >
+          <div style={{ fontSize: 28, marginBottom: 8 }}>{state.icon}</div>
+          <div style={{ fontWeight: 500, fontSize: 16, color: active === state.id ? state.text : "var(--color-text-primary)", marginBottom: 4 }}>{state.label}</div>
+          {active === state.id && (
+            <div style={{ fontSize: 13, color: state.text, lineHeight: 1.6, marginTop: 8 }}>{state.desc}</div>
+          )}
+          {active !== state.id && (
+            <div style={{ fontSize: 12, color: "var(--color-text-tertiary)" }}>click to learn</div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
 };
 
 export const PromiseChainVisual = () => {
-const [step, setStep] = useState(0);
-const steps = [
-{ title: "fetchUser(1)", color: "#EEEDFE", border: "#7F77DD", text: "#26215C", status: "⏳ Pending", desc: "An API call starts. Returns a Promise immediately." },
-{ title: ".then(user => fetchOrders(user.id))", color: "#E6F1FB", border: "#378ADD", text: "#042C53", status: "✅ Got user data", desc: "First .then() receives the user, starts a new fetch for their orders." },
-{ title: ".then(orders => formatOrders(orders))", color: "#EAF3DE", border: "#639922", text: "#173404", status: "✅ Got orders", desc: "Second .then() receives orders and formats them for display." },
-{ title: ".catch(err => showError(err))", color: "#FCEBEB", border: "#E24B4A", text: "#501313", status: "🛡 Safety net", desc: "If ANY step fails, .catch() handles the error. One catch for the whole chain." },
-{ title: ".finally(() => hideLoader())", color: "#FAEEDA", border: "#EF9F27", text: "#412402", status: "🏁 Always runs", desc: ".finally() runs whether success or failure — perfect for hiding loading spinners." },
-];
+  const [step, setStep] = useState(0);
+  const steps = [
+    { title: "fetchUser(1)", color: "#EEEDFE", border: "#7F77DD", text: "#26215C", status: "⏳ Pending", desc: "An API call starts. Returns a Promise immediately." },
+    { title: ".then(user => fetchOrders(user.id))", color: "#E6F1FB", border: "#378ADD", text: "#042C53", status: "✅ Got user data", desc: "First .then() receives the user, starts a new fetch for their orders." },
+    { title: ".then(orders => formatOrders(orders))", color: "#EAF3DE", border: "#639922", text: "#173404", status: "✅ Got orders", desc: "Second .then() receives orders and formats them for display." },
+    { title: ".catch(err => showError(err))", color: "#FCEBEB", border: "#E24B4A", text: "#501313", status: "🛡 Safety net", desc: "If ANY step fails, .catch() handles the error. One catch for the whole chain." },
+    { title: ".finally(() => hideLoader())", color: "#FAEEDA", border: "#EF9F27", text: "#412402", status: "🏁 Always runs", desc: ".finally() runs whether success or failure — perfect for hiding loading spinners." },
+  ];
 
-return (
-<div style={{ margin: "20px 0" }}>
-<div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
-{steps.map((s, i) => (
-<div key={i} style={{ display: "flex", alignItems: "stretch", gap: 0 }}>
-{/_ Connector line _/}
-<div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 40, flexShrink: 0 }}>
-<div style={{ width: 2, height: i === 0 ? 16 : 24, background: i === 0 ? "transparent" : "var(--color-border-secondary)" }} />
-<div style={{
+  return (
+    <div style={{ margin: "20px 0" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+        {steps.map((s, i) => (
+          <div key={i} style={{ display: "flex", alignItems: "stretch", gap: 0 }}>
+            {/* Connector line */}
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 40, flexShrink: 0 }}>
+              <div style={{ width: 2, height: i === 0 ? 16 : 24, background: i === 0 ? "transparent" : "var(--color-border-secondary)" }} />
+              <div style={{
                 width: 32, height: 32, borderRadius: "50%", background: step === i ? s.color : "var(--color-background-secondary)",
                 border: `2px solid ${step === i ? s.border : "var(--color-border-tertiary)"}`,
                 display: "flex", alignItems: "center", justifyContent: "center",
                 fontSize: 13, fontWeight: 500, color: step === i ? s.text : "var(--color-text-secondary)",
                 flexShrink: 0, transition: "all 0.3s", cursor: "pointer"
               }} onClick={() => setStep(i)}>{i + 1}</div>
-{i < steps.length - 1 && <div style={{ width: 2, flex: 1, minHeight: 16, background: "var(--color-border-secondary)" }} />}
-</div>
+              {i < steps.length - 1 && <div style={{ width: 2, flex: 1, minHeight: 16, background: "var(--color-border-secondary)" }} />}
+            </div>
 
             {/* Content */}
             <div
@@ -355,14 +356,13 @@ return (
       </div>
       <div style={{ fontSize: 12, color: "var(--color-text-tertiary)", marginTop: 8, fontFamily: "sans-serif", textAlign: "center" }}>Click any step to explore it</div>
     </div>
-
-);
+  );
 };
 
 export const AsyncAwaitComparison = () => {
-const [view, setView] = useState("promise");
+  const [view, setView] = useState("promise");
 
-const promiseCode = `function loadUserProfile(userId) {
+  const promiseCode = `function loadUserProfile(userId) {
   return fetchUser(userId)
     .then(user => {
       return fetchOrders(user.id)
@@ -378,29 +378,30 @@ const promiseCode = `function loadUserProfile(userId) {
     });
 }`;
 
-const asyncCode = `async function loadUserProfile(userId) {
-try {
-const user = await fetchUser(userId);
-const orders = await fetchOrders(user.id);
-const reviews = await fetchReviews(user.id);
+  const asyncCode = `async function loadUserProfile(userId) {
+  try {
+    const user    = await fetchUser(userId);
+    const orders  = await fetchOrders(user.id);
+    const reviews = await fetchReviews(user.id);
 
     return { user, orders, reviews };
-
-} catch (err) {
-console.error("Error:", err);
-}
+  } catch (err) {
+    console.error("Error:", err);
+  }
 }`;
 
-return (
-<div style={{ margin: "20px 0" }}>
-<div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
-<button
-onClick={() => setView("promise")}
-style={{ padding: "8px 18px", borderRadius: 8, border: `1.5px solid ${view === "promise" ? "#7F77DD" : "var(--color-border-tertiary)"}`, background: view === "promise" ? "#EEEDFE" : "transparent", color: view === "promise" ? "#26215C" : "var(--color-text-secondary)", cursor: "pointer", fontSize: 13, fontWeight: view === "promise" ? 500 : 400, transition: "all 0.2s" }} >Promises (.then)</button>
-<button
-onClick={() => setView("async")}
-style={{ padding: "8px 18px", borderRadius: 8, border: `1.5px solid ${view === "async" ? "#639922" : "var(--color-border-tertiary)"}`, background: view === "async" ? "#EAF3DE" : "transparent", color: view === "async" ? "#173404" : "var(--color-text-secondary)", cursor: "pointer", fontSize: 13, fontWeight: view === "async" ? 500 : 400, transition: "all 0.2s" }} >async / await</button>
-</div>
+  return (
+    <div style={{ margin: "20px 0" }}>
+      <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
+        <button
+          onClick={() => setView("promise")}
+          style={{ padding: "8px 18px", borderRadius: 8, border: `1.5px solid ${view === "promise" ? "#7F77DD" : "var(--color-border-tertiary)"}`, background: view === "promise" ? "#EEEDFE" : "transparent", color: view === "promise" ? "#26215C" : "var(--color-text-secondary)", cursor: "pointer", fontSize: 13, fontWeight: view === "promise" ? 500 : 400, transition: "all 0.2s" }}
+        >Promises (.then)</button>
+        <button
+          onClick={() => setView("async")}
+          style={{ padding: "8px 18px", borderRadius: 8, border: `1.5px solid ${view === "async" ? "#639922" : "var(--color-border-tertiary)"}`, background: view === "async" ? "#EAF3DE" : "transparent", color: view === "async" ? "#173404" : "var(--color-text-secondary)", cursor: "pointer", fontSize: 13, fontWeight: view === "async" ? 500 : 400, transition: "all 0.2s" }}
+        >async / await</button>
+      </div>
 
       <div style={{ background: "#1e1e2e", borderRadius: 10, padding: 20 }}>
         <div style={{ fontSize: 11, color: "#585b70", marginBottom: 12, fontFamily: "sans-serif" }}>
@@ -426,102 +427,102 @@ style={{ padding: "8px 18px", borderRadius: 8, border: `1.5px solid ${view === "
         </div>
       )}
     </div>
-
-);
+  );
 };
 
 export const ApiAnalogy = () => {
-const [scene, setScene] = useState("order");
-const scenes = {
-order: { emoji: "🍕", title: "You place the order", sub: "Like calling fetch('/api/data')", color: "#E6F1FB", text: "#042C53" },
-wait: { emoji: "⏳", title: "Kitchen is working", sub: "Server is processing your request", color: "#FAEEDA", text: "#412402" },
-receive: { emoji: "🛎️", title: "Order arrives!", sub: "The Promise resolves with data", color: "#EAF3DE", text: "#173404" },
-error: { emoji: "😞", title: "Kitchen is closed!", sub: "Promise rejects — .catch() handles it", color: "#FCEBEB", text: "#501313" },
-};
-const flow = ["order", "wait", "receive"];
-const s = scenes[scene];
+  const [scene, setScene] = useState("order");
+  const scenes = {
+    order: { emoji: "🍕", title: "You place the order", sub: "Like calling fetch('/api/data')", color: "#E6F1FB", text: "#042C53" },
+    wait: { emoji: "⏳", title: "Kitchen is working", sub: "Server is processing your request", color: "#FAEEDA", text: "#412402" },
+    receive: { emoji: "🛎️", title: "Order arrives!", sub: "The Promise resolves with data", color: "#EAF3DE", text: "#173404" },
+    error: { emoji: "😞", title: "Kitchen is closed!", sub: "Promise rejects — .catch() handles it", color: "#FCEBEB", text: "#501313" },
+  };
+  const flow = ["order", "wait", "receive"];
+  const s = scenes[scene];
 
-return (
-<div style={{ margin: "20px 0", background: "var(--color-background-secondary)", borderRadius: 12, padding: 24 }}>
-<div style={{ fontFamily: "sans-serif", fontSize: 13, color: "var(--color-text-secondary)", marginBottom: 16 }}>Real-world analogy: ordering food</div>
-<div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap" }}>
-{["order", "wait", "receive", "error"].map(key => (
-<button
-key={key}
-onClick={() => setScene(key)}
-style={{ padding: "6px 14px", borderRadius: 8, border: `1px solid ${scene === key ? scenes[key].text : "var(--color-border-tertiary)"}`, background: scene === key ? scenes[key].color : "transparent", color: scene === key ? scenes[key].text : "var(--color-text-secondary)", cursor: "pointer", fontSize: 12, fontFamily: "sans-serif" }} >{scenes[key].emoji} {scenes[key].title}</button>
-))}
-</div>
-<div style={{ background: s.color, border: `1px solid var(--color-border-tertiary)`, borderRadius: 12, padding: 24, textAlign: "center", transition: "all 0.3s" }}>
-<div style={{ fontSize: 48, marginBottom: 12 }}>{s.emoji}</div>
-<div style={{ fontSize: 18, fontWeight: 500, color: s.text, fontFamily: "sans-serif", marginBottom: 6 }}>{s.title}</div>
-<div style={{ fontSize: 13, color: s.text, fontFamily: "monospace", opacity: 0.8 }}>{s.sub}</div>
-</div>
-</div>
-);
+  return (
+    <div style={{ margin: "20px 0", background: "var(--color-background-secondary)", borderRadius: 12, padding: 24 }}>
+      <div style={{ fontFamily: "sans-serif", fontSize: 13, color: "var(--color-text-secondary)", marginBottom: 16 }}>Real-world analogy: ordering food</div>
+      <div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap" }}>
+        {["order", "wait", "receive", "error"].map(key => (
+          <button
+            key={key}
+            onClick={() => setScene(key)}
+            style={{ padding: "6px 14px", borderRadius: 8, border: `1px solid ${scene === key ? scenes[key].text : "var(--color-border-tertiary)"}`, background: scene === key ? scenes[key].color : "transparent", color: scene === key ? scenes[key].text : "var(--color-text-secondary)", cursor: "pointer", fontSize: 12, fontFamily: "sans-serif" }}
+          >{scenes[key].emoji} {scenes[key].title}</button>
+        ))}
+      </div>
+      <div style={{ background: s.color, border: `1px solid var(--color-border-tertiary)`, borderRadius: 12, padding: 24, textAlign: "center", transition: "all 0.3s" }}>
+        <div style={{ fontSize: 48, marginBottom: 12 }}>{s.emoji}</div>
+        <div style={{ fontSize: 18, fontWeight: 500, color: s.text, fontFamily: "sans-serif", marginBottom: 6 }}>{s.title}</div>
+        <div style={{ fontSize: 13, color: s.text, fontFamily: "monospace", opacity: 0.8 }}>{s.sub}</div>
+      </div>
+    </div>
+  );
 };
 
 export const MicrotaskVisual = () => {
-const [revealed, setRevealed] = useState(false);
-const code = `console.log('1');
+  const [revealed, setRevealed] = useState(false);
+  const code = `console.log('1');
 
 setTimeout(() => console.log('2'), 0);
 
 Promise.resolve()
-.then(() => console.log('3'));
+  .then(() => console.log('3'));
 
 console.log('4');`;
 
-return (
-<div style={{ margin: "20px 0", background: "var(--color-background-secondary)", borderRadius: 12, padding: 24, fontFamily: "monospace" }}>
-<div style={{ fontFamily: "sans-serif", fontSize: 14, fontWeight: 500, marginBottom: 12, color: "var(--color-text-primary)" }}>🧩 Quiz: What order does this print?</div>
-<div style={{ background: "#1e1e2e", borderRadius: 8, padding: 16, marginBottom: 16 }}>
-{code.split("\n").map((line, i) => <div key={i} style={{ fontSize: 12, lineHeight: 2, color: line.includes("Promise") || line.includes("then") ? "#cba6f7" : line.includes("setTimeout") ? "#fab387" : "#cdd6f4" }}>{line}</div>)}
-</div>
-<button onClick={() => setRevealed(!revealed)} style={{ padding: "8px 20px", borderRadius: 8, border: "0.5px solid var(--color-border-secondary)", background: "transparent", color: "var(--color-text-primary)", cursor: "pointer", fontSize: 13, fontFamily: "sans-serif", marginBottom: 12 }}>
-{revealed ? "Hide answer" : "Reveal answer 👀"}
-</button>
-{revealed && (
-<div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-{[
-{ output: "1", reason: "Synchronous — runs immediately", color: "#EAF3DE", text: "#3B6D11" },
-{ output: "4", reason: "Synchronous — runs immediately after 1", color: "#EAF3DE", text: "#3B6D11" },
-{ output: "3", reason: "Promise.then → Microtask Queue (runs before setTimeout!)", color: "#EEEDFE", text: "#26215C" },
-{ output: "2", reason: "setTimeout → Callback Queue (lowest priority)", color: "#FAEEDA", text: "#412402" },
-].map((item, i) => (
-<div key={i} style={{ display: "flex", alignItems: "center", gap: 12, background: item.color, border: "0.5px solid var(--color-border-tertiary)", borderRadius: 8, padding: "10px 16px" }}>
-<span style={{ fontSize: 20, fontWeight: 700, color: item.text, minWidth: 24 }}>{i + 1}.</span>
-<span style={{ fontFamily: "monospace", fontSize: 13, color: item.text, fontWeight: 500 }}>"{item.output}"</span>
-<span style={{ fontSize: 12, color: item.text, opacity: 0.8, fontFamily: "sans-serif" }}>— {item.reason}</span>
-</div>
-))}
-<div style={{ background: "#E6F1FB", border: "0.5px solid #B5D4F4", borderRadius: 8, padding: "10px 14px", marginTop: 4 }}>
-<span style={{ fontSize: 13, color: "#042C53", fontFamily: "sans-serif" }}>
-💡 Key rule: <strong>Microtask Queue</strong> (Promises) always drains completely before the <strong>Callback Queue</strong> (setTimeout) gets a turn.
-</span>
-</div>
-</div>
-)}
-</div>
-);
+  return (
+    <div style={{ margin: "20px 0", background: "var(--color-background-secondary)", borderRadius: 12, padding: 24, fontFamily: "monospace" }}>
+      <div style={{ fontFamily: "sans-serif", fontSize: 14, fontWeight: 500, marginBottom: 12, color: "var(--color-text-primary)" }}>🧩 Quiz: What order does this print?</div>
+      <div style={{ background: "#1e1e2e", borderRadius: 8, padding: 16, marginBottom: 16 }}>
+        {code.split("\n").map((line, i) => <div key={i} style={{ fontSize: 12, lineHeight: 2, color: line.includes("Promise") || line.includes("then") ? "#cba6f7" : line.includes("setTimeout") ? "#fab387" : "#cdd6f4" }}>{line}</div>)}
+      </div>
+      <button onClick={() => setRevealed(!revealed)} style={{ padding: "8px 20px", borderRadius: 8, border: "0.5px solid var(--color-border-secondary)", background: "transparent", color: "var(--color-text-primary)", cursor: "pointer", fontSize: 13, fontFamily: "sans-serif", marginBottom: 12 }}>
+        {revealed ? "Hide answer" : "Reveal answer 👀"}
+      </button>
+      {revealed && (
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {[
+            { output: "1", reason: "Synchronous — runs immediately", color: "#EAF3DE", text: "#3B6D11" },
+            { output: "4", reason: "Synchronous — runs immediately after 1", color: "#EAF3DE", text: "#3B6D11" },
+            { output: "3", reason: "Promise.then → Microtask Queue (runs before setTimeout!)", color: "#EEEDFE", text: "#26215C" },
+            { output: "2", reason: "setTimeout → Callback Queue (lowest priority)", color: "#FAEEDA", text: "#412402" },
+          ].map((item, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: 12, background: item.color, border: "0.5px solid var(--color-border-tertiary)", borderRadius: 8, padding: "10px 16px" }}>
+              <span style={{ fontSize: 20, fontWeight: 700, color: item.text, minWidth: 24 }}>{i + 1}.</span>
+              <span style={{ fontFamily: "monospace", fontSize: 13, color: item.text, fontWeight: 500 }}>"{item.output}"</span>
+              <span style={{ fontSize: 12, color: item.text, opacity: 0.8, fontFamily: "sans-serif" }}>— {item.reason}</span>
+            </div>
+          ))}
+          <div style={{ background: "#E6F1FB", border: "0.5px solid #B5D4F4", borderRadius: 8, padding: "10px 14px", marginTop: 4 }}>
+            <span style={{ fontSize: 13, color: "#042C53", fontFamily: "sans-serif" }}>
+              💡 Key rule: <strong>Microtask Queue</strong> (Promises) always drains completely before the <strong>Callback Queue</strong> (setTimeout) gets a turn.
+            </span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export const FetchVisual = () => {
-const [tab, setTab] = useState("fetch");
-const tabs = {
-fetch: {
-label: "Basic fetch",
-code: `async function getUser(id) {
+  const [tab, setTab] = useState("fetch");
+  const tabs = {
+    fetch: {
+      label: "Basic fetch",
+      code: `async function getUser(id) {
   const response = await fetch(
     \`https://api.example.com/users/\${id}\`
-);
+  );
 
-if (!response.ok) {
-throw new Error(\`HTTP error! status: \${response.status}\`);
-}
+  if (!response.ok) {
+    throw new Error(\`HTTP error! status: \${response.status}\`);
+  }
 
-const data = await response.json();
-return data;
+  const data = await response.json();
+  return data;
 }
 
 // Using it:
@@ -532,10 +533,10 @@ console.log(user.name);`,
     error: {
       label: "Error handling",
       code: `async function getUser(id) {
-try {
-const response = await fetch(
-\`https://api.example.com/users/\${id}\`
-);
+  try {
+    const response = await fetch(
+      \`https://api.example.com/users/\${id}\`
+    );
 
     if (!response.ok) {
       throw new Error(\`Not found: \${response.status}\`);
@@ -543,68 +544,68 @@ const response = await fetch(
 
     return await response.json();
 
-} catch (err) {
-if (err.name === "TypeError") {
-console.error("Network failure:", err);
-} else {
-console.error("API error:", err.message);
-}
-return null;
-}
+  } catch (err) {
+    if (err.name === "TypeError") {
+      console.error("Network failure:", err);
+    } else {
+      console.error("API error:", err.message);
+    }
+    return null;
+  }
 }`,
       notes: ["TypeError = network failure (no internet, DNS fail)", "Non-ok status codes = app-level errors (404, 500)", "Always return a sensible fallback value from catch"],
     },
     parallel: {
       label: "Parallel requests",
       code: `async function getDashboardData(userId) {
-// ❌ Slow — waits for each one
-// const profile = await fetchProfile(userId);
-// const posts = await fetchPosts(userId);
+  // ❌ Slow — waits for each one
+  // const profile = await fetchProfile(userId);
+  // const posts   = await fetchPosts(userId);
 
-// ✅ Fast — all run at the same time!
-const [profile, posts, followers] =
-await Promise.all([
-fetchProfile(userId),
-fetchPosts(userId),
-fetchFollowers(userId),
-]);
+  // ✅ Fast — all run at the same time!
+  const [profile, posts, followers] =
+    await Promise.all([
+      fetchProfile(userId),
+      fetchPosts(userId),
+      fetchFollowers(userId),
+    ]);
 
-return { profile, posts, followers };
+  return { profile, posts, followers };
 }`,
-notes: ["Sequential awaits = slow (waterfall pattern)", "Promise.all() fires all requests at once", "Resolves when ALL resolve — or rejects if ANY fail"],
-},
-};
+      notes: ["Sequential awaits = slow (waterfall pattern)", "Promise.all() fires all requests at once", "Resolves when ALL resolve — or rejects if ANY fail"],
+    },
+  };
 
-const t = tabs[tab];
+  const t = tabs[tab];
 
-return (
-<div style={{ margin: "20px 0" }}>
-<div style={{ display: "flex", gap: 6, marginBottom: 14, flexWrap: "wrap" }}>
-{Object.entries(tabs).map(([key, val]) => (
-<button key={key} onClick={() => setTab(key)} style={{ padding: "6px 14px", borderRadius: 8, border: `1px solid ${tab === key ? "#378ADD" : "var(--color-border-tertiary)"}`, background: tab === key ? "#E6F1FB" : "transparent", color: tab === key ? "#042C53" : "var(--color-text-secondary)", cursor: "pointer", fontSize: 12, fontFamily: "sans-serif", fontWeight: tab === key ? 500 : 400 }}>
-{val.label}
-</button>
-))}
-</div>
-<div style={{ background: "#1e1e2e", borderRadius: 10, padding: 20, marginBottom: 12 }}>
-{t.code.split("\n").map((line, i) => {
-const isComment = line.trim().startsWith("//");
-const isKeyword = /\b(async|await|const|return|throw|try|catch)\b/.test(line);
-return (
-<div key={i} style={{ fontFamily: "monospace", fontSize: 12, lineHeight: 1.9, color: isComment ? "#6c7086" : line.includes("fetch") || line.includes("Promise") ? "#89b4fa" : isKeyword ? "#cba6f7" : "#cdd6f4" }}>{line}</div>
-);
-})}
-</div>
-<div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-{t.notes.map((note, i) => (
-<div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start", fontSize: 13, color: "var(--color-text-secondary)", fontFamily: "sans-serif", lineHeight: 1.5 }}>
-<span style={{ color: "#378ADD", fontWeight: 500, flexShrink: 0 }}>→</span>
-<span>{note}</span>
-</div>
-))}
-</div>
-</div>
-);
+  return (
+    <div style={{ margin: "20px 0" }}>
+      <div style={{ display: "flex", gap: 6, marginBottom: 14, flexWrap: "wrap" }}>
+        {Object.entries(tabs).map(([key, val]) => (
+          <button key={key} onClick={() => setTab(key)} style={{ padding: "6px 14px", borderRadius: 8, border: `1px solid ${tab === key ? "#378ADD" : "var(--color-border-tertiary)"}`, background: tab === key ? "#E6F1FB" : "transparent", color: tab === key ? "#042C53" : "var(--color-text-secondary)", cursor: "pointer", fontSize: 12, fontFamily: "sans-serif", fontWeight: tab === key ? 500 : 400 }}>
+            {val.label}
+          </button>
+        ))}
+      </div>
+      <div style={{ background: "#1e1e2e", borderRadius: 10, padding: 20, marginBottom: 12 }}>
+        {t.code.split("\n").map((line, i) => {
+          const isComment = line.trim().startsWith("//");
+          const isKeyword = /\b(async|await|const|return|throw|try|catch)\b/.test(line);
+          return (
+            <div key={i} style={{ fontFamily: "monospace", fontSize: 12, lineHeight: 1.9, color: isComment ? "#6c7086" : line.includes("fetch") || line.includes("Promise") ? "#89b4fa" : isKeyword ? "#cba6f7" : "#cdd6f4" }}>{line}</div>
+          );
+        })}
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+        {t.notes.map((note, i) => (
+          <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start", fontSize: 13, color: "var(--color-text-secondary)", fontFamily: "sans-serif", lineHeight: 1.5 }}>
+            <span style={{ color: "#378ADD", fontWeight: 500, flexShrink: 0 }}>→</span>
+            <span>{note}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 # Async JavaScript: From Zero to Confident
